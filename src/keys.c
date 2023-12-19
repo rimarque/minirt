@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bde-sous <bde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 17:58:05 by rita              #+#    #+#             */
-/*   Updated: 2023/12/19 21:48:15 by bde-sous         ###   ########.fr       */
+/*   Created: 2023/12/19 21:47:42 by bde-sous          #+#    #+#             */
+/*   Updated: 2023/12/19 21:48:10 by bde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minirt.h"
+#include "../includes/minirt.h"
 
-int main(int argc, char **argv)
+int	handle_key_event(int button, t_win *view)
 {
-    t_win   minirita;
-
-    (void) argc;
-    (void) argv;
-    minirita = new_program(1280,700, "minirita");
-    mlx_hook(minirita.win_ptr, 17, 0L, &close_window, (void *)&minirita);
-    mlx_key_hook(minirita.win_ptr, handle_key_event, &minirita);
-    mlx_loop(minirita.mlx_ptr);
+	if (button == ESC)
+		close_window(view);
+	return (0);
 }
