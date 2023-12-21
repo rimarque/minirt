@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bde-sous <bde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 17:58:05 by rita              #+#    #+#             */
-/*   Updated: 2023/12/19 21:48:15 by bde-sous         ###   ########.fr       */
+/*   Created: 2023/12/19 20:32:56 by bde-sous          #+#    #+#             */
+/*   Updated: 2023/12/19 20:35:47 by bde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minirt.h"
+#include "../includes/minirt.h"
 
-int main(int argc, char **argv)
+t_win	new_program(int w, int h, char *str)
 {
-    t_win   minirita;
+	void	*mlx_ptr;
+	t_win	win;
 
-    (void) argc;
-    (void) argv;
-    minirita = new_program(1280,700, "minirita");
-    mlx_hook(minirita.win_ptr, 17, 0L, &close_window, (void *)&minirita);
-    mlx_key_hook(minirita.win_ptr, handle_key_event, &minirita);
-    mlx_loop(minirita.mlx_ptr);
+	mlx_ptr = mlx_init();
+	win.mlx_ptr = mlx_ptr;
+	win.win_ptr = mlx_new_window(mlx_ptr, w, h, str);
+	win.width = w;
+	win.height = h;
+	win.zoom = 150.0;
+	return (win);
 }
