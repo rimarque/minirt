@@ -17,6 +17,7 @@ RM 				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror
 NPD				= --no-print-directory
 CMLX			= -lmlx -Ilmlx -lXext -lX11
+CMATH			= -lm
 #----------------------------------  FOLDERS ------------------------------------
 
 LIBFTDIR 		= libftrm
@@ -32,7 +33,7 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minirt
 
-_FILES 			= test inits exit keys create_img
+_FILES 			= test inits exit keys render
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
@@ -44,7 +45,7 @@ HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 all: $(NAME)
 
 $(NAME): $(OBJDIR) $(TARGET) $(LIBFT) $(MLX) main.c
-	$(CC) $(CFLAGS) main.c $(TARGET) -I $(INCLUDE) $(LIBFT) -o $(NAME) -L $(MLX_PATH) $(CMLX)
+	$(CC) $(CFLAGS) main.c $(TARGET) -I $(INCLUDE) $(LIBFT) -o $(NAME) -L $(MLX_PATH) $(CMLX) $(CMATH)
 	echo "[$(GREEN)Success$(RESET)] MiniRita created successfully$(BOLD)$(RESET)"
 
 $(OBJDIR)/%.o : %.c $(HDR)
