@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 21:47:42 by bde-sous          #+#    #+#             */
-/*   Updated: 2023/12/26 20:52:43 by rita             ###   ########.fr       */
+/*   Created: 2022/11/23 17:26:29 by rimarque          #+#    #+#             */
+/*   Updated: 2023/04/20 11:33:54 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../includes/libft.h"
 
-int	handle_key_event(int button, t_img *view)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	if (button == ESC)
-		close_window(view);
-	return (0);
+	size_t	i;
+
+	if (!dest && !src)
+		return (0);
+	i = 0;
+	while (i < n)
+	{
+		((char *) dest)[i] = ((const char *)src)[i];
+		i++;
+	}
+	return (dest);
 }

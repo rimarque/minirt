@@ -19,7 +19,7 @@ NPD				= --no-print-directory
 CMLX			= -lmlx -Ilmlx -lXext -lX11
 #----------------------------------  FOLDERS ------------------------------------
 
-LIBFTDIR 		= libftx
+LIBFTDIR 		= libftrm
 LIBFT 			= $(LIBFTDIR)/libft.a
 MLX 			= ./mlx/libmlx.a
 MLX_PATH		= ./mlx
@@ -32,7 +32,7 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minirt
 
-_FILES 			= test inits exit keys
+_FILES 			= inits exit keys create_img
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
@@ -77,6 +77,23 @@ fclean: clean
 
 re: fclean all
 
+
+#---------------------  TEMP RULE - MAP VALIDATION  -----------------------------
+
+validation: map_validation
+
+MAP_VALIDATION_SRC = map_validation.c
+MAP_VALIDATION_OBJ = $(OBJDIR)/map_validation.o
+
+# Rule to compile map_validation.c
+$(MAP_VALIDATION_OBJ): $(SRCS)/$(MAP_VALIDATION_SRC) $(INCLUDE)/map_validation.h $(LIBFT)
+	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $<$(RESET)"
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
+
+map_validation: $(OBJDIR) $(MAP_VALIDATION_OBJ)
+	$(CC) $(CFLAGS) $(OBJDIR)/map_validation.o $(LIBFT) -o map_validation
+	echo "[$(GREEN)Success$(RESET)] map_validation compiled successfully$(BOLD)$(RESET)"
+
 .SILENT:
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re validation

@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 21:47:42 by bde-sous          #+#    #+#             */
-/*   Updated: 2023/12/26 20:52:43 by rita             ###   ########.fr       */
+/*   Created: 2022/12/01 19:01:50 by rimarque          #+#    #+#             */
+/*   Updated: 2023/04/20 11:34:42 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../includes/libft.h"
 
-int	handle_key_event(int button, t_img *view)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	if (button == ESC)
-		close_window(view);
-	return (0);
+	size_t	i;
+
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i] != 0)
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }

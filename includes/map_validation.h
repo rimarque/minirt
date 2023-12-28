@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   map_validation.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bde-sous <bde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2023/12/27 00:53:49 by rita             ###   ########.fr       */
+/*   Updated: 2023/12/28 16:06:56 by bde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,17 +109,5 @@ typedef struct s_info
 	t_cy		*cy;
 }t_info;
 
-//*INITS
-t_win	new_program(char *win_name);
-t_img	new_img(t_win *win);
-
-//*EXIT
-int		close_window(t_img *img);
-
-//*KEYS
-int		handle_key_event(int button, t_img *view);
-
-//*CREATE IMG
-void	draw_test(t_img img);
 
 #endif

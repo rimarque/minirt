@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 21:47:42 by bde-sous          #+#    #+#             */
-/*   Updated: 2023/12/26 20:52:43 by rita             ###   ########.fr       */
+/*   Created: 2022/11/28 21:07:47 by rimarque          #+#    #+#             */
+/*   Updated: 2023/05/16 19:38:41 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../includes/libft.h"
 
-int	handle_key_event(int button, t_img *view)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	if (button == ESC)
-		close_window(view);
-	return (0);
+	void	*dst;
+
+	dst = (void *) malloc(nmemb * size);
+	if (!dst)
+		return (0);
+	ft_bzero(dst, nmemb * size);
+	return (dst);
 }
