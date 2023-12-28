@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2023/12/27 00:53:49 by rita             ###   ########.fr       */
+/*   Updated: 2023/12/28 16:12:57 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <errno.h>
 # include <math.h>
 # include <stdint.h>
+# include "../mathvec/includes/mathvec.h"
 # include "../mlx/mlx.h"
 # include "../libftrm/includes/libft.h"
 
@@ -23,6 +24,8 @@
 # define WIN_W 1280
 # define WIN_H 700
 # define WIN_Z 150.0 //!Para que serve?
+#define BEGIN_IMAGE_LOOP(img) int i =0; int j=0; while(i<WIN_W){j=0;while(j<WIN_H){
+#define END_IMAGE_LOOP j++;}i++;}
 
 typedef struct s_win
 {
@@ -48,13 +51,6 @@ typedef	struct s_rgb
 	uint8_t b;	
 }t_rgb;
 
-typedef struct s_vec3
-{
-	float	x;
-	float	y;
-	float	z;
-}t_vec3;
-
 typedef struct s_amb
 {
 	float	ratio;
@@ -64,8 +60,8 @@ typedef struct s_amb
 typedef struct s_cam
 {
 	t_vec3	view_point;
-	t_vec3	normal;
-	float	fov_x; //!Temos de calcular o fov y?
+	t_vec3	orientation_vector; //precisamos de 3 vetores
+	float	tangfov_x; //!fov_y = fov_x * aspect
 	float	aspect; //*W / H
 }t_cam;
 
@@ -99,7 +95,7 @@ typedef struct s_cy
 	t_rgb	color;
 }t_cy;
 
-typedef struct s_info
+typedef struct s_scene
 {
 	t_amb		*amb;
 	t_cam		*cam;
@@ -107,10 +103,10 @@ typedef struct s_info
 	t_sp		*sp;
 	t_plane		*pl;
 	t_cy		*cy;
-}t_info;
+}t_scene;
 
 //*INITS
-t_win	new_program(char *win_name);
+t_win	new_program(char *title);
 t_img	new_img(t_win *win);
 
 //*EXIT
@@ -121,5 +117,6 @@ int		handle_key_event(int button, t_img *view);
 
 //*CREATE IMG
 void	draw_test(t_img img);
+void render(t_img img, t_scene sc);
 
 #endif

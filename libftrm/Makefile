@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
+#    By: rita <rita@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 14:39:30 by rimarque          #+#    #+#              #
-#    Updated: 2023/06/24 14:34:06 by rimarque         ###   ########.fr        #
+#    Updated: 2023/12/27 10:53:50 by rita             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,14 +43,11 @@ SRC =  libft/ft_bzero.c \
            libft/ft_putnbr_fd.c \
            libft/ft_itoa.c \
            libft/ft_free.c \
-	   libft/ft_len.c \
-	   printf/ft_print_cs.c \
-	   printf/ft_print_iduxXp.c \
-	   printf/ft_printf.c \
-       get_next_line/get_next_line.c \
-       get_next_line/get_next_line_utils.c \
-       libft/ft_split.c \
-       libft/ft_print.c
+           libft/ft_len.c \
+           libft/ft_split.c \
+		   libft/ft_print.c \
+		   get_next_line/get_next_line.c \
+		   get_next_line/get_next_line_utils.c \
 
 NAME = libft.a
 
@@ -60,18 +57,20 @@ CFLAGS  = -Wall -Wextra -Werror -g
 
 RM = rm -rf
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:%.c=%.o)
+
+INCLUDE = includes
+_HEADERS = libft.h get_next_line.h
+HDR	= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HRD)
+	echo "ups"
 	@ar rcs $(NAME) $(OBJ)
 
 clean:
 	@$(RM) $(OBJ)
-	@$(RM) a.out
-	@$(RM) libft.h.gch
-	@$(RM) libft.so
 
 fclean: clean
 	@$(RM) $(NAME)
