@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2023/12/27 22:08:17 by rita             ###   ########.fr       */
+/*   Updated: 2023/12/28 16:12:57 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <errno.h>
 # include <math.h>
 # include <stdint.h>
+# include "../mathvec/includes/mathvec.h"
 # include "../mlx/mlx.h"
 # include "../libftrm/includes/libft.h"
 
@@ -49,19 +50,6 @@ typedef	struct s_rgb
 	uint8_t g;
 	uint8_t b;	
 }t_rgb;
-
-typedef struct s_vec3
-{
-	float	x;
-	float	y;
-	float	z;
-}t_vec3;
-
-typedef struct s_vec2
-{
-	float	x;
-	float	y;
-}t_vec2;
 
 typedef struct s_amb
 {

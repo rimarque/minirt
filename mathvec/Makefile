@@ -6,11 +6,11 @@
 #    By: rita <rita@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 14:39:30 by rimarque          #+#    #+#              #
-#    Updated: 2023/12/27 22:09:09 by rita             ###   ########.fr        #
+#    Updated: 2023/12/28 17:25:42 by rita             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = 
+SRC = len_vec2.c len_vec3.c math_vec2.c math_vec3.c prod_vec2.c prod_vec3.c
 
 NAME = mathvec.a
 
@@ -22,12 +22,11 @@ RM = rm -rf
 
 OBJ = $(SRC:.c=.o)
 
-HRD =
+HRD = includes/mathvec.h
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	echo "ups"
 	@ar rcs $(NAME) $(OBJ)
 
 clean:
