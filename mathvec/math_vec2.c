@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:31:22 by rita              #+#    #+#             */
-/*   Updated: 2023/12/28 17:25:22 by rita             ###   ########.fr       */
+/*   Updated: 2023/12/29 11:59:47 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vec2 vec2_sub(t_vec2 a, t_vec2 b)
     return(result);
 }
 
-t_vec2 vec2_normal(t_vec2 a)
+t_vec2 vec2_normalized(t_vec2 a)
 {
     t_vec2  result;
     float   len;

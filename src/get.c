@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   len_vec3.c                                         :+:      :+:    :+:   */
+/*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/28 16:33:59 by rita              #+#    #+#             */
-/*   Updated: 2023/12/29 11:45:20 by rita             ###   ########.fr       */
+/*   Created: 2023/12/29 16:16:21 by rita              #+#    #+#             */
+/*   Updated: 2023/12/29 17:48:40 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/mathvec.h"
+#include "includes/minirt.h"
 
-float vec3_lensqr(t_vec3 a)
+t_vec3  get_dir(t_vec2 pixel, t_cam cam)
 {
-    return(vec3_dot(a, a));
-}
-float vec3_lenght(t_vec3 a)
-{
-    return(sqrt(vec3_lensqr(a)));
+    t_vec3 result;
+
+    float x_max;
+    float y_max;
+    x_max = tanf(cam.fov_x/2);
+    y_max = x_max * cam.aspect; //tan(fov_y / 2) = tan(fov_x / 2) * aspect;
+    result.x = pixel.x * x_max;
+    result.y = pixel.y * y_max;
+    result.z = -1;
+    return(result);
 }

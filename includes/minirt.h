@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2023/12/28 16:12:57 by rita             ###   ########.fr       */
+/*   Updated: 2023/12/29 17:47:04 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ typedef struct s_cam
 {
 	t_vec3	view_point;
 	t_vec3	orientation_vector; //precisamos de 3 vetores
-	float	tangfov_x; //!fov_y = fov_x * aspect
-	float	aspect; //*W / H
+	float	fov_x; //!tanfov_y = tanfov_x * aspect
+	float	tanfov_x;
+	float	aspect; //*H / W
 }t_cam;
 
 typedef struct s_light

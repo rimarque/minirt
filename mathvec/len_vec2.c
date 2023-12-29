@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:46:07 by rita              #+#    #+#             */
-/*   Updated: 2023/12/28 17:28:47 by rita             ###   ########.fr       */
+/*   Updated: 2023/12/29 11:44:43 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ float vec2_lensqr(t_vec2 a)
 
 float vec2_lenght(t_vec2 a)
 {
-    return(sqrt(vec2_dot(a, a)));
+    return(sqrt(vec2_lensqr(a)));
 }
