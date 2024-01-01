@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:16:21 by rita              #+#    #+#             */
-/*   Updated: 2023/12/29 17:48:40 by rita             ###   ########.fr       */
+/*   Updated: 2024/01/01 18:33:44 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minirt.h"
 
+//primary ray's direction
 t_vec3  get_dir(t_vec2 pixel, t_cam cam)
 {
     t_vec3 result;
