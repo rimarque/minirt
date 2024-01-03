@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
+#    By: bde-sous <bde-sous@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 14:39:30 by rimarque          #+#    #+#              #
-#    Updated: 2023/06/24 14:34:06 by rimarque         ###   ########.fr        #
+#    Updated: 2024/01/03 22:13:38 by bde-sous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SRC =  libft/ft_bzero.c \
            libft/ft_memcpy.c \
            libft/ft_memmove.c \
            libft/ft_cpy.c \
+           libft/ft_atof.c \
+           libft/ft_atoll.c \
            libft/ft_strlcat.c \
            libft/ft_toupper.c \
            libft/ft_tolower.c \
@@ -35,6 +37,7 @@ SRC =  libft/ft_bzero.c \
            libft/ft_substr.c \
            libft/ft_strjoin.c \
            libft/ft_strtrim.c \
+           libft/ft_strtrimall.c \
            libft/ft_strmapi.c \
            libft/ft_striteri.c \
            libft/ft_putchar_fd.c \
