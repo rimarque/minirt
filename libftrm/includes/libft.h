@@ -6,7 +6,7 @@
 /*   By: bde-sous <bde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:02 by rimarque          #+#    #+#             */
-/*   Updated: 2024/01/03 22:13:54 by bde-sous         ###   ########.fr       */
+/*   Updated: 2024/01/07 17:58:51 by bde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		ft_free_matrix(char	****matrix);
 void		print_arr(char **arr);
 void		print_matrix(char ***matrix);
 char		*ft_strtrimall(char *str);
-double      ft_atof(const char *str);
+float      ft_atof(const char *str);
 long long	ft_atoll(const char *str);
 
 #endif

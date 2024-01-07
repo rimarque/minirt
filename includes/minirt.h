@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bde-sous <bde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2023/12/27 00:53:49 by rita             ###   ########.fr       */
+/*   Updated: 2024/01/07 15:28:16 by bde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,39 +75,52 @@ typedef struct s_light
 	float ratio;
 }t_light;
 
-typedef struct s_sp
-{
-	t_vec3	center;
-	float	d;
-	t_rgb	color;
-}t_sp;
+// typedef struct s_sp
+// {
+// 	t_vec3	center;
+// 	float	d;
+// 	t_rgb	color;
+// }t_sp;
 
 
-typedef struct s_plane
+// typedef struct s_plane
+// {
+// 	t_vec3	point;
+// 	t_vec3	normal;
+// 	t_rgb	color;
+// }t_plane;
+
+// typedef struct s_cy
+// {
+// 	t_vec3	center;
+// 	t_vec3	normal;
+// 	float	d;
+// 	float	h;
+// 	t_rgb	color;
+// }t_cy;
+
+typedef struct s_obj
 {
+	int		type;
 	t_vec3	point;
 	t_vec3	normal;
 	t_rgb	color;
-}t_plane;
-
-typedef struct s_cy
-{
-	t_vec3	center;
-	t_vec3	normal;
 	float	d;
 	float	h;
-	t_rgb	color;
-}t_cy;
+}t_obj;
 
-typedef struct s_info
-{
+typedef struct s_scene
+{	// t_sp		*sp;
+	// t_plane		*pl;
+	// t_cy		*cy;
 	t_amb		*amb;
 	t_cam		*cam;
 	t_light		*light;
-	t_sp		*sp;
-	t_plane		*pl;
-	t_cy		*cy;
-}t_info;
+	t_obj		*obj;
+	// t_sp		*sp;
+	// t_plane		*pl;
+	// t_cy		*cy;
+}t_scene;
 
 //*INITS
 t_win	new_program(char *win_name);

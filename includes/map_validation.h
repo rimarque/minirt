@@ -6,7 +6,7 @@
 /*   By: bde-sous <bde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2023/12/28 16:06:56 by bde-sous         ###   ########.fr       */
+/*   Updated: 2024/01/07 17:56:11 by bde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_vec3
 typedef struct s_amb
 {
 	float	ratio;
-	t_rgb	color;
+	t_rgb	*color;
 }t_amb;
 
 typedef struct s_cam
@@ -75,39 +75,23 @@ typedef struct s_light
 	float ratio;
 }t_light;
 
-typedef struct s_sp
+typedef struct s_obj
 {
-	t_vec3	center;
-	float	d;
-	t_rgb	color;
-}t_sp;
-
-
-typedef struct s_plane
-{
+	int		type;
 	t_vec3	point;
 	t_vec3	normal;
-	t_rgb	color;
-}t_plane;
-
-typedef struct s_cy
-{
-	t_vec3	center;
-	t_vec3	normal;
+	t_rgb	*color;
 	float	d;
 	float	h;
-	t_rgb	color;
-}t_cy;
+}t_obj;
 
-typedef struct s_info
+typedef struct s_scene
 {
 	t_amb		*amb;
 	t_cam		*cam;
 	t_light		*light;
-	t_sp		*sp;
-	t_plane		*pl;
-	t_cy		*cy;
-}t_info;
+	t_obj		*obj;
+}t_scene;
 
 
 #endif
