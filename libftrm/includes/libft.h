@@ -68,7 +68,7 @@ void		ft_free_matrix(char	****matrix);
 void		print_arr(char **arr);
 void		print_matrix(char ***matrix);
 char		*ft_strtrimall(char *str);
-float      ft_atof(const char *str);
+double      ft_atof(const char *str);
 long long	ft_atoll(const char *str);
 
 #endif

@@ -16,7 +16,7 @@
 # include <errno.h>
 # include <math.h>
 # include <stdint.h>
-# include "../mlx/mlx.h"
+# include "../mlx_osx/mlx.h"
 # include "../libftrm/includes/libft.h"
 
 # define ESC 65307

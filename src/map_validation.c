@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "../includes/map_validation.h"
+#include <stdlib.h>
 
 
-bool check_ambient_ratio(float ratio)
+/*bool check_ambient_ratio(float ratio)
 {
     return (ratio >=  0 && ratio <= 1);
-} 
+} */
 
 int	ft_ischar(const char *str, int val)
 {
@@ -42,15 +43,17 @@ int parse_color(char *str, t_rgb *rgb)
     int     i;
 
     i = 0;
-    printf("color\n");
     raw = ft_split(str,',');
     while(ft_arrlen(raw) == 3 && i < 3)
     {
-        if (ft_ischar(str, irgb[i]))
+        if (ft_ischar(raw[i], irgb[i]))
             i++;
         else
             return(0);
     }
+    rgb = malloc(sizeof(t_rgb));
+    if(rgb == NULL)
+        return(0);
     rgb->r=irgb[0];
     rgb->r=irgb[1];
     rgb->r=irgb[2];
@@ -62,15 +65,17 @@ int float_in_range(float value, float min, float max)
     return(value >= min && value <= max);
 }
 
-int validate_A(char **line, t_scene scene)
+int validate_A(char **line, t_scene *scene)
 {
-    if (ft_arrlen(line) == 3 && scene.amb == NULL)
+    if (ft_arrlen(line) == 3 && scene->amb == NULL)
     {
-        //printf("%f \n", ft_atof(line[1]));
-        scene.amb->ratio = ft_atof(line[1]);
-        if (!parse_color(line[2], scene.amb->color))
-            return(0); 
-        if (!float_in_range(scene.amb->ratio, 0, 1))
+        scene->amb = malloc(sizeof(t_amb));
+        if (scene->amb == NULL)
+            return 0;
+        scene->amb->ratio = ft_atof(line[1]);
+        if (!parse_color(line[2], scene->amb->color))
+            return(0);
+        if (!float_in_range(scene->amb->ratio, 0, 1) || !ft_isdigit(line[1][0]))
             return(0);
         return(1);
     }
@@ -160,7 +165,7 @@ int validate_line(char *line, t_scene *scene)
         return(0);
     words = ft_split(line, ' ');
     if (ft_strlen(words[0]) == 1 && !ft_strcmp(words[0], "A"))
-        return(validate_A(words, *scene));
+        return(validate_A(words, scene));
     if (ft_strlen(words[0]) == 1 && !ft_strcmp(words[0], "C"))
         return(validate_C(words, scene));
     if (ft_strlen(words[0]) == 1 && !ft_strcmp(words[0], "L"))

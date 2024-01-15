@@ -14,7 +14,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -g
 NPD				= --no-print-directory
 CMLX			= -lmlx -Ilmlx -lXext -lX11
 #----------------------------------  FOLDERS ------------------------------------
@@ -41,9 +41,19 @@ HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------
 
+
+ifeq ($(shell uname), Linux)
+	MLX_PATH	= ./mlx
+	CMLX		= -lmlx -Ilmlx -lXext -lX11
+else ifeq ($(shell uname), Darwin)
+	MLX_PATH	= ./mlx_osx
+	CMLX 		= -lmlx -Ilmlx
+	CP_CMD 		= cp ${MLX_PATH}/libmlx.dylib ./
+endif
+
 all: $(NAME)
 
-$(NAME): $(OBJDIR) $(TARGET) $(LIBFT) $(MLX) main.c
+$(NAME):$(OBJDIR) $(TARGET) $(LIBFT) $(MLX) main.c
 	$(CC) $(CFLAGS) main.c $(TARGET) -I $(INCLUDE) $(LIBFT) -o $(NAME) -L $(MLX_PATH) $(CMLX)
 	echo "[$(GREEN)Success$(RESET)] MiniRita created successfully$(BOLD)$(RESET)"
 
@@ -62,6 +72,7 @@ $(LIBFT):
 $(MLX):
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)MLX$(RESET)"
 	$(MAKE) $(NPD) -C $(MLX_PATH)
+	$(CP_CMD)
 
 clean:
 	$(RM) $(OBJDIR)

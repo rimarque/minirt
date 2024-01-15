@@ -64,9 +64,8 @@ typedef struct s_amb
 typedef struct s_cam
 {
 	t_vec3	view_point;
-	t_vec3	normal;
-	float	fov_x; //!Temos de calcular o fov y?
-	float	aspect; //*W / H
+	t_vec3	normal; // range  -1, 1
+	float	fov_x; // Range 0-180
 }t_cam;
 
 typedef struct s_light
@@ -79,7 +78,7 @@ typedef struct s_obj
 {
 	int		type;
 	t_vec3	point;
-	t_vec3	normal;
+	t_vec3	normal; // range -1, 1
 	t_rgb	*color;
 	float	d;
 	float	h;

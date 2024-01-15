@@ -12,10 +12,10 @@
 
 #include "../includes/libft.h"
 
-float	ft_atof(const char *str)
+double	ft_atof(const char *str)
 {
-	float	inteiro;
-	float	restante;
+	double	inteiro;
+	double	restante;
 	int		len;
 
 	inteiro = 0;
@@ -30,7 +30,7 @@ float	ft_atof(const char *str)
 	len = ft_strlen(str);
 	while (len--)
 		restante /= 10;
-	if (inteiro > 0)
+	if (inteiro >= 0)
 		return (inteiro + restante);
 	else
 		return (inteiro + -restante);
