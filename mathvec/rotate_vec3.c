@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 20:38:45 by rita              #+#    #+#             */
-/*   Updated: 2024/01/16 13:19:16 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:05:03 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_vec3  vec3_mtpmt(t_vec3 vec, t_mt mt)
     result.x = vec.x * mt.x.x + vec.y * mt.y.x + vec.z * mt.z.x + mt.o.x;
     result.y = vec.x * mt.x.y + vec.y * mt.y.y + vec.z * mt.z.y + mt.o.y;
     result.z = vec.x * mt.x.z + vec.y * mt.y.z + vec.z * mt.z.z + mt.o.z;
-    //result = vec3_add(vec3_add(vec3_add(vec3_add(vec, mt.o), vec3_scale(mt.x, vec.x)), vec3_scale(mt.y, vec.y)), vec3_scale(mt.z, vec.z));
+    // result = vec3_add(vec3_add(vec3_add(mt.o,vec3_scale(mt.x, vec.x)), 
+    //vec3_scale(mt.y, vec.y)), vec3_scale(mt.z, vec.z));
     return(result);
 }
 

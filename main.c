@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:58:05 by rita              #+#    #+#             */
-/*   Updated: 2024/01/16 13:20:48 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:17:14 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ void	define_sc(t_scene *sc)
     sc->sp = malloc(sizeof(t_sp));
     sc->cam = malloc(sizeof(t_cam));
 	set_coord(&sc->pl->point, 0, -1, 0);
-	set_coord(&sc->pl->normal, 5, 3, 1);
-	set_coord(&sc->pl->point, 0, -1, 0);
+	set_coord(&sc->pl->normal, 0, 1, 0);
 	set_coord(&sc->sp->center, 0, 0, 30);
 	sc->sp->d = 3;
 	sc->cam->aspect = (float)WIN_H/WIN_W;
-	sc->cam->fov_x = 1.0;
+	sc->cam->fov_x = 1.2;
 	set_coord(&sc->cam->o, 0, 0, 0);
 	set_coord(&sc->cam->view, 0, 0, 1); //!condicao para se o view for (0,0,0)
 	sc->cam->axis = get_axis(sc->cam->view, sc->cam->o);

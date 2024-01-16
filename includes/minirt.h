@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/01/16 13:10:57 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:13:31 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@
 # define ANG_ROT PI/8
 # define WIN_W 1280
 # define WIN_H 700
-#define BEGIN_IMAGE_LOOP(img) int i =0; int j=0; while(i<WIN_W/4){j=0;while(j<WIN_H/4){
+#define BEGIN_IMAGE_LOOP(img) int i =0; int j=0; while(i<WIN_W){j=0;while(j<WIN_H){
 #define END_IMAGE_LOOP j++;}i++;}
 
 typedef struct s_inter
 {
 	bool inter;
 	t_vec3 point;
+	float t;
 } t_inter;
 
 typedef struct s_ray

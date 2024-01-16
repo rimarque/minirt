@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:18:36 by rita              #+#    #+#             */
-/*   Updated: 2024/01/16 11:47:38 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:16:43 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ t_inter	inter_pl(t_ray ray, t_plane pl)
 {
 	t_inter inter;
 	
+	print_vec("ray_o:", ray.o);
+	print_vec("ray_d:", ray.d);
 	float t = vec3_dot(vec3_sub(pl.point, ray.o), pl.normal) / vec3_dot(vec3_normalized(ray.d), pl.normal);
+	printf("t: %f\n", t);
 	if(t < 0){
 		inter.inter = false;
 		return(inter);
@@ -44,7 +47,11 @@ t_inter	inter_sp(t_ray ray, t_sp sp)
 	t_inter inter;
 	float t1;
 	float t2;
+	t_vec3 point1;
+	t_vec3 point2;
 	
+	//print_vec("ray_o:", ray.o);
+	//print_vec("ray_d:", ray.d);
 	t_vec3 co = vec3_sub(ray.o, sp.center);
 	float a = vec3_dot(ray.d, ray.d);
 	float b = 2 * vec3_dot(ray.d, co);
@@ -57,17 +64,37 @@ t_inter	inter_sp(t_ray ray, t_sp sp)
 	}
 	t1 = (-b + sqrtf(in_sqr)) / 2 * a;
 	t2 = (-b - sqrtf(in_sqr)) / 2 * a;
+	if(t1 < 0 && t2 < 0)
+	{
+		inter.inter = false;
+		return(inter);
+	}
 	inter.inter = true;
 	if (in_sqr == 0){
 		inter.point = vec3_add(ray.o, vec3_scale(ray.d, t1));
 		return(inter);
 	}
-	t_vec3 point1 = vec3_add(ray.o, vec3_scale(ray.d, t1));
-	t_vec3 point2 = vec3_add(ray.o, vec3_scale(ray.d, t2));
-	if(vec3_lensqr(vec3_sub(point1, ray.o)) < vec3_lensqr(vec3_sub(point2, ray.o)))
-		inter.point = vec3_add(ray.o, vec3_scale(ray.d, t1));
-	else
-		inter.point = vec3_add(ray.o, vec3_scale(ray.d, t2));
+	point1 = vec3_add(ray.o, vec3_scale(ray.d, t1));
+	point2 = vec3_add(ray.o, vec3_scale(ray.d, t2));
+	if(t1 > 0 && t2 > 0)
+	{
+		if(t1 < t2){
+			inter.t = t1;
+			inter.point = point1;
+		}
+		else{
+			inter.t = t2;
+			inter.point = point2;
+		}
+	}
+	else if(t1 > 0){
+		inter.t = t1;
+		inter.point = point1;
+	}
+	else if(t2 > 0){
+		inter.t = t2;
+		inter.point = point2;
+	}
 	return(inter);
 }
 
@@ -76,19 +103,21 @@ static inline int	pixel_color(int i, int j, t_scene sc)
 {
 	t_ray ray;
 	t_vec2 pixel;
+	float f;
 
 	j = WIN_H - j - 1;
 	pixel.x = ((float)i / (WIN_W - 1)) * 2 - 1;
 	pixel.y = ((float)j / (WIN_H - 1)) * 2 - 1;
 	ray.d = get_dir(pixel, *sc.cam);
 	ray.o = sc.cam->axis.o;
-	//t_inter inter = inter_pl(ray, pl);
+	//t_inter inter = inter_pl(ray, *sc.pl);
 	t_inter inter = inter_sp(ray, *sc.sp);
 	//return(encode_rgb(255 *ray.d.x * 10, 255 *ray.d.y * 10, 255 *ray.d.z * 10));
 	if(!inter.inter)
 		return(encode_rgb(0, 0, 0));
 	else{
-		return(encode_rgb(255, 0 , 255));
+		f = (vec3_lenght(vec3_sub(sc.cam->o, sc.sp->center)) - inter.t)/sc.sp->d;
+		return(encode_rgb(0, 0 , f*255));
 	}
 }
 
