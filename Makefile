@@ -74,12 +74,14 @@ $(MLX):
 clean:
 	$(RM) $(OBJDIR)
 	$(MAKE) clean $(NPD) -C  $(LIBFTDIR)
+	$(MAKE) clean $(NPD) -C  $(MATHVECDIR)
 	$(MAKE) clean $(NPD) -C  $(MLX_PATH)
 	echo "[$(RED)Deleting$(RESET)]  object files deleted$(BOLD)$(RESET)"
 
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) fclean $(NPD) -C $(LIBFTDIR)
+	$(MAKE) fclean $(NPD) -C $(MATHVECDIR)
 	$(MAKE) clean $(NPD) -C $(MLX_PATH)
 	echo "[$(RED)Deleting$(RESET)]  .a deleted$(BOLD)"
 

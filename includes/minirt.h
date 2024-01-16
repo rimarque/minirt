@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/01/15 22:34:30 by rita             ###   ########.fr       */
+/*   Updated: 2024/01/16 13:10:57 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define ANG_ROT PI/8
 # define WIN_W 1280
 # define WIN_H 700
-#define BEGIN_IMAGE_LOOP(img) int i =0; int j=0; while(i<WIN_W){j=0;while(j<WIN_H){
+#define BEGIN_IMAGE_LOOP(img) int i =0; int j=0; while(i<WIN_W/4){j=0;while(j<WIN_H/4){
 #define END_IMAGE_LOOP j++;}i++;}
 
 typedef struct s_inter
@@ -137,5 +137,6 @@ void render(t_img img, t_scene sc);
 //*GET
 t_vec3  get_dir(t_vec2 pixel, t_cam cam);
 t_mt    get_axis(t_vec3 view, t_vec3 o);
+void    set_coord(t_vec3 *vec, float a, float b, float c);
 
 #endif

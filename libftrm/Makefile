@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rita <rita@student.42.fr>                  +#+  +:+       +#+         #
+#    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 14:39:30 by rimarque          #+#    #+#              #
-#    Updated: 2023/12/27 10:53:50 by rita             ###   ########.fr        #
+#    Updated: 2024/01/16 12:51:15 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,6 @@ HDR	= $(addprefix $(INCLUDE)/, $(_HEADERS))
 all: $(NAME)
 
 $(NAME): $(OBJ) $(HRD)
-	echo "ups"
 	@ar rcs $(NAME) $(OBJ)
 
 clean:
