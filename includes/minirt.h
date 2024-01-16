@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2023/12/29 17:47:04 by rita             ###   ########.fr       */
+/*   Updated: 2024/01/15 22:34:30 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,24 @@
 # include "../libftrm/includes/libft.h"
 
 # define ESC 65307
+# define PI 3.1415
+# define ANG_ROT PI/8
 # define WIN_W 1280
 # define WIN_H 700
-# define WIN_Z 150.0 //!Para que serve?
 #define BEGIN_IMAGE_LOOP(img) int i =0; int j=0; while(i<WIN_W){j=0;while(j<WIN_H){
 #define END_IMAGE_LOOP j++;}i++;}
+
+typedef struct s_inter
+{
+	bool inter;
+	t_vec3 point;
+} t_inter;
+
+typedef struct s_ray
+{
+	t_vec3 d;
+	t_vec3 o;
+}t_ray;
 
 typedef struct s_win
 {
@@ -57,13 +70,14 @@ typedef struct s_amb
 	t_rgb	color;
 }t_amb;
 
+//*aqui basta ter o axis, o fov_x e o aspect;
 typedef struct s_cam
 {
-	t_vec3	view_point;
-	t_vec3	orientation_vector; //precisamos de 3 vetores
+	t_vec3	o;
+	t_vec3	view; //precisamos de 3 vetores
 	float	fov_x; //!tanfov_y = tanfov_x * aspect
-	float	tanfov_x;
 	float	aspect; //*H / W
+	t_mt	axis;
 }t_cam;
 
 typedef struct s_light
@@ -119,5 +133,9 @@ int		handle_key_event(int button, t_img *view);
 //*CREATE IMG
 void	draw_test(t_img img);
 void render(t_img img, t_scene sc);
+
+//*GET
+t_vec3  get_dir(t_vec2 pixel, t_cam cam);
+t_mt    get_axis(t_vec3 view, t_vec3 o);
 
 #endif

@@ -22,6 +22,8 @@ CMATH			= -lm
 
 LIBFTDIR 		= libftrm
 LIBFT 			= $(LIBFTDIR)/libft.a
+MATHVECDIR 		= mathvec
+MATHVEC 		= $(MATHVECDIR)/mathvec.a
 MLX 			= ./mlx/libmlx.a
 MLX_PATH		= ./mlx
 INCLUDE			= includes
@@ -33,7 +35,7 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minirt
 
-_FILES 			= test inits exit keys render
+_FILES 			= test inits exit keys render get
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
@@ -44,8 +46,8 @@ HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 all: $(NAME)
 
-$(NAME): $(OBJDIR) $(TARGET) $(LIBFT) $(MLX) main.c
-	$(CC) $(CFLAGS) main.c $(TARGET) -I $(INCLUDE) $(LIBFT) -o $(NAME) -L $(MLX_PATH) $(CMLX) $(CMATH)
+$(NAME): $(OBJDIR) $(TARGET) $(LIBFT) $(MATHVEC) $(MLX) main.c
+	$(CC) $(CFLAGS) main.c $(TARGET) -I $(INCLUDE) $(LIBFT) $(MATHVEC) -o $(NAME) -L $(MLX_PATH) $(CMLX) $(CMATH)
 	echo "[$(GREEN)Success$(RESET)] MiniRita created successfully$(BOLD)$(RESET)"
 
 $(OBJDIR)/%.o : %.c $(HDR)
@@ -59,6 +61,11 @@ $(LIBFT):
 	echo "[$(CYAN)Compiling$(RESET)] libft$(RESET)"
 	$(MAKE) $(NPD) -C $(LIBFTDIR)
 	echo "[$(GREEN)Success$(RESET)] Libft compilation compleated!$(BOLD)$(RESET)"
+
+$(MATHVEC):
+	echo "[$(CYAN)Compiling$(RESET)] mathvec$(RESET)"
+	$(MAKE) $(NPD) -C $(MATHVECDIR)
+	echo "[$(GREEN)Success$(RESET)] Mathvec compilation compleated!$(BOLD)$(RESET)"
 
 $(MLX):
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)MLX$(RESET)"

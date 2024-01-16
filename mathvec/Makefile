@@ -6,11 +6,11 @@
 #    By: rita <rita@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 14:39:30 by rimarque          #+#    #+#              #
-#    Updated: 2023/12/28 17:25:42 by rita             ###   ########.fr        #
+#    Updated: 2024/01/15 23:07:50 by rita             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = len_vec2.c len_vec3.c math_vec2.c math_vec3.c prod_vec2.c prod_vec3.c
+SRC = len_vec2.c len_vec3.c math_vec2.c math_vec3.c prod_vec2.c prod_vec3.c rotate_vec3
 
 NAME = mathvec.a
 

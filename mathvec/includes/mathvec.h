@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:10:40 by rita              #+#    #+#             */
-/*   Updated: 2023/12/28 17:30:22 by rita             ###   ########.fr       */
+/*   Updated: 2024/01/15 22:35:15 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,19 @@ typedef struct s_vec2
 	float	y;
 }t_vec2;
 
+typedef struct s_mt
+{
+	t_vec3 x;
+	t_vec3 y;
+	t_vec3 z;
+	t_vec3 o;
+}t_mt;
+
 //*MATH_VEC3
 t_vec3 vec3_add(t_vec3 a, t_vec3 b);
 t_vec3 vec3_sub(t_vec3 a, t_vec3 b);
 t_vec3 vec3_scale(t_vec3 a, float b);
+t_vec3 vec3_normalized(t_vec3 a);
 
 //*LEN_VEC3
 float vec3_lensqr(t_vec3 a);
@@ -46,6 +55,7 @@ t_vec3 vec3_cross(t_vec3 a, t_vec3 b);
 t_vec2 vec2_add(t_vec2 a, t_vec2 b);
 t_vec2 vec2_sub(t_vec2 a, t_vec2 b);
 t_vec2 vec2_scale(t_vec2 a, float b);
+t_vec2 vec2_normalized(t_vec2 a);
 
 //*LEN_VEC2
 float vec2_lensqr(t_vec2 a);
