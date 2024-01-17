@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/01/17 14:12:12 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:13:51 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct s_obj
 	int		type;
 	t_vec3	point;
 	t_vec3	normal; // range -1, 1
-	t_rgb	*c;
+	t_rgb	c;
 	float	d;
 	float	h;
 }t_obj;

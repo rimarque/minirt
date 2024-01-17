@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:58:05 by rita              #+#    #+#             */
-/*   Updated: 2024/01/17 14:18:45 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:31:31 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@ void	define_sc(t_scene *sc)
 {
     sc->obj = malloc(sizeof(t_obj) * 2);
     sc->cam = malloc(sizeof(t_cam));
+    sc->n_obj = 2;
     sc->obj[0].type = PL;
-	set_coord(&sc->obj[0].point, 0, -1, 0);
-	set_coord(&sc->obj[0].normal, 0, 1, 0);
-    set_color(sc->obj[0].c, 255, 0, 255);
+	set_coord(&sc->obj[0].point, 0, 0, 40);
+	set_coord(&sc->obj[0].normal, 0, 0, 1);
+    set_color(&sc->obj[0].c, 255, 0, 255);
     sc->obj[1].type = SP;
-	set_coord(&sc->obj[1].point, 0, 0, 30);
+	set_coord(&sc->obj[1].point, -20, -10, 30);
 	sc->obj[1].d = 3;
-    set_color(sc->obj[0].c, 0, 0, 255);
+    set_color(&sc->obj[1].c, 0, 0, 255);
     set_coord(&sc->cam->o, 0, 0, 0);
 	set_coord(&sc->cam->view, 0, 0, 1); //!condicao para se o view for (0,0,0)
 	sc->cam->aspect = (float)WIN_H/WIN_W;

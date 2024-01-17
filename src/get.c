@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:16:21 by rita              #+#    #+#             */
-/*   Updated: 2024/01/17 11:53:03 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:01:27 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ t_mt    get_axis(t_vec3 view, t_vec3 o)
     axis.z = vec3_scale(view, -1);
     axis.x = vec3_normalized(vec3_cross(up, axis.z));
     axis.y = vec3_normalized(vec3_cross(axis.z, axis.x));
-    print_vec("X: ", axis.x);
+    /* print_vec("X: ", axis.x);
     print_vec("Y: ", axis.y);
-    print_vec("Z: ", axis.z);
+    print_vec("Z: ", axis.z); */
     return(axis);
 }

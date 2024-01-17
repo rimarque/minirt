@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:18:36 by rita              #+#    #+#             */
-/*   Updated: 2024/01/17 14:16:52 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:34:15 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,17 @@ t_inter	inter_pl(t_ray ray, t_obj pl, t_inter prev_it)
 	//print_vec("ray_d:", ray.d);
 	t = vec3_dot(vec3_sub(pl.point, ray.o), pl.normal) 
 	/ vec3_dot(vec3_normalized(ray.d), pl.normal);
-	//printf("t: %f\n", t);
+	/* printf("boll prev t: %d\n", prev_it.inter);
+	printf("prev_t: %f\n", prev_it.t);
+	printf("t: %f\n", t); */
 	if(t < 0 || (prev_it.inter && prev_it.t < t)){
+		//printf("entra aqui");
 		it.inter = false;
 		return(it);
 	}
 	it.point = vec3_add(ray.o, vec3_scale(ray.d, t));
 	it.inter = true;
+	it.t = t;
 	return(it);
 }
 
@@ -77,8 +81,9 @@ t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it)
 		return(it);
 	}
 	it.inter = true;
-	if (in_sqr == 0){
-		if(prev_it.inter && prev_it.t < it.t)
+	if (in_sqr == 0)
+	{
+		if(prev_it.inter && prev_it.t < t1)
 			return(it.inter = false, it);
 		it.t = t1;
 		it.point = vec3_add(ray.o, vec3_scale(ray.d, t1));
@@ -109,7 +114,10 @@ t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it)
 		it.point = point2;
 	}
 	if(prev_it.inter && prev_it.t < it.t)
+	{
+		printf("entra aqui\n");
 		return(it.inter = false, it);
+	}
 	return(it);
 }
 
@@ -119,18 +127,27 @@ t_inter intersect(t_ray ray, t_obj *obj, int n)
 	t_inter prev_it;
 	t_inter it;
 
-	it.inter = false;
+	prev_it.inter = false;
 	i = 0;
 	while(i < n)
 	{
 		if(obj[i].type == PL)
 		{
-			it = inter_pl(ray, obj[i], prev_it);
+			/* printf("obj\n");
+			print_vec("point", obj[i].point);
+			print_vec("normal", obj[i].normal);
+			printf("color: %d, %d, %d\n", obj[i].c.r, obj[i].c.g, obj[i].c.b); */
+			printf("pl inter prev: %d\n", prev_it.inter);
+			it = inter_pl(ray, obj[i], prev_it); //it.inter = true
+			//printf("inter: %d\n", it.inter);
+			printf("pl inter: %d\n", it.inter);
 			it.i = i;
 		}
 		if(obj[i].type == SP)
 		{
+			printf("inter prev: %d\n", prev_it.inter);
 			it = inter_sp(ray, obj[i], prev_it);
+			printf("inter: %d\n", it.inter);
 			it.i = i;
 		}
 		//if(obj[i].type == CY)
@@ -138,8 +155,10 @@ t_inter intersect(t_ray ray, t_obj *obj, int n)
 		if (it.inter)
 			prev_it = it;
 		i++;
+		//printf("i: %d\n", i);
 	}
-	return(it);
+	//printf("inter: %d\n", it.inter);
+	return(prev_it);
 }
 
 //x e o y vao ter um range de 2, variam entre -1 e 1
@@ -165,8 +184,8 @@ static inline int	pixel_color(int i, int j, t_scene sc)
 			f = (vec3_lenght(vec3_sub(sc.cam->o, sc.obj[it.i].point)) - it.t)/sc.obj[it.i].d;
 		else
 			f = 1;
-		return(encode_rgb(sc.obj[it.i].c->r * f, 
-				sc.obj[it.i].c->g * f, sc.obj[it.i].c->b * f));
+		return(encode_rgb(sc.obj[it.i].c.r * f, 
+				sc.obj[it.i].c.g * f, sc.obj[it.i].c.b * f));
 	}
 }
 
