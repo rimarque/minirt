@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:18:36 by rita              #+#    #+#             */
-/*   Updated: 2024/01/16 19:16:43 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:16:52 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,77 +25,121 @@ int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
     return (red << 16 | green << 8 | blue);
 }
 
-t_inter	inter_pl(t_ray ray, t_plane pl)
+t_inter	inter_pl(t_ray ray, t_obj pl, t_inter prev_it)
 {
-	t_inter inter;
-	
-	print_vec("ray_o:", ray.o);
-	print_vec("ray_d:", ray.d);
-	float t = vec3_dot(vec3_sub(pl.point, ray.o), pl.normal) / vec3_dot(vec3_normalized(ray.d), pl.normal);
-	printf("t: %f\n", t);
-	if(t < 0){
-		inter.inter = false;
-		return(inter);
-	}
-	inter.point = vec3_add(ray.o, vec3_scale(ray.d, t));
-	inter.inter = true;
-	return(inter);
-}
+	t_inter it;
+	float	t;
 
-t_inter	inter_sp(t_ray ray, t_sp sp)
-{
-	t_inter inter;
-	float t1;
-	float t2;
-	t_vec3 point1;
-	t_vec3 point2;
-	
 	//print_vec("ray_o:", ray.o);
 	//print_vec("ray_d:", ray.d);
-	t_vec3 co = vec3_sub(ray.o, sp.center);
-	float a = vec3_dot(ray.d, ray.d);
-	float b = 2 * vec3_dot(ray.d, co);
-	float c = vec3_dot(co, co) - sp.d * sp.d;
-	float in_sqr = b * b - 4 * a * c;
+	t = vec3_dot(vec3_sub(pl.point, ray.o), pl.normal) 
+	/ vec3_dot(vec3_normalized(ray.d), pl.normal);
+	//printf("t: %f\n", t);
+	if(t < 0 || (prev_it.inter && prev_it.t < t)){
+		it.inter = false;
+		return(it);
+	}
+	it.point = vec3_add(ray.o, vec3_scale(ray.d, t));
+	it.inter = true;
+	return(it);
+}
+
+t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it)
+{
+	t_inter	it;
+	float	t1;
+	float	t2;
+	t_vec3	point1;
+	t_vec3	point2;
+	t_vec3	co;
+	float	a;
+	float	b;
+	float	c;
+	float	in_sqr;
+
+	//print_vec("ray_o:", ray.o);
+	//print_vec("ray_d:", ray.d);
+	co = vec3_sub(ray.o, sp.point);
+	a = vec3_dot(ray.d, ray.d);
+	b = 2 * vec3_dot(ray.d, co);
+	c = vec3_dot(co, co) - sp.d * sp.d;
+	in_sqr = b * b - 4 * a * c;
 	if (in_sqr < 0)
 	{
-		inter.inter = false;
-		return(inter);
+		it.inter = false;
+		return(it);
 	}
 	t1 = (-b + sqrtf(in_sqr)) / 2 * a;
 	t2 = (-b - sqrtf(in_sqr)) / 2 * a;
 	if(t1 < 0 && t2 < 0)
 	{
-		inter.inter = false;
-		return(inter);
+		it.inter = false;
+		return(it);
 	}
-	inter.inter = true;
+	it.inter = true;
 	if (in_sqr == 0){
-		inter.point = vec3_add(ray.o, vec3_scale(ray.d, t1));
-		return(inter);
+		if(prev_it.inter && prev_it.t < it.t)
+			return(it.inter = false, it);
+		it.t = t1;
+		it.point = vec3_add(ray.o, vec3_scale(ray.d, t1));
+		return(it);
 	}
 	point1 = vec3_add(ray.o, vec3_scale(ray.d, t1));
 	point2 = vec3_add(ray.o, vec3_scale(ray.d, t2));
 	if(t1 > 0 && t2 > 0)
 	{
-		if(t1 < t2){
-			inter.t = t1;
-			inter.point = point1;
+		if(t1 < t2)
+		{
+			it.t = t1;
+			it.point = point1;
 		}
-		else{
-			inter.t = t2;
-			inter.point = point2;
+		else
+		{
+			it.t = t2;
+			it.point = point2;
 		}
 	}
-	else if(t1 > 0){
-		inter.t = t1;
-		inter.point = point1;
+	else if(t1 > 0)
+	{
+		it.t = t1;
+		it.point = point1;
 	}
 	else if(t2 > 0){
-		inter.t = t2;
-		inter.point = point2;
+		it.t = t2;
+		it.point = point2;
 	}
-	return(inter);
+	if(prev_it.inter && prev_it.t < it.t)
+		return(it.inter = false, it);
+	return(it);
+}
+
+t_inter intersect(t_ray ray, t_obj *obj, int n)
+{
+	int i;
+	t_inter prev_it;
+	t_inter it;
+
+	it.inter = false;
+	i = 0;
+	while(i < n)
+	{
+		if(obj[i].type == PL)
+		{
+			it = inter_pl(ray, obj[i], prev_it);
+			it.i = i;
+		}
+		if(obj[i].type == SP)
+		{
+			it = inter_sp(ray, obj[i], prev_it);
+			it.i = i;
+		}
+		//if(obj[i].type == CY)
+		//	inter_cy();
+		if (it.inter)
+			prev_it = it;
+		i++;
+	}
+	return(it);
 }
 
 //x e o y vao ter um range de 2, variam entre -1 e 1
@@ -104,20 +148,25 @@ static inline int	pixel_color(int i, int j, t_scene sc)
 	t_ray ray;
 	t_vec2 pixel;
 	float f;
+	t_inter it;
 
 	j = WIN_H - j - 1;
 	pixel.x = ((float)i / (WIN_W - 1)) * 2 - 1;
 	pixel.y = ((float)j / (WIN_H - 1)) * 2 - 1;
 	ray.d = get_dir(pixel, *sc.cam);
 	ray.o = sc.cam->axis.o;
-	//t_inter inter = inter_pl(ray, *sc.pl);
-	t_inter inter = inter_sp(ray, *sc.sp);
+	it = intersect(ray, sc.obj, sc.n_obj);
 	//return(encode_rgb(255 *ray.d.x * 10, 255 *ray.d.y * 10, 255 *ray.d.z * 10));
-	if(!inter.inter)
+	if(!it.inter)
 		return(encode_rgb(0, 0, 0));
-	else{
-		f = (vec3_lenght(vec3_sub(sc.cam->o, sc.sp->center)) - inter.t)/sc.sp->d;
-		return(encode_rgb(0, 0 , f*255));
+	else
+	{
+		if(sc.obj[it.i].type == SP)
+			f = (vec3_lenght(vec3_sub(sc.cam->o, sc.obj[it.i].point)) - it.t)/sc.obj[it.i].d;
+		else
+			f = 1;
+		return(encode_rgb(sc.obj[it.i].c->r * f, 
+				sc.obj[it.i].c->g * f, sc.obj[it.i].c->b * f));
 	}
 }
 

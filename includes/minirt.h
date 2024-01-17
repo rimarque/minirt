@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/01/16 18:13:31 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:12:12 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,18 @@
 # define ANG_ROT PI/8
 # define WIN_W 1280
 # define WIN_H 700
-#define BEGIN_IMAGE_LOOP(img) int i =0; int j=0; while(i<WIN_W){j=0;while(j<WIN_H){
-#define END_IMAGE_LOOP j++;}i++;}
+# define PL 0
+# define SP 1
+# define CY 2
+# define BEGIN_IMAGE_LOOP(img) int i =0; int j=0; while(i<WIN_W){j=0;while(j<WIN_H){
+# define END_IMAGE_LOOP j++;}i++;}
 
 typedef struct s_inter
 {
-	bool inter;
-	t_vec3 point;
-	float t;
+	bool	inter;
+	t_vec3	point;
+	float	t;  //distancia a origem do ray
+	int		i;
 } t_inter;
 
 typedef struct s_ray
@@ -75,8 +79,8 @@ typedef struct s_amb
 typedef struct s_cam
 {
 	t_vec3	o;
-	t_vec3	view; //precisamos de 3 vetores
-	float	fov_x; //!tanfov_y = tanfov_x * aspect
+	t_vec3	view;
+	float	fov_x;
 	float	aspect; //*H / W
 	t_mt	axis;
 }t_cam;
@@ -87,38 +91,25 @@ typedef struct s_light
 	float ratio;
 }t_light;
 
-typedef struct s_sp
+//color nao precisa de ser um ponteiro
+typedef struct s_obj
 {
-	t_vec3	center;
-	float	d;
-	t_rgb	color;
-}t_sp;
-
-
-typedef struct s_plane
-{
+	int		type;
 	t_vec3	point;
-	t_vec3	normal;
-	t_rgb	color;
-}t_plane;
-
-typedef struct s_cy
-{
-	t_vec3	center;
-	t_vec3	normal;
+	t_vec3	normal; // range -1, 1
+	t_rgb	*c;
 	float	d;
 	float	h;
-	t_rgb	color;
-}t_cy;
+}t_obj;
 
+//amb, cam, light nao precisam de ser ponteiros acho eu
 typedef struct s_scene
 {
 	t_amb		*amb;
 	t_cam		*cam;
 	t_light		*light;
-	t_sp		*sp;
-	t_plane		*pl;
-	t_cy		*cy;
+	t_obj		*obj;
+	int			n_obj;
 }t_scene;
 
 //*INITS
@@ -139,5 +130,6 @@ void render(t_img img, t_scene sc);
 t_vec3  get_dir(t_vec2 pixel, t_cam cam);
 t_mt    get_axis(t_vec3 view, t_vec3 o);
 void    set_coord(t_vec3 *vec, float a, float b, float c);
+void    set_color(t_rgb *color, uint8_t r, uint8_t g, uint8_t b);
 
 #endif

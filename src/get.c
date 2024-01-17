@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:16:21 by rita              #+#    #+#             */
-/*   Updated: 2024/01/16 17:54:12 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:53:03 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ void    set_coord(t_vec3 *vec, float a, float b, float c)
     vec->x = a;
     vec->y = b;
     vec->z = c;
+}
+
+void    set_color(t_rgb *color, uint8_t r, uint8_t g, uint8_t b)
+{
+    color->r = r;
+    color->g = g;
+    color->b = b;
 }
 
 //o up sera definido como (0,1,0); -> se o view for paralelo ao up: dot(normalized(up), normalized(view)) == 1 ou -1 -> up(1,0,0)??
