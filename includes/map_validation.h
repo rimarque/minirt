@@ -6,7 +6,7 @@
 /*   By: bde-sous <bde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/01/17 22:17:17 by bde-sous         ###   ########.fr       */
+/*   Updated: 2024/01/21 14:48:52 by bde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,19 @@ typedef struct s_vec3
 	float	z;
 }t_vec3;
 
-typedef struct s_amb
-{
-	float	ratio;
-	t_rgb	color;
-}t_amb;
-
 typedef struct s_cam
 {
 	t_vec3	view_point;
 	t_vec3	normal; // range  -1, 1
 	float	fov_x; // Range 0-180
 }t_cam;
+
+typedef struct s_amb
+{
+	float	ratio;
+	t_rgb	color;
+}t_amb;
+
 
 typedef struct s_light
 {
