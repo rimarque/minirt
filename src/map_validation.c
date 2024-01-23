@@ -6,7 +6,7 @@
 /*   By: bde-sous <bde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:07:10 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/01/21 20:37:02 by bde-sous         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:48:53 by bde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ int	ft_isfloat(const char *str, float *val, int normalized)
 	if (str[i] != '\0')
 		return (0);
     *val = ft_atof(str);
-    if (normalized && (!float_in_range(*val, -1, 1)))
+    if (normalized == 1 && (!float_in_range(*val, -1, 1)))
+        return (0);
+    if (normalized == 2 && (*val <= 0))
         return (0);
     return (1);
 }
@@ -93,10 +95,10 @@ int parse_color(char *str, t_rgb *rgb)
         if (ft_ischar(raw[i], &irgb[i]))
             i++;
         else
-            return(0);
+            return(0 & ft_freedoublepointer(raw));
     }
     if(ft_arrlen(raw) != 3)
-        return(0);
+        return(0 & ft_freedoublepointer(raw));
     rgb->r=irgb[0];
     rgb->g=irgb[1];
     rgb->b=irgb[2];
@@ -117,7 +119,7 @@ int parse_vec3(char *str, t_vec3 *vec, int normalized)
         if (ft_isfloat(raw[i], &ivec[i], normalized))
             i++;
         else
-            return(0);
+            return(0 & ft_freedoublepointer(raw));
     }
     if (ft_arrlen(raw) != 3)
         return(ft_freedoublepointer(raw) & 0);
@@ -134,7 +136,7 @@ int validate_A(char **line, t_scene *scene)
     {
         scene->amb = malloc(sizeof(t_amb));
         if (scene->amb == NULL)
-            return 0;
+            return (0);
         scene->amb->ratio = ft_atof(line[1]);
         if (!parse_color(line[2], &scene->amb->color))
             return(0);
@@ -142,7 +144,6 @@ int validate_A(char **line, t_scene *scene)
             return(0);
         return(1);
     }
-    ft_freedoublepointer(line);
     return(0);
 }
 
@@ -164,13 +165,12 @@ int validate_C(char **line, t_scene *scene)
         scene->cam->fov_x = scene->cam->fov_x * (M_PI / 180);
         return(1);
     }
-    ft_freedoublepointer(line);
     return(0);
 }
 
 int validate_L(char **line, t_scene *scene)
 {
-    if (ft_arrlen(line) == 4 && scene->light == NULL)
+    if (ft_arrlen(line) == 3 && scene->light == NULL)
     {
         scene->light = ft_calloc(1,sizeof(t_light));
         if (!parse_vec3(line[1], &scene->light->point, 0))
@@ -181,7 +181,6 @@ int validate_L(char **line, t_scene *scene)
             return(0);
         return(1);
     }
-    ft_freedoublepointer(line);
     return(0);
 }
 
@@ -191,14 +190,13 @@ int validate_sp(char **line, t_obj *obj)
     {
         if (!parse_vec3(line[1], &obj->point, 0))
             return(0);
-        if (!ft_isfloat(line[2], &obj->d, 0))
+        if (!ft_isfloat(line[2], &obj->d, 2))
             return(0);
         if (!parse_color(line[3], &obj->color))
             return(0);
         obj->type = 0;
         return(1);
     }
-    ft_freedoublepointer(line);
     return(0);
 }
 
@@ -210,16 +208,15 @@ int validate_cy(char **line, t_obj *obj)
             return(0);
         if (!parse_vec3(line[2], &obj->normal, 1))
             return(0);
-        if (!ft_isfloat(line[3], &obj->d, 0))
+        if (!ft_isfloat(line[3], &obj->d, 2))
             return(0);
-        if (!ft_isfloat(line[4], &obj->h, 0))
+        if (!ft_isfloat(line[4], &obj->h, 2))
             return(0);
         if (!parse_color(line[5], &obj->color))
             return(0);
         obj->type = 1;
         return(1);
     }
-    ft_freedoublepointer(line);
     return(0);
 }
 
@@ -236,7 +233,6 @@ int validate_pl(char **line, t_obj *obj)
         obj->type = 2;
         return(1);
     }
-    ft_freedoublepointer(line);
     return(0);
 }
 
@@ -369,13 +365,45 @@ void init_scene(t_scene *scene)
     scene->temp = NULL;
 }
 
+int ft_put_err()
+{
+    ft_putstr_fd("Invalid Map\n",2);
+    return(0);
+}
+
+int final_check(t_scene *scene)
+{
+    if(scene->amb == NULL)
+        return(ft_put_err() & 0);
+    if(scene->cam == NULL)
+        return(ft_put_err() & 0);
+    if(scene->light == NULL)
+        return(ft_put_err() & 0);
+    if(scene->obj == NULL)
+        return(ft_put_err() & 0);
+    if(scene->temp == NULL)
+        return(ft_put_err() & 0);
+    return(1);
+}
+
+int open_map(char *str)
+{
+    int fd;
+
+    fd = -1;
+    if (!access(str, F_OK))
+        fd = open(str, O_RDONLY);
+    else
+        ft_putstr_fd("Invalid Map\n",2);
+    return(fd);
+}
+
 int map_validate(char *file, t_scene *scene)
 {
     int     fd; 
     char    *line;
 
-    fd = 0;
-    fd = open(file, O_RDONLY);
+    fd = open_map(file);
     if (fd == -1)
 		return (127);
     line = ft_strtrimall(get_next_line(fd, 0));
@@ -385,7 +413,9 @@ int map_validate(char *file, t_scene *scene)
         {
             free(line);
             ft_putstr_fd("Invalid Map\n",2);
-            break;
+            get_next_line(fd, 1);
+            close(fd);
+            return(0);
         }
         else
             free(line);
@@ -393,7 +423,7 @@ int map_validate(char *file, t_scene *scene)
     }
     get_next_line(fd, 1);
     close(fd);
-    return(list_to_obj(scene));
+    return(list_to_obj(scene) & final_check(scene));
 }
 
 int	freestack(t_obj_list *stack)
@@ -427,11 +457,16 @@ void ft_free_objarray(t_obj *obj, int len)
 
 void ft_free_scene(t_scene *scene)
 {
-    free(scene->amb);
-    free(scene->cam);
-    free(scene->light);
-    freestack(scene->temp);
-    free(scene->obj);
+    if (scene->amb != NULL)
+        free(scene->amb);
+    if (scene->cam != NULL)
+        free(scene->cam);
+    if (scene->light != NULL)
+        free(scene->light);
+    if (scene->temp != NULL)
+        freestack(scene->temp);
+    if (scene->obj != NULL)
+        free(scene->obj);
 }
 
 void ft_print_vec(t_vec3 *vec)
@@ -479,7 +514,7 @@ void ft_print_light(t_light *light)
 void ft_print_obj(t_obj *obj, int num)
 {
     int i;
-    char   *tipos[3] = {"CY", "SP", "PL"};
+    char   *tipos[3] = {"SP", "CY", "PL"};
 
     printf("---OBJECTS---\n\n");
     i = -1;
@@ -519,8 +554,8 @@ int main(int argc, char **argv)
 		return (1);
 	}
     init_scene(&scene);
-    map_validate(argv[1], &scene);
-    ft_print_scene(&scene);
+    if(map_validate(argv[1], &scene) == 1)
+        ft_print_scene(&scene);
     ft_free_scene(&scene);
     return(0);
 }
