@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bde-sous <bde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:48:02 by rimarque          #+#    #+#             */
-/*   Updated: 2023/12/27 10:10:44 by rita             ###   ########.fr       */
+/*   Updated: 2024/01/07 17:58:51 by bde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <limits.h>
 # include "get_next_line.h"
+# include "ft_printf.h"
 
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
@@ -66,5 +67,8 @@ void		ft_free_array(char	***array);
 void		ft_free_matrix(char	****matrix);
 void		print_arr(char **arr);
 void		print_matrix(char ***matrix);
+char		*ft_strtrimall(char *str);
+double      ft_atof(const char *str);
+long long	ft_atoll(const char *str);
 
 #endif

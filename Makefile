@@ -35,11 +35,11 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minirt
 
-_FILES 			= test inits exit keys render get
+_FILES 			= test inits exit keys render get map_validation
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
-_HEADERS		= minirt.h
+_HEADERS		= minirt.h map_validation.h
 HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------

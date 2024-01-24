@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:18:36 by rita              #+#    #+#             */
-/*   Updated: 2024/01/17 19:34:15 by rita             ###   ########.fr       */
+/*   Updated: 2024/01/24 20:55:05 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,9 @@ t_inter	inter_pl(t_ray ray, t_obj pl, t_inter prev_it)
 	t_inter it;
 	float	t;
 
-	//print_vec("ray_o:", ray.o);
-	//print_vec("ray_d:", ray.d);
 	t = vec3_dot(vec3_sub(pl.point, ray.o), pl.normal) 
 	/ vec3_dot(vec3_normalized(ray.d), pl.normal);
-	/* printf("boll prev t: %d\n", prev_it.inter);
-	printf("prev_t: %f\n", prev_it.t);
-	printf("t: %f\n", t); */
 	if(t < 0 || (prev_it.inter && prev_it.t < t)){
-		//printf("entra aqui");
 		it.inter = false;
 		return(it);
 	}
@@ -61,8 +55,6 @@ t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it)
 	float	c;
 	float	in_sqr;
 
-	//print_vec("ray_o:", ray.o);
-	//print_vec("ray_d:", ray.d);
 	co = vec3_sub(ray.o, sp.point);
 	a = vec3_dot(ray.d, ray.d);
 	b = 2 * vec3_dot(ray.d, co);
@@ -114,10 +106,7 @@ t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it)
 		it.point = point2;
 	}
 	if(prev_it.inter && prev_it.t < it.t)
-	{
-		printf("entra aqui\n");
 		return(it.inter = false, it);
-	}
 	return(it);
 }
 
@@ -133,31 +122,18 @@ t_inter intersect(t_ray ray, t_obj *obj, int n)
 	{
 		if(obj[i].type == PL)
 		{
-			/* printf("obj\n");
-			print_vec("point", obj[i].point);
-			print_vec("normal", obj[i].normal);
-			printf("color: %d, %d, %d\n", obj[i].c.r, obj[i].c.g, obj[i].c.b); */
-			printf("pl inter prev: %d\n", prev_it.inter);
-			it = inter_pl(ray, obj[i], prev_it); //it.inter = true
-			//printf("inter: %d\n", it.inter);
-			printf("pl inter: %d\n", it.inter);
+			it = inter_pl(ray, obj[i], prev_it);
 			it.i = i;
 		}
 		if(obj[i].type == SP)
 		{
-			printf("inter prev: %d\n", prev_it.inter);
 			it = inter_sp(ray, obj[i], prev_it);
-			printf("inter: %d\n", it.inter);
 			it.i = i;
 		}
-		//if(obj[i].type == CY)
-		//	inter_cy();
 		if (it.inter)
 			prev_it = it;
 		i++;
-		//printf("i: %d\n", i);
 	}
-	//printf("inter: %d\n", it.inter);
 	return(prev_it);
 }
 
@@ -175,13 +151,12 @@ static inline int	pixel_color(int i, int j, t_scene sc)
 	ray.d = get_dir(pixel, *sc.cam);
 	ray.o = sc.cam->axis.o;
 	it = intersect(ray, sc.obj, sc.n_obj);
-	//return(encode_rgb(255 *ray.d.x * 10, 255 *ray.d.y * 10, 255 *ray.d.z * 10));
 	if(!it.inter)
 		return(encode_rgb(0, 0, 0));
 	else
 	{
 		if(sc.obj[it.i].type == SP)
-			f = (vec3_lenght(vec3_sub(sc.cam->o, sc.obj[it.i].point)) - it.t)/sc.obj[it.i].d;
+			f = (vec3_lenght(vec3_sub(sc.cam->axis.o, sc.obj[it.i].point)) - it.t)/sc.obj[it.i].d;
 		else
 			f = 1;
 		return(encode_rgb(sc.obj[it.i].c.r * f, 
@@ -191,6 +166,7 @@ static inline int	pixel_color(int i, int j, t_scene sc)
 
 void render(t_img img, t_scene sc)
 {
+	ft_print_scene(&sc);
 	BEGIN_IMAGE_LOOP(img)
 	put_pixel_img(img, i, j, pixel_color(i, j, sc));
 	END_IMAGE_LOOP

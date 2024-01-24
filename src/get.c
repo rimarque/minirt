@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:16:21 by rita              #+#    #+#             */
-/*   Updated: 2024/01/17 16:01:27 by rita             ###   ########.fr       */
+/*   Updated: 2024/01/24 19:34:25 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_vec3  get_dir(t_vec2 pixel, t_cam cam)
     result.y = pixel.y * y_max;
     result.z = -1;
     result = vec3_mtpmt(result, cam.axis);
-    result = vec3_sub(result, cam.o);
+    result = vec3_sub(result, cam.axis.o);
     result = vec3_normalized(result);
     //print_vec("dir:",result);
     //printf("point.x: %f\npoint.y: %f\npoint.z: %f\n", result.x, result.y, result.z);

@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:58:05 by rita              #+#    #+#             */
-/*   Updated: 2024/01/17 19:31:31 by rita             ###   ########.fr       */
+/*   Updated: 2024/01/24 20:12:52 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minirt.h"
-
-void	define_sc(t_scene *sc)
-{
-    sc->obj = malloc(sizeof(t_obj) * 2);
-    sc->cam = malloc(sizeof(t_cam));
-    sc->n_obj = 2;
-    sc->obj[0].type = PL;
-	set_coord(&sc->obj[0].point, 0, 0, 40);
-	set_coord(&sc->obj[0].normal, 0, 0, 1);
-    set_color(&sc->obj[0].c, 255, 0, 255);
-    sc->obj[1].type = SP;
-	set_coord(&sc->obj[1].point, -20, -10, 30);
-	sc->obj[1].d = 3;
-    set_color(&sc->obj[1].c, 0, 0, 255);
-    set_coord(&sc->cam->o, 0, 0, 0);
-	set_coord(&sc->cam->view, 0, 0, 1); //!condicao para se o view for (0,0,0)
-	sc->cam->aspect = (float)WIN_H/WIN_W;
-	sc->cam->fov_x = 1.2;
-	sc->cam->axis = get_axis(sc->cam->view, sc->cam->o);
-}
 
 int main(int argc, char **argv)
 {
@@ -38,13 +18,20 @@ int main(int argc, char **argv)
     t_img   img;
     t_scene  sc;
 
-    if (argc != 2 || ft_strcmp(argv[1] + ft_strclen(argv[1], '.'), ".rt"))
+    if (argc != 2) // || ft_strcmp(argv[1] + ft_strclen(argv[1], '.'), ".rt"))
 	{
 		printf("minirt: INSERT <file.rt>\n");
 		return (1);
 	}
     //sc = parser();
-	define_sc(&sc);
+	//define_sc(&sc);
+    init_scene(&sc);
+    if(map_validate(argv[1], &sc) == 0)
+    {
+        ft_free_scene(&sc);
+        return(1);
+    }
+    //ft_print_scene(&scene);
     minirita = new_program(argv[1]);
     img = new_img(&minirita);
     render(img, sc);

@@ -3,22 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/01/17 19:13:51 by rita             ###   ########.fr       */
+/*   Updated: 2024/01/24 19:21:10 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include <errno.h>
-# include <math.h>
-# include <stdint.h>
-# include "../mathvec/includes/mathvec.h"
+
 # include "../mlx/mlx.h"
-# include "../libftrm/includes/libft.h"
+# include "./map_validation.h"
 
 # define ESC 65307
 # define PI 3.1415
@@ -61,56 +58,6 @@ typedef struct s_img
 	int		endian;
 	t_win	*win;
 }t_img;
-
-typedef	struct s_rgb
-{
-	uint8_t	r;
-	uint8_t g;
-	uint8_t b;	
-}t_rgb;
-
-typedef struct s_amb
-{
-	float	ratio;
-	t_rgb	color;
-}t_amb;
-
-//*aqui basta ter o axis, o fov_x e o aspect;
-typedef struct s_cam
-{
-	t_vec3	o;
-	t_vec3	view;
-	float	fov_x;
-	float	aspect; //*H / W
-	t_mt	axis;
-}t_cam;
-
-typedef struct s_light
-{
-	t_vec3 point;
-	float ratio;
-}t_light;
-
-//color nao precisa de ser um ponteiro
-typedef struct s_obj
-{
-	int		type;
-	t_vec3	point;
-	t_vec3	normal; // range -1, 1
-	t_rgb	c;
-	float	d;
-	float	h;
-}t_obj;
-
-//amb, cam, light nao precisam de ser ponteiros acho eu
-typedef struct s_scene
-{
-	t_amb		*amb;
-	t_cam		*cam;
-	t_light		*light;
-	t_obj		*obj;
-	int			n_obj;
-}t_scene;
 
 //*INITS
 t_win	new_program(char *title);
