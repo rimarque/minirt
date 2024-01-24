@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rita <rita@student.42.fr>                  +#+  +:+       +#+         #
+#    By: bde-sous <bde-sous@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 14:39:30 by rimarque          #+#    #+#              #
-#    Updated: 2023/12/27 10:53:50 by rita             ###   ########.fr        #
+#    Updated: 2024/01/03 22:13:38 by bde-sous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SRC =  libft/ft_bzero.c \
            libft/ft_memcpy.c \
            libft/ft_memmove.c \
            libft/ft_cpy.c \
+           libft/ft_atof.c \
+           libft/ft_atoll.c \
            libft/ft_strlcat.c \
            libft/ft_toupper.c \
            libft/ft_tolower.c \
@@ -35,6 +37,7 @@ SRC =  libft/ft_bzero.c \
            libft/ft_substr.c \
            libft/ft_strjoin.c \
            libft/ft_strtrim.c \
+           libft/ft_strtrimall.c \
            libft/ft_strmapi.c \
            libft/ft_striteri.c \
            libft/ft_putchar_fd.c \
@@ -43,11 +46,14 @@ SRC =  libft/ft_bzero.c \
            libft/ft_putnbr_fd.c \
            libft/ft_itoa.c \
            libft/ft_free.c \
-           libft/ft_len.c \
-           libft/ft_split.c \
-		   libft/ft_print.c \
-		   get_next_line/get_next_line.c \
-		   get_next_line/get_next_line_utils.c \
+	   libft/ft_len.c \
+	   printf/ft_print_cs.c \
+	   printf/ft_print_iduxXp.c \
+	   printf/ft_printf.c \
+       get_next_line/get_next_line.c \
+       get_next_line/get_next_line_utils.c \
+       libft/ft_split.c \
+       libft/ft_print.c
 
 NAME = libft.a
 
@@ -57,20 +63,18 @@ CFLAGS  = -Wall -Wextra -Werror -g
 
 RM = rm -rf
 
-OBJ = $(SRC:%.c=%.o)
-
-INCLUDE = includes
-_HEADERS = libft.h get_next_line.h
-HDR	= $(addprefix $(INCLUDE)/, $(_HEADERS))
+OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(HRD)
-	echo "ups"
+$(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
 
 clean:
 	@$(RM) $(OBJ)
+	@$(RM) a.out
+	@$(RM) libft.h.gch
+	@$(RM) libft.so
 
 fclean: clean
 	@$(RM) $(NAME)

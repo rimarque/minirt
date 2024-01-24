@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   len_vec3.c                                         :+:      :+:    :+:   */
+/*   print_vec3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/28 16:33:59 by rita              #+#    #+#             */
-/*   Updated: 2023/12/29 11:45:20 by rita             ###   ########.fr       */
+/*   Created: 2024/01/16 11:34:48 by rimarque          #+#    #+#             */
+/*   Updated: 2024/01/16 12:53:04 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/mathvec.h"
 
-float vec3_lensqr(t_vec3 a)
+void print_vec(char *id, t_vec3 vec)
 {
-    return(vec3_dot(a, a));
-}
-float vec3_lenght(t_vec3 a)
-{
-    return(sqrt(vec3_lensqr(a)));
+	printf("%s x: %f; y: %f; z: %f;\n", id, vec.x, vec.y, vec.z);
 }

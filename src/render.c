@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:18:36 by rita              #+#    #+#             */
-/*   Updated: 2023/12/28 16:08:04 by rita             ###   ########.fr       */
+/*   Updated: 2024/01/24 20:55:05 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,42 +25,149 @@ int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
     return (red << 16 | green << 8 | blue);
 }
 
-bool	in_circle(float x, float y)
+t_inter	inter_pl(t_ray ray, t_obj pl, t_inter prev_it)
 {
-	float r = 0.5;
-	float pow_comp = powf(x, 2) + powf(y, 2); //usar o teorema de pitagoras 
-												//para calcular o comprimeto do vetor 
-												//(neste caso o quadrado do comprimento do vetor, o quadrado da hipotenusa das coordenadas)
-	if (pow_comp < powf(r, 2)) //se o comprimento do vetor for menor que o raio do circulo, entao este pixel pertence ao circulo
-		return(true);
-	return(false);
-}
-//x e o y vao ter um range de 2
-int	pixel_color(int i, int j)
-{
-	float x;
-	float y;
-	j = WIN_H - j - 1;
-	x = ((float)i / (WIN_W - 1)) * 2 - 1 ; //varia entre -1 e 0
-	y = ((float)j / (WIN_H - 1)) * 2 - 1; 
-	y *= (float)WIN_H/WIN_W; //a escala de y fica igual a de x
-	if(in_circle(x, y)){
-		//float f = 1.0 - sqrt(powf(x, 2) + powf(y, 2)); //1 - comprimento do vetor -> vai dar um fator de escurecimento maior
-		float f = 1.0 - 2*(powf(x, 2) + powf(y, 2)); //1 - quadrado do comprimento o vetor*q
-													//-> fator para multiplicar pelo rgb, 
-													//assim, quanto maior o comprimento, menor o rgb
-		return(encode_rgb(255 * f, 255 * f, 255 * f)); //quanto maior o comprimento do vetor, menor o uint
-														//quanto maior a distancia ao centro do circulo, mais escuro
+	t_inter it;
+	float	t;
+
+	t = vec3_dot(vec3_sub(pl.point, ray.o), pl.normal) 
+	/ vec3_dot(vec3_normalized(ray.d), pl.normal);
+	if(t < 0 || (prev_it.inter && prev_it.t < t)){
+		it.inter = false;
+		return(it);
 	}
-	x = fabs(x);
-	y = fabs(y);
-	return(encode_rgb(255 * x, 255 * y, 0)); //a cor varia entre 0 e 255
+	it.point = vec3_add(ray.o, vec3_scale(ray.d, t));
+	it.inter = true;
+	it.t = t;
+	return(it);
+}
+
+t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it)
+{
+	t_inter	it;
+	float	t1;
+	float	t2;
+	t_vec3	point1;
+	t_vec3	point2;
+	t_vec3	co;
+	float	a;
+	float	b;
+	float	c;
+	float	in_sqr;
+
+	co = vec3_sub(ray.o, sp.point);
+	a = vec3_dot(ray.d, ray.d);
+	b = 2 * vec3_dot(ray.d, co);
+	c = vec3_dot(co, co) - sp.d * sp.d;
+	in_sqr = b * b - 4 * a * c;
+	if (in_sqr < 0)
+	{
+		it.inter = false;
+		return(it);
+	}
+	t1 = (-b + sqrtf(in_sqr)) / 2 * a;
+	t2 = (-b - sqrtf(in_sqr)) / 2 * a;
+	if(t1 < 0 && t2 < 0)
+	{
+		it.inter = false;
+		return(it);
+	}
+	it.inter = true;
+	if (in_sqr == 0)
+	{
+		if(prev_it.inter && prev_it.t < t1)
+			return(it.inter = false, it);
+		it.t = t1;
+		it.point = vec3_add(ray.o, vec3_scale(ray.d, t1));
+		return(it);
+	}
+	point1 = vec3_add(ray.o, vec3_scale(ray.d, t1));
+	point2 = vec3_add(ray.o, vec3_scale(ray.d, t2));
+	if(t1 > 0 && t2 > 0)
+	{
+		if(t1 < t2)
+		{
+			it.t = t1;
+			it.point = point1;
+		}
+		else
+		{
+			it.t = t2;
+			it.point = point2;
+		}
+	}
+	else if(t1 > 0)
+	{
+		it.t = t1;
+		it.point = point1;
+	}
+	else if(t2 > 0){
+		it.t = t2;
+		it.point = point2;
+	}
+	if(prev_it.inter && prev_it.t < it.t)
+		return(it.inter = false, it);
+	return(it);
+}
+
+t_inter intersect(t_ray ray, t_obj *obj, int n)
+{
+	int i;
+	t_inter prev_it;
+	t_inter it;
+
+	prev_it.inter = false;
+	i = 0;
+	while(i < n)
+	{
+		if(obj[i].type == PL)
+		{
+			it = inter_pl(ray, obj[i], prev_it);
+			it.i = i;
+		}
+		if(obj[i].type == SP)
+		{
+			it = inter_sp(ray, obj[i], prev_it);
+			it.i = i;
+		}
+		if (it.inter)
+			prev_it = it;
+		i++;
+	}
+	return(prev_it);
+}
+
+//x e o y vao ter um range de 2, variam entre -1 e 1
+static inline int	pixel_color(int i, int j, t_scene sc)
+{
+	t_ray ray;
+	t_vec2 pixel;
+	float f;
+	t_inter it;
+
+	j = WIN_H - j - 1;
+	pixel.x = ((float)i / (WIN_W - 1)) * 2 - 1;
+	pixel.y = ((float)j / (WIN_H - 1)) * 2 - 1;
+	ray.d = get_dir(pixel, *sc.cam);
+	ray.o = sc.cam->axis.o;
+	it = intersect(ray, sc.obj, sc.n_obj);
+	if(!it.inter)
+		return(encode_rgb(0, 0, 0));
+	else
+	{
+		if(sc.obj[it.i].type == SP)
+			f = (vec3_lenght(vec3_sub(sc.cam->axis.o, sc.obj[it.i].point)) - it.t)/sc.obj[it.i].d;
+		else
+			f = 1;
+		return(encode_rgb(sc.obj[it.i].c.r * f, 
+				sc.obj[it.i].c.g * f, sc.obj[it.i].c.b * f));
+	}
 }
 
 void render(t_img img, t_scene sc)
 {
-	(void)sc;
+	ft_print_scene(&sc);
 	BEGIN_IMAGE_LOOP(img)
-	put_pixel_img(img, i, j, pixel_color(i, j));
+	put_pixel_img(img, i, j, pixel_color(i, j, sc));
 	END_IMAGE_LOOP
 }

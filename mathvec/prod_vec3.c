@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prod_vec3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:54:45 by rita              #+#    #+#             */
-/*   Updated: 2023/12/28 17:25:14 by rita             ###   ########.fr       */
+/*   Updated: 2024/01/16 11:13:57 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 float vec3_dot(t_vec3 a, t_vec3 b)
 {
-    return(a.x * b.x + a.y * b.y + a.z * a.z);
+    return(a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
 //Os vetores a e b formam um plano, 
