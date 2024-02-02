@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/01/24 19:21:10 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:28:16 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,23 @@
 # define BEGIN_IMAGE_LOOP(img) int i =0; int j=0; while(i<WIN_W){j=0;while(j<WIN_H){
 # define END_IMAGE_LOOP j++;}i++;}
 
+typedef struct s_auxeq
+{
+	float	in_sqrt;
+	float	t1;
+	float	t2;
+	float	m;
+	float	dot_dv;
+	float	dot_cov;
+}t_auxeq;
+
 typedef struct s_inter
 {
 	bool	inter;
 	t_vec3	point;
 	float	t;  //distancia a origem do ray
 	int		i;
+	t_vec3	normal;
 } t_inter;
 
 typedef struct s_ray
@@ -69,13 +80,22 @@ int		close_window(t_img *img);
 //*KEYS
 int		handle_key_event(int button, t_img *view);
 
-//*CREATE IMG
-void	draw_test(t_img img);
-void render(t_img img, t_scene sc);
+//*RENDER
+void	render(t_img img, t_scene sc);
+
+//*INTER_PL
+t_inter	inter_pl(t_ray ray, t_obj pl, t_inter prev_it);
+
+//*INTER_SP
+t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it);
+
+//*INTER_CY
+t_inter inter_cy(t_ray ray, t_obj cy);
 
 //*GET
 t_vec3  get_dir(t_vec2 pixel, t_cam cam);
-t_mt    get_axis(t_vec3 view, t_vec3 o);
+t_mt    get_camaxis(t_vec3 view, t_vec3 o);
+t_mt    get_cyaxis(t_vec3 normal, t_vec3 o);
 void    set_coord(t_vec3 *vec, float a, float b, float c);
 void    set_color(t_rgb *color, uint8_t r, uint8_t g, uint8_t b);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mathvec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:10:40 by rita              #+#    #+#             */
-/*   Updated: 2024/01/16 12:38:13 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:06:13 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,12 @@ t_vec3 vec3_cross(t_vec3 a, t_vec3 b);
 void print_vec(char *id, t_vec3 vec);
 
 //*ROTATE_VEC3
-t_vec3  vec3_mtpmt(t_vec3 vec, t_mt mt);
+t_vec3  vec3_mltmatrix(t_mt mt, t_vec3 vec);
+t_mt	mltmatrix(t_mt mt1, t_mt mt2);
+t_mt    get_rotmatrix_x(float teta);
+t_mt    get_rotmatrix_y(float teta);
+t_mt    get_rotmatrix_z(float teta);
+t_vec3	vec3_rotate(t_vec3 vec, float teta, char c);
 
 //*MATH_VEC2
 t_vec2 vec2_add(t_vec2 a, t_vec2 b);

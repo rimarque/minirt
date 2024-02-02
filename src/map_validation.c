@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:07:10 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/01/24 20:12:35 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:22:58 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	ft_ischar(const char *str, uint8_t *val)
 	if (str[i] != '\0')
 		return (0);
     *val = ft_atoi(str);
-	if (*val > 255 || *val < 0)
-		return (0);
+	//if (*val > 255 || *val < 0)
+	//	return (0);
 	return (1);
 }
 
@@ -157,7 +157,7 @@ int validate_C(char **line, t_scene *scene)
             return(0);
         scene->cam->fov_x = scene->cam->fov_x * (M_PI / 180);
         scene->cam->aspect = (float)WIN_H/WIN_W;
-        scene->cam->axis = get_axis(scene->cam->normal, scene->cam->view_point);
+        scene->cam->axis = get_camaxis(scene->cam->normal, scene->cam->view_point);
         return(1);
     }
     return(0);
@@ -185,12 +185,13 @@ int validate_sp(char **line, t_obj *obj)
     {
         if (!parse_vec3(line[1], &obj->point, 0))
             return(0);
-        if (!ft_isfloat(line[2], &obj->d, 2))
+        if (!ft_isfloat(line[2], &obj->r, 2))
             return(0);
         if (!parse_color(line[3], &obj->c))
             return(0);
         obj->type = SP;
-        obj->d /= 2;
+        obj->r /= 2;
+        obj->r_sq = obj->r*obj->r;
         return(1);
     }
     return(0);
@@ -202,16 +203,17 @@ int validate_cy(char **line, t_obj *obj)
     {
         if (!parse_vec3(line[1], &obj->point, 0))
             return(0);
-        if (!parse_vec3(line[2], &obj->normal, 1))
+        if (!parse_vec3(line[2], &obj->vector, 1))
             return(0);
-        if (!ft_isfloat(line[3], &obj->d, 2))
+        if (!ft_isfloat(line[3], &obj->r, 2))
             return(0);
         if (!ft_isfloat(line[4], &obj->h, 2))
             return(0);
         if (!parse_color(line[5], &obj->c))
             return(0);
         obj->type = CY;
-        obj->d /= 2;
+        obj->r /= 2;
+        obj->r_sq = obj->r*obj->r;
         return(1);
     }
     return(0);
@@ -223,7 +225,7 @@ int validate_pl(char **line, t_obj *obj)
     {
         if (!parse_vec3(line[1], &obj->point, 0))
             return(0);
-        if (!parse_vec3(line[2], &obj->normal, 1))
+        if (!parse_vec3(line[2], &obj->vector, 1))
             return(0);
         if (!parse_color(line[3], &obj->c))
             return(0);
@@ -295,12 +297,12 @@ void ft_initobj(t_obj *obj)
     obj->c.b = 0;
     obj->c.r = 0;
     obj->c.g = 0;
-    obj->d = 0;
+    obj->r = 0;
     obj->h = 0;
     obj->type = 0;
-    obj->normal.x = 0;
-    obj->normal.y = 0;
-    obj->normal.z = 0;
+    obj->vector.x = 0;
+    obj->vector.y = 0;
+    obj->vector.z = 0;
     obj->point.x = 0;
     obj->point.y = 0;
     obj->point.z = 0;
@@ -524,8 +526,9 @@ void ft_print_obj(t_obj *obj, int num)
         printf("point\n");
         ft_print_vec(&obj[i].point);
         printf("normalized\n");
-        ft_print_vec(&obj[i].normal);
-        printf("D:          %f\n", obj[i].d);
+        ft_print_vec(&obj[i].vector);
+        printf("R:          %f\n", obj[i].r);
+        printf("R SQ:          %f\n", obj[i].r_sq);
         printf("H:          %f\n", obj[i].h);
         printf("\n");
     }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/01/24 19:36:35 by rimarque         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:19:15 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_amb
 	t_rgb	c;
 }t_amb;
 
-//*aqui basta ter o axis, o fov_x e o aspect;
+//!invalid map, if normal = (0, 0, 0)
 typedef struct s_cam
 {
 	t_vec3	view_point;
@@ -53,10 +53,12 @@ typedef struct s_obj
 {
 	int		type;
 	t_vec3	point;
-	t_vec3	normal; // range -1, 1
+	t_vec3	vector; // range -1, 1
 	t_rgb	c;
-	float	d;
 	float	h;
+	float	r;
+	float	r_sq;
+	t_mt	axis;
 }t_obj;
 
 typedef struct s_obj_list
@@ -65,7 +67,6 @@ typedef struct s_obj_list
 	struct s_obj_list	*next;
 }t_obj_list;
 
-//amb, cam, light nao precisam de ser ponteiros acho eu
 typedef struct s_scene
 {
 	t_amb		*amb;

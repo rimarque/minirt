@@ -14,7 +14,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra #-Werror
 NPD				= --no-print-directory
 CMLX			= -lmlx -Ilmlx -lXext -lX11
 CMATH			= -lm
@@ -35,7 +35,7 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minirt
 
-_FILES 			= test inits exit keys render get map_validation
+_FILES 			= test inits exit keys render get map_validation inter_pl inter_sp inter_cy
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
