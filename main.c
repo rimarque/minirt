@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:58:05 by rita              #+#    #+#             */
-/*   Updated: 2024/01/31 13:57:56 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/02 21:43:44 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //todo: guardar coisas que se repetem nos calculos:
 //c = vec3_dot(co, co) - sp.r_sq;
 //cy.vector = vec3_scale(cy.vector, -1);
-
+//todo: definir o que acontece quando as normais sao (0,0,0)
 int main(int argc, char **argv)
 {
     t_win   minirita;

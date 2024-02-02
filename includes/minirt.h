@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/01 21:28:16 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/02 21:47:11 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,11 @@ void	render(t_img img, t_scene sc);
 t_inter	inter_pl(t_ray ray, t_obj pl, t_inter prev_it);
 
 //*INTER_SP
+float	closer_t(t_auxeq aux);
 t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it);
 
 //*INTER_CY
-t_inter inter_cy(t_ray ray, t_obj cy);
+t_inter inter_cy(t_ray ray, t_obj cy, t_inter prev_it);
 
 //*GET
 t_vec3  get_dir(t_vec2 pixel, t_cam cam);
