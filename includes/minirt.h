@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/02 21:47:11 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/03 18:50:21 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	render(t_img img, t_scene sc);
 t_inter	inter_pl(t_ray ray, t_obj pl, t_inter prev_it);
 
 //*INTER_SP
-float	closer_t(t_auxeq aux);
+float	closer_t(float t1, float t2);
 t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it);
 
 //*INTER_CY

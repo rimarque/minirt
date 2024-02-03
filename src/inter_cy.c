@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 16:36:21 by rita              #+#    #+#             */
-/*   Updated: 2024/02/03 17:08:53 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/03 20:04:11 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,33 +33,69 @@ bool	in_cy(t_ray ray, t_obj cy, t_auxeq *aux)
 	return(true);
 }
 
+t_inter	closer_inter(t_inter it1, t_inter it2)
+{
+	if(it1.t > 0 && it2.t > 0)
+	{
+		if(it1.t < it2.t)
+			return(it1);
+		else
+			return(it2);
+	}
+	else if(it1.t > 0)
+		return(it1);
+	return(it2);
+}
+
+t_inter	inter_caps(t_ray ray, t_obj cy)
+{
+	t_obj	pl;
+	t_auxeq	aux;
+	t_inter it;
+
+	aux.dot_dv = vec3_dot(vec3_normalized(ray.d), cy.vector);
+	if(aux.dot_dv == 0)
+		it.inter = false;
+	aux.t1 = vec3_dot(vec3_sub(cy.cap_c, ray.o), pl.vector) / aux.dot_dv;
+	aux.t2 = vec3_dot(vec3_sub(cy.cap2_c, ray.o), pl.vector) / aux.dot_dv;
+	if(aux.t1 < 0 && aux.t2 < 0)
+		return(it.inter = false, it);
+	it.t = closer_t(aux.t1, aux.t2);
+	it.point = vec3_add(ray.o, vec3_scale(ray.d, it.t));
+	it.inter = true;
+	if(it.t == aux.t1)
+		it.normal = cy.vector;
+	else
+		it.normal = cy.vec_inver;
+	return(it);
+}
+
 t_inter inter_cy(t_ray ray, t_obj cy, t_inter prev_it)
 {
 	t_inter it;
+	t_inter	it_caps;
 	t_auxeq aux;
-	t_vec3	cap_c;
-	
-	cap_c = vec3_scale(cy.point, cy.h/2); //!acrescentar no validate.map
-	cy.vector = vec3_scale(cy.vector, -1); //!necessario?
+
     if(!in_cy(ray, cy, &aux) || (aux.t1 < 0 && aux.t2 < 0))
 		return(it.inter = false, it);
-	it.inter = true;
-	if (aux.in_sqrt == 0)
-	{
-		if(prev_it.inter && prev_it.t < aux.t1)
-			return(it.inter = false, it);
+	if(aux.in_sqrt == 0)
 		it.t = aux.t1;
-		it.point = vec3_add(ray.o, vec3_scale(ray.d, aux.t1));
-		aux.m = vec3_dot(ray.d, vec3_scale(cy.vector, it.t)) + aux.dot_cov;
-		it.normal = vec3_normalized(vec3_sub(it.point, vec3_sub(cap_c, vec3_scale(cy.vector, aux.m))));
-		return(it);
-	}
-	it.t = closer_t(aux);
-	it.point = vec3_add(ray.o, vec3_scale(ray.d, aux.t1));
-	aux.m = vec3_dot(ray.d, vec3_scale(cy.vector, it.t)) + aux.dot_cov;
-	it.normal = vec3_normalized(vec3_sub(it.point, vec3_sub(cap_c, vec3_scale(cy.vector, aux.m))));
+	else
+		it.t = closer_t(aux.t1, aux.t2);
+	aux.m = vec3_dot(ray.d, vec3_scale(cy.vec_inver, it.t)) + aux.dot_cov;
 	if (aux.m > cy.h || aux.m < 0)
-		return(it.inter = false, it);
+		it.inter = false;
+	else
+	{
+		it.inter = true;
+		it.point = vec3_add(ray.o, vec3_scale(ray.d, aux.t1));
+		it.normal = vec3_normalized(vec3_sub(it.point, vec3_sub(cy.cap_c, vec3_scale(vec_inver, aux.m))));
+	}
+	it_caps = inter_caps(ray, cy);
+	if(it.inter == true && it_caps.inter == true)
+		it = closer_inter(it, it_caps);
+	else if(it_caps.inter == true)
+		it = it_caps;
 	if(prev_it.inter && prev_it.t < it.t)
 		return(it.inter = false, it);
 	return(it);

@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/01/31 13:19:15 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/03 19:34:17 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ typedef struct s_obj
 	int		type;
 	t_vec3	point;
 	t_vec3	vector; // range -1, 1
+	t_vec3	cap_c;
+	t_vec3	vec_inver;
+	t_vec3	cap2_c;
 	t_rgb	c;
 	float	h;
 	float	r;

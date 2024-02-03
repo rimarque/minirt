@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 16:34:17 by rita              #+#    #+#             */
-/*   Updated: 2024/02/02 20:11:40 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/03 18:49:26 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ bool	in_sp(t_ray ray, t_obj sp, t_auxeq *aux)
 	aux->t2 = (-b - sqrtf(aux->in_sqrt)) / 2 * a;
 	return(true);
 }
-float	closer_t(t_auxeq aux)
+float	closer_t(float t1, float t2)
 {
-	if(aux.t1 > 0 && aux.t2 > 0)
+	if(t1 > 0 && t2 > 0)
 	{
-		if(aux.t1 < aux.t2)
-			return(aux.t1);
+		if(t1 < t2)
+			return(t1);
 		else
-			return(aux.t2);
+			return(t2);
 	}
-	else if(aux.t1 > 0)
-		return(aux.t1);
-	return(aux.t2);
+	else if(t1 > 0)
+		return(t1);
+	return(t2);
 }
 
 t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it)
@@ -52,16 +52,10 @@ t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it)
 	if(!in_sp(ray, sp, &aux) || (aux.t1 < 0 && aux.t2 < 0))
 		return(it.inter = false, it);
 	it.inter = true;
-	if (aux.in_sqrt == 0)
-	{
-		if(prev_it.inter && prev_it.t < aux.t1)
-			return(it.inter = false, it);
+	if(aux.in_sqrt == 0)	
 		it.t = aux.t1;
-		it.point = vec3_add(ray.o, vec3_scale(ray.d, aux.t1));
-		it.normal = vec3_normalized(vec3_sub(it.point, sp.point));
-		return(it);
-	}
-	it.t = closer_t(aux);
+	else
+		it.t = closer_t(aux.t1, aux.t2);
 	it.point = vec3_add(ray.o, vec3_scale(ray.d, it.t));
 	it.normal = vec3_normalized(vec3_sub(it.point, sp.point));
 	if(prev_it.inter && prev_it.t < it.t)

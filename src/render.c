@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:18:36 by rita              #+#    #+#             */
-/*   Updated: 2024/02/03 16:50:09 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/03 20:00:11 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ t_inter intersect(t_ray ray, t_obj *obj, int n)
 			it = inter_sp(ray, obj[i], prev_it);
 			it.i = i;
 		}
-		if(obj[i].type == CY)
+		/* if(obj[i].type == CY)
 		{
 			it = inter_cy(ray, obj[i], prev_it);
 			it.i = i;
-		}
+		} */
 		if (it.inter)
 			prev_it = it;
 		i++;
