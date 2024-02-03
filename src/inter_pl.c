@@ -41,7 +41,10 @@ t_inter	inter_pl(t_ray ray, t_obj pl, t_inter prev_it)
 	it.point = vec3_add(ray.o, vec3_scale(ray.d, it.t));
 	it.inter = true;
 	if(dot_dv < 0)
+	{
+		printf("entra aqui\n");
 		it.normal = vec3_scale(pl.vector, -1);
+	}
 	else
 		it.normal = pl.vector;
 	return(it);

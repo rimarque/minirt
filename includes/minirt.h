@@ -101,6 +101,6 @@ void    set_coord(t_vec3 *vec, float a, float b, float c);
 void    set_color(t_rgb *color, uint8_t r, uint8_t g, uint8_t b);
 
 //Light
-float   compute_light(t_scene *scene, t_vec3 p, t_vec3 temp);
+float   compute_light(t_scene *scene, t_inter *it);
 
 #endif

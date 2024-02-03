@@ -12,16 +12,22 @@
 
 #include "../includes/minirt.h"
 
-float   compute_light(t_scene *scene, t_vec3 p, t_vec3 temp)
+// l    --> Light Direction
+// n    --> Object Norm
+// i    --> intensidade luz
+
+float   compute_light(t_scene *scene, t_inter *it)
 {
     float i;
-    t_vec3 n;
     float dot;
+    t_vec3 l;
 
     i = scene->amb->ratio;
-    n = vec3_normalized(vec3_sub(p, temp)); //verificar ordem dos params
-    dot = vec3_dot(n, scene->light->point);
+    l = vec3_sub(scene->light->point,it->point);
+    //set_coord(&it->normal, 0, 1, 0);
+    print_vec("normal", it->normal);
+    dot = vec3_dot(it->normal, l);
     if (dot > 0)
-        i += scene->light->ratio * dot / (vec3_lenght(n) * vec3_lenght(scene->light->point));
+        i += scene->light->ratio * dot / (vec3_lenght(it->normal) * vec3_lenght(l));
     return(i);
 }

@@ -39,7 +39,7 @@ int	ft_ischar(const char *str, uint8_t *val)
 	i = 0;
 	if (ft_strlen(str) == 0 || ft_strlen(str) > 3)
 		return (0);
-	while (str[i] >= '0' && str[i] <= '5')
+	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	if (str[i] != '\0')
 		return (0);
@@ -350,7 +350,7 @@ int list_to_obj(t_scene *scene)
         erro = validate_obj(head->obj, &scene->obj[++i]);
         if (erro == 0)
         {
-            ft_putstr_fd("Invalid Map\n",2);
+            ft_putstr_fd("Invalid Map Lista\n",2);
             return(0);
         }
         head = head->next;
@@ -368,24 +368,25 @@ void init_scene(t_scene *scene)
     scene->temp = NULL;
 }
 
-int ft_put_err()
+int ft_put_err(char *str)
 {
-    ft_putstr_fd("Invalid Map\n",2);
+    ft_putstr_fd("Invalid Map \n",2);
+    printf("%s\n", str);
     return(0);
 }
 
 int final_check(t_scene *scene)
 {
     if(scene->amb == NULL)
-        return(ft_put_err() & 0);
+        return(ft_put_err("amb") & 0);
     if(scene->cam == NULL)
-        return(ft_put_err() & 0);
+        return(ft_put_err("cam") & 0);
     if(scene->light == NULL)
-        return(ft_put_err() & 0);
+        return(ft_put_err("light") & 0);
     if(scene->obj == NULL)
-        return(ft_put_err() & 0);
+        return(ft_put_err("obj") & 0);
     if(scene->temp == NULL)
-        return(ft_put_err() & 0);
+        return(ft_put_err("lista") & 0);
     return(1);
 }
 
@@ -397,7 +398,7 @@ int open_map(char *str)
     if (!access(str, F_OK))
         fd = open(str, O_RDONLY);
     else
-        ft_putstr_fd("Invalid Map\n",2);
+        ft_putstr_fd("Invalid Map Open\n",2);
     return(fd);
 }
 
@@ -415,7 +416,7 @@ int map_validate(char *file, t_scene *scene)
         if(!validate_line(line, scene))
         {
             free(line);
-            ft_putstr_fd("Invalid Map\n",2);
+            ft_putstr_fd("Invalid Map line\n",2);
             get_next_line(fd, 1);
             close(fd);
             return(0);
