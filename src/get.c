@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:16:21 by rita              #+#    #+#             */
-/*   Updated: 2024/01/31 13:17:51 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/03 17:02:27 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ t_mt    get_camaxis(t_vec3 view, t_vec3 o)
     t_vec3  up;
 
     set_coord(&up, 0, 1, 0);
-    //if(vec3_dot(up, view) == 1 || vec3_dot(up, view) == -1) //!inventei nao sei se esta bem
-    //    set_coords(&up, 1, 0, 0);
+    if(vec3_dot(up, view) == 1 || vec3_dot(up, view) == -1) //!inventei nao sei se esta bem
+        set_coord(&up, 1, 0, 0);
     axis.o = o;
     axis.z = vec3_scale(view, -1);
     axis.x = vec3_normalized(vec3_cross(up, axis.z));

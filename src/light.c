@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bde-sous <bde-sous@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:12:17 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/01 22:03:06 by bde-sous         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:18:15 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ float   compute_light(t_scene *scene, t_inter *it)
 
     i = scene->amb->ratio;
     l = vec3_sub(scene->light->point,it->point);
-    //set_coord(&it->normal, 0, 1, 0);
-    print_vec("normal", it->normal);
     dot = vec3_dot(it->normal, l);
+    //print_vec("normal:", it->normal);
     if (dot > 0)
-        i += scene->light->ratio * dot / (vec3_lenght(it->normal) * vec3_lenght(l));
+        i += scene->light->ratio * dot / vec3_lenght(l);
     return(i);
 }
