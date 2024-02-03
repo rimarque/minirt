@@ -34,6 +34,7 @@ int float_in_range(float value, float min, float max)
 int	ft_ischar(const char *str, uint8_t *val)
 {
 	int	i;
+    int res;
 
 	i = 0;
 	if (ft_strlen(str) == 0 || ft_strlen(str) > 3)
@@ -42,9 +43,10 @@ int	ft_ischar(const char *str, uint8_t *val)
 		i++;
 	if (str[i] != '\0')
 		return (0);
-    *val = ft_atoi(str);
-	//if (*val > 255 || *val < 0)
-	//	return (0);
+    res = ft_atoi(str);
+	if (res > 255 || res < 0)
+		return (0);
+    *val = res;
 	return (1);
 }
 

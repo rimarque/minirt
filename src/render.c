@@ -76,7 +76,8 @@ static inline int	pixel_color(int i, int j, t_scene sc)
 	else
 	{
 		if(sc.obj[it.i].type == SP)
-			f = (vec3_lenght(vec3_sub(sc.cam->axis.o, sc.obj[it.i].point)) - it.t)/sc.obj[it.i].r;
+			f = compute_light(&sc, it.normal, sc.obj[it.i].point);
+			//f = (vec3_lenght(vec3_sub(sc.cam->axis.o, sc.obj[it.i].point)) - it.t)/sc.obj[it.i].r;
 		else
 			f = 1;
 		return(encode_rgb(sc.obj[it.i].c.r * f, 
