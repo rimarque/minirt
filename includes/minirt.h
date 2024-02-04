@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/03 18:50:21 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/04 20:28:53 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_auxeq
 	float	in_sqrt;
 	float	t1;
 	float	t2;
-	float	m;
 	float	dot_dv;
 	float	dot_cov;
 }t_auxeq;
@@ -43,6 +42,7 @@ typedef struct s_inter
 	bool	inter;
 	t_vec3	point;
 	float	t;  //distancia a origem do ray
+	float	m;
 	int		i;
 	t_vec3	normal;
 } t_inter;
@@ -87,7 +87,7 @@ void	render(t_img img, t_scene sc);
 t_inter	inter_pl(t_ray ray, t_obj pl, t_inter prev_it);
 
 //*INTER_SP
-float	closer_t(float t1, float t2);
+float   closer_t(float in_sqrt, float t1, float t2);
 t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it);
 
 //*INTER_CY

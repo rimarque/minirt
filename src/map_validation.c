@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:07:10 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/03 19:33:52 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/04 20:28:06 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,9 +216,9 @@ int validate_cy(char **line, t_obj *obj)
         obj->type = CY;
         obj->r /= 2;
         obj->r_sq = obj->r*obj->r;
-        obj->cap_c = vec3_add(obj->point, vec3_scale(obj->vector, obj->h/2));
         obj->vec_inver = vec3_scale(obj->vector, -1); //!duvida
-        obj->cap2_c = vec3_add(obj->point, vec3_scale(obj->vec_inver, obj->h/2));
+        obj->base1_c = vec3_add(obj->point, vec3_scale(obj->vector, obj->h/2));
+        obj->base2_c = vec3_add(obj->point, vec3_scale(obj->vec_inver, obj->h/2));
         return(1);
     }
     return(0);
