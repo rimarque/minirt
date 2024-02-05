@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/04 20:28:53 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/05 12:55:10 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ int		handle_key_event(int button, t_img *view);
 
 //*RENDER
 void	render(t_img img, t_scene sc);
+
+//*INTERSECT
+t_inter intersect(t_ray ray, t_obj *obj, int n);
 
 //*INTER_PL
 t_inter	inter_pl(t_ray ray, t_obj pl, t_inter prev_it);

@@ -35,7 +35,7 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minirt
 
-_FILES 			= test inits exit keys render get map_validation inter_pl inter_sp light inter_cy
+_FILES 			= test inits exit keys render get map_validation intersect inter_pl inter_sp inter_cy light 
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
