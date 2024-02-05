@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 16:36:21 by rita              #+#    #+#             */
-/*   Updated: 2024/02/04 22:50:10 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/05 12:09:36 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	in_cy(t_ray ray, t_obj cy, t_auxeq *aux)
 	float	b;
 	float	c;
 
-	co = vec3_sub(ray.o, cy.point);
+	co = vec3_sub(ray.o, cy.base1_c);
 	aux->dot_dv = vec3_dot(ray.d, cy.vec_inver);
 	aux->dot_cov = vec3_dot(co, cy.vec_inver);
 	a = vec3_dot(ray.d, ray.d) - aux->dot_dv * aux->dot_dv;
@@ -87,7 +87,7 @@ t_inter	inter_base(t_ray ray, t_obj cy)
 	return(it1);
 }
 
-t_inter	get_inter_tm(t_vec3 d, t_obj cy, float dot_cov, float t)
+t_inter	get_inter_onepoint(t_vec3 d, t_obj cy, float dot_cov, float t)
 {
 	t_inter it;
 
@@ -95,22 +95,22 @@ t_inter	get_inter_tm(t_vec3 d, t_obj cy, float dot_cov, float t)
 		return(it.inter = false, it);
 	it.t = t;
 	it.m = vec3_dot(d, vec3_scale(cy.vec_inver, t)) + dot_cov;
-	if ((it.m < 0 || it.m > cy.h))
+	if (it.m < 0 || it.m > cy.h)
 		return(it.inter = false, it);
-	return(it);
+	return(it.inter = true, it);
 }
-t_inter	get_inter_tm2(t_vec3 d, t_obj cy, t_auxeq aux)
+t_inter	get_inter(t_vec3 d, t_obj cy, t_auxeq aux)
 {
 	t_inter	it1;
 	t_inter it2;
 	
-		it1 = get_inter_tm(d, cy, aux.dot_cov, aux.t1);
-		it2 = get_inter_tm(d, cy, aux.dot_cov, aux.t2);
-		if(it1.inter == true && it2.inter == true)
-			it1 = closer_inter(it1, it2);
-		else if(it2.inter == true)
-			it1 = it2;
-		return(it1);
+	it1 = get_inter_onepoint(d, cy, aux.dot_cov, aux.t1);
+	it2 = get_inter_onepoint(d, cy, aux.dot_cov, aux.t2);
+	if(it1.inter == true && it2.inter == true)
+		it1 = closer_inter(it1, it2);
+	else if(it2.inter == true)
+		it1 = it2;
+	return(it1);
 }
 		
 //!normal
@@ -124,15 +124,14 @@ t_inter	inter_surface(t_ray ray, t_obj cy)
 	if(!in_cy(ray, cy, &aux) || (aux.t1 < 0 && aux.t2 < 0)) //se nao interseta o cilindro infinito
 		return(it.inter = false, it);
 	if(aux.in_sqrt == 0)
-	{
-		it = get_inter_tm(ray.d, cy, aux.dot_cov, aux.t1);
-		if(it.inter == false)
-			return(it);
-	}
+		it = get_inter_onepoint(ray.d, cy, aux.dot_cov, aux.t1);
 	else
-		it = get_inter_tm2(ray.d, cy, aux);
+		it = get_inter(ray.d, cy, aux);
+	if(it.inter == false)
+			return(it);
 	it.point = vec3_add(ray.o, vec3_scale(ray.d, it.t));
-	it.normal = vec3_normalized(vec3_sub(it.point, vec3_add(cy.base1_c, vec3_scale(cy.vec_inver, it.m)))); //*p - (c + v*m);
+	it.normal = vec3_normalized(vec3_sub(it.point, vec3_add(cy.base1_c, 
+	vec3_scale(cy.vec_inver, it.m)))); //*p - (c + v*m);
 	return(it);
 }
 
