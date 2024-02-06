@@ -24,9 +24,13 @@ float   compute_light(t_scene *scene, t_inter *it)
 
     i = scene->amb->ratio;
     l = vec3_sub(scene->light->point,it->point);
+    //set_coord(&it->normal, 0, 1, 0);
     dot = vec3_dot(it->normal, l);
     //print_vec("normal:", it->normal);
     if (dot > 0)
-        i += scene->light->ratio * dot / vec3_lenght(l);
+        i += scene->light->ratio * dot / (vec3_lenght(it->normal) * vec3_lenght(l));
+    else
+        i = 1;
+       // i += compute_shadow(scene, it);
     return(i);
 }
