@@ -44,10 +44,21 @@ HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------
 
+ifeq ($(shell uname), Linux)
+	MLX_PATH	= ./mlx
+	CMLX		= -lmlx -Ilmlx -lXext -lX11
+	OS          = 1
+else ifeq ($(shell uname), Darwin)
+	MLX_PATH	= ./mlx_osx
+	CMLX 		= -lmlx -Ilmlx
+	CP_CMD 		= cp ${MLX_PATH}/libmlx.dylib ./
+	OS          = 2
+endif
+
 all: $(NAME)
 
 $(NAME): $(OBJDIR) $(TARGET) $(LIBFT) $(MATHVEC) $(MLX) main.c
-	$(CC) $(CFLAGS) main.c $(TARGET) -I $(INCLUDE) $(LIBFT) $(MATHVEC) -o $(NAME) -L $(MLX_PATH) $(CMLX) $(CMATH)
+	$(CC) $(CFLAGS) main.c $(TARGET) -D OS=$(OS) -I $(INCLUDE) $(LIBFT) $(MATHVEC) -o $(NAME) -L $(MLX_PATH) $(CMLX) $(CMATH)
 	echo "[$(GREEN)Success$(RESET)] MiniRita created successfully$(BOLD)$(RESET)"
 
 $(OBJDIR)/%.o : %.c $(HDR)

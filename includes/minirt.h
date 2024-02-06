@@ -17,7 +17,38 @@
 # include "../mlx/mlx.h"
 # include "./map_validation.h"
 
-# define ESC 65307
+# ifndef OS
+#  define OS			2
+# endif
+
+# if OS == 1
+#  define ESC 65307
+#  define LEFT 65361
+#  define RIGHT 65363
+#  define UP 65362
+#  define DOWN 65364
+#  define W 119
+#  define A 97
+#  define S 115
+#  define D 100
+#  define O 111
+#  define INCREASE 65451
+#  define DECREASE 65453
+# elif OS == 2
+#  define ESC 53
+#  define LEFT 123
+#  define RIGHT 124
+#  define UP 126
+#  define DOWN 125
+#  define W 13
+#  define A 0
+#  define S 1
+#  define D 2
+#  define O 31
+#  define INCREASE 24
+#  define DECREASE 27
+# endif
+
 # define PI 3.1415
 # define ANG_ROT PI/8
 # define WIN_W 1280
@@ -57,7 +88,7 @@ typedef struct s_win
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
-	
+
 }		t_win;
 
 typedef struct s_img

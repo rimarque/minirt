@@ -14,6 +14,7 @@
 
 int	handle_key_event(int button, t_img *view)
 {
+    printf("Button: %d\n", button);
 	if (button == ESC)
 		close_window(view);
 	return (0);
