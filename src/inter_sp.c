@@ -6,20 +6,20 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 16:34:17 by rita              #+#    #+#             */
-/*   Updated: 2024/02/04 13:52:28 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/06 12:52:17 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-bool	in_sp(t_ray ray, t_obj sp, t_auxeq *aux)
+bool	in_sp_surface(t_ray ray, t_obj sp, t_auxeq *aux)
 {
 	t_vec3	co;
 	float	a;
 	float	b;
 	float	c;
 
-	co = vec3_sub(ray.o, sp.point); //!X
+	co = vec3_sub(ray.o, sp.point);
 	a = vec3_dot(ray.d, ray.d);
 	b = 2 * vec3_dot(ray.d, co);
 	c = vec3_dot(co, co) - sp.r_sq;
@@ -30,28 +30,13 @@ bool	in_sp(t_ray ray, t_obj sp, t_auxeq *aux)
 	aux->t2 = (-b - sqrtf(aux->in_sqrt)) / 2 * a;
 	return(true);
 }
-float	closer_t(float in_sqrt, float t1, float t2)
-{
-	if(in_sqrt == 0)
-		return(t1);
-	if(t1 > 0 && t2 > 0)
-	{
-		if(t1 < t2)
-			return(t1);
-		else
-			return(t2);
-	}
-	else if(t1 > 0)
-		return(t1);
-	return(t2);
-}
 
 t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it)
 {
 	t_inter	it;
 	t_auxeq aux;
 	
-	if(!in_sp(ray, sp, &aux) || (aux.t1 < 0 && aux.t2 < 0))
+	if(!in_sp_surface(ray, sp, &aux) || (aux.t1 < 0 && aux.t2 < 0))
 		return(it.inter = false, it);
 	it.inter = true;
 	it.t = closer_t(aux.in_sqrt, aux.t1, aux.t2);

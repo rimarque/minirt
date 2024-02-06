@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:07:10 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/04 20:28:06 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/06 15:12:32 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ int validate_C(char **line, t_scene *scene)
             return(0);
         scene->cam->fov_x = scene->cam->fov_x * (M_PI / 180);
         scene->cam->aspect = (float)WIN_H/WIN_W;
-        scene->cam->axis = get_camaxis(scene->cam->normal, scene->cam->view_point);
+        scene->cam->axis = cam_axis(scene->cam->normal, scene->cam->view_point);
         return(1);
     }
     return(0);

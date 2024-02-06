@@ -28,14 +28,13 @@ MLX 			= ./mlx/libmlx.a
 MLX_PATH		= ./mlx
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= test
-VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
+VPATH			= $(SRCS)
 OBJDIR			= obj
 
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minirt
 
-_FILES 			= test inits exit keys render get map_validation intersect inter_pl inter_sp inter_cy light 
+_FILES 			= inits exit keys map_validation render cam intersect inter_pl inter_sp inter_cy inter_cysurface inter_cybase inter_closer light 
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))

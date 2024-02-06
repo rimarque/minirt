@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:18:36 by rita              #+#    #+#             */
-/*   Updated: 2024/02/05 12:50:24 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/06 15:25:46 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,39 +25,50 @@ int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
     return (red << 16 | green << 8 | blue);
 }
 
-//x e o y vao ter um range de 2, variam entre -1 e 1
+/* The static inline keywords suggest that this function is defined within 
+a header file and is meant to be inlined by the compiler 
+for optimization purposes.
+static: This keyword limits the visibility of the function to the 
+translation unit in which it is defined, meaning it cannot be 
+accessed from outside that unit.
+inline: This keyword suggests to the compiler that it should 
+try to inline this function, meaning it may insert the functions 
+code directly into the calling code rather
+than performing a function call. */
 static inline int	pixel_color(int i, int j, t_scene sc)
 {
-	t_ray ray;
-	t_vec2 pixel;
-	float f;
-	t_inter it;
+	t_ray	ray;
+	float	f;
+	t_inter	it;
 
-	j = WIN_H - j - 1;
-	pixel.x = ((float)i / (WIN_W - 1)) * 2 - 1;
-	pixel.y = ((float)j / (WIN_H - 1)) * 2 - 1;
-	ray.d = get_dir(pixel, *sc.cam);
-	ray.o = sc.cam->axis.o;
+	ray = get_ray(i, j, sc);
 	it = intersect(ray, sc.obj, sc.n_obj);
-	if(!it.inter)
-		return(encode_rgb(0, 0, 0));
+	if (!it.inter)
+		return (encode_rgb(0, 0, 0));
 	else
 	{
-		f = compute_light(&sc, &it);
-		//f = 1;
-		return(encode_rgb(sc.obj[it.i].c.r * f, 
+		//f = compute_light(&sc, &it);
+		f = 1;
+		return (encode_rgb(sc.obj[it.i].c.r * f, 
 				sc.obj[it.i].c.g * f, sc.obj[it.i].c.b * f));
 	}
 }
 
 void render(t_img img, t_scene sc)
 {
-	//ft_print_scene(&sc);
-	/* t_ray ray;
-	
-	ray.o = sc.cam->axis.o;
-	inter_cy(ray, sc.obj[0]); */
-	BEGIN_IMAGE_LOOP(img)
-	put_pixel_img(img, i, j, pixel_color(i, j, sc));
-	END_IMAGE_LOOP
+	int i;
+	int j;
+
+	i = 0;
+	j = 0; 
+	while (i < WIN_W)
+	{
+		j=0;
+		while (j < WIN_H)
+		{
+			put_pixel_img(img, i, j, pixel_color(i, j, sc));
+			j++;
+		}
+		i++;
+	}
 }

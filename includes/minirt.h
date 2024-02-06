@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/05 12:55:10 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/06 12:50:34 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,14 @@ int		handle_key_event(int button, t_img *view);
 //*RENDER
 void	render(t_img img, t_scene sc);
 
+//*SET
+void    set_pixel(t_vec2 *pixel);
+void    set_ray(t_ray *ray);
+
+//*CAM
+t_mt    cam_axis(t_vec3 view, t_vec3 o);
+t_ray	get_ray(int i, int j, t_scene sc);
+
 //*INTERSECT
 t_inter intersect(t_ray ray, t_obj *obj, int n);
 
@@ -90,20 +98,22 @@ t_inter intersect(t_ray ray, t_obj *obj, int n);
 t_inter	inter_pl(t_ray ray, t_obj pl, t_inter prev_it);
 
 //*INTER_SP
-float   closer_t(float in_sqrt, float t1, float t2);
 t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it);
 
 //*INTER_CY
 t_inter inter_cy(t_ray ray, t_obj cy, t_inter prev_it);
 
-//*GET
-t_vec3  get_dir(t_vec2 pixel, t_cam cam);
-t_mt    get_camaxis(t_vec3 view, t_vec3 o);
-t_mt    get_cyaxis(t_vec3 normal, t_vec3 o);
-void    set_coord(t_vec3 *vec, float a, float b, float c);
-void    set_color(t_rgb *color, uint8_t r, uint8_t g, uint8_t b);
+//*INTER_CYSURFACE
+t_inter	inter_surface(t_ray ray, t_obj cy);
 
-//Light
+//*INTER_CYBASE
+t_inter	inter_base(t_ray ray, t_obj cy);
+
+//*INTER_CLOSER
+t_inter	closer_inter(t_inter it1, t_inter it2);
+float   closer_t(float in_sqrt, float t1, float t2);
+
+//*LIGHT
 float   compute_light(t_scene *scene, t_inter *it);
 
 #endif

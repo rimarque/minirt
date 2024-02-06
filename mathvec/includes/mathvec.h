@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:10:40 by rita              #+#    #+#             */
-/*   Updated: 2024/01/31 13:06:13 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/06 12:44:54 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_vec3 vec3_cross(t_vec3 a, t_vec3 b);
 void print_vec(char *id, t_vec3 vec);
 
 //*ROTATE_VEC3
+void    set_coord(t_vec3 *vec, float a, float b, float c);
 t_vec3  vec3_mltmatrix(t_mt mt, t_vec3 vec);
 t_mt	mltmatrix(t_mt mt1, t_mt mt2);
 t_mt    get_rotmatrix_x(float teta);
