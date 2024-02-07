@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 16:34:17 by rita              #+#    #+#             */
-/*   Updated: 2024/02/06 12:52:17 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/07 11:20:57 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ bool	in_sp_surface(t_ray ray, t_obj sp, t_auxeq *aux)
 	aux->in_sqrt = b * b - 4 * a * c;
 	if (aux->in_sqrt < 0)
 		return(false);
-	aux->t1 = (-b + sqrtf(aux->in_sqrt)) / 2 * a;
-	aux->t2 = (-b - sqrtf(aux->in_sqrt)) / 2 * a;
+	aux->t1 = (-b + sqrtf(aux->in_sqrt)) / (2 * a);
+	aux->t2 = (-b - sqrtf(aux->in_sqrt)) / (2 * a);
 	return(true);
 }
 

@@ -57,12 +57,12 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJDIR) $(TARGET) $(LIBFT) $(MATHVEC) $(MLX) main.c
-	$(CC) $(CFLAGS) main.c $(TARGET) -D OS=$(OS) -I $(INCLUDE) $(LIBFT) $(MATHVEC) -o $(NAME) -L $(MLX_PATH) $(CMLX) $(CMATH)
+	$(CC) $(CFLAGS) main.c $(TARGET) -I $(INCLUDE) $(LIBFT) $(MATHVEC) -o $(NAME) -L $(MLX_PATH) $(CMLX) $(CMATH)
 	echo "[$(GREEN)Success$(RESET)] MiniRita created successfully$(BOLD)$(RESET)"
 
 $(OBJDIR)/%.o : %.c $(HDR)
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $<$(RESET)"
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
+	$(CC) $(CFLAGS) -D OS=$(OS) -c $< -o $@ -I $(INCLUDE)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)

@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/06 12:50:34 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/07 12:49:25 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "./map_validation.h"
 
 # ifndef OS
-#  define OS			2
+#  define OS 1
 # endif
 
 # if OS == 1
@@ -71,10 +71,10 @@ typedef struct s_auxeq
 typedef struct s_inter
 {
 	bool	inter;
-	t_vec3	point;
-	float	t;  //distancia a origem do ray
-	float	m;
 	int		i;
+	float	t;
+	float	m;
+	t_vec3	point;
 	t_vec3	normal;
 } t_inter;
 

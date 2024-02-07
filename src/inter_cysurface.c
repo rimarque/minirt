@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:43:23 by rita              #+#    #+#             */
-/*   Updated: 2024/02/06 14:26:49 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/07 11:13:06 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ bool	in_cy_surface(t_ray ray, t_obj cy, t_auxeq *aux)
 	aux->in_sqrt = b * b - 4 * a * c;
 	if (aux->in_sqrt < 0)
 		return(false);
-	aux->t1 = (-b + sqrtf(aux->in_sqrt)) / 2 * a;
-	aux->t2 = (-b - sqrtf(aux->in_sqrt)) / 2 * a;
+	aux->t1 = (-b + sqrtf(aux->in_sqrt)) / (2 * a);
+	aux->t2 = (-b - sqrtf(aux->in_sqrt)) / (2 * a);
 	return(true);
 }
 
-t_inter	get_inter_onepoint(t_vec3 d, t_obj cy, float dot_cov, float t)
+t_inter	get_inter_tm(t_vec3 d, t_obj cy, float dot_cov, float t)
 {
 	t_inter it;
 
@@ -52,8 +52,8 @@ t_inter	get_inter(t_vec3 d, t_obj cy, t_auxeq aux)
 	t_inter	it1;
 	t_inter it2;
 	
-	it1 = get_inter_onepoint(d, cy, aux.dot_cov, aux.t1);
-	it2 = get_inter_onepoint(d, cy, aux.dot_cov, aux.t2);
+	it1 = get_inter_tm(d, cy, aux.dot_cov, aux.t1);
+	it2 = get_inter_tm(d, cy, aux.dot_cov, aux.t2);
 	if(it1.inter == true && it2.inter == true)
 		it1 = closer_inter(it1, it2);
 	else if(it2.inter == true)
@@ -73,7 +73,7 @@ t_inter	inter_surface(t_ray ray, t_obj cy)
 	if(!in_cy_surface(ray, cy, &aux) || (aux.t1 < 0 && aux.t2 < 0))
 		return(it);
 	if(aux.in_sqrt == 0)
-		it = get_inter_onepoint(ray.d, cy, aux.dot_cov, aux.t1);
+		it = get_inter_tm(ray.d, cy, aux.dot_cov, aux.t1);
 	else
 		it = get_inter(ray.d, cy, aux);
 	if(it.inter == false)
