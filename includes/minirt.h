@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/07 12:49:25 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/07 19:18:44 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,12 @@
 # endif
 
 # define PI 3.1415
-# define ANG_ROT PI/8
+# define ANG_ROT PI/16
 # define WIN_W 1280
 # define WIN_H 700
 # define PL 0
 # define SP 1
 # define CY 2
-# define BEGIN_IMAGE_LOOP(img) int i =0; int j=0; while(i<WIN_W){j=0;while(j<WIN_H){
-# define END_IMAGE_LOOP j++;}i++;}
 
 typedef struct s_auxeq
 {
@@ -99,11 +97,12 @@ typedef struct s_img
 	int		line_length;
 	int		endian;
 	t_win	*win;
+	t_scene scene;
 }t_img;
 
 //*INITS
 t_win	new_program(char *title);
-t_img	new_img(t_win *win);
+t_img	new_img(t_win *win, t_scene scene);
 
 //*EXIT
 int		close_window(t_img *img);

@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 20:32:56 by bde-sous          #+#    #+#             */
-/*   Updated: 2023/12/27 20:18:02 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/07 18:24:41 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_win	new_program(char *title)
 	return (win);
 }
 
-t_img	new_img(t_win *win)
+t_img	new_img(t_win *win, t_scene scene)
 {
 	t_img img;
 
@@ -33,5 +33,6 @@ t_img	new_img(t_win *win)
 			&img.bits_per_pixel,
 			&img.line_length, &img.endian);
 	img.win = win;
+	img.scene = scene;
 	return(img);
 }

@@ -6,17 +6,14 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:58:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/02 21:43:44 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/07 18:23:39 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minirt.h"
 
-//*guardei o raio e o raio ao quadrado (eliminei o d);
 //todo: guardar coisas que se repetem nos calculos:
 //c = vec3_dot(co, co) - sp.r_sq;
-//cy.vector = vec3_scale(cy.vector, -1);
-//todo: definir o que acontece quando as normais sao (0,0,0)
 int main(int argc, char **argv)
 {
     t_win   minirita;
@@ -36,7 +33,7 @@ int main(int argc, char **argv)
     }
     //ft_print_scene(&scene);
     minirita = new_program(argv[1]);
-    img = new_img(&minirita);
+    img = new_img(&minirita, sc);
     render(img, sc);
     mlx_put_image_to_window(minirita.mlx_ptr, minirita.win_ptr, img.ptr, 0, 0); 
     mlx_hook(minirita.win_ptr, 17, 0L, &close_window, (void *)&img);
