@@ -6,12 +6,13 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:07:10 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/06 15:12:32 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/08 20:47:40 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
+//!já há uma funcao que faz isto na libft
 int	ft_freedoublepointer(char **dptr)
 {
 	int	i;
@@ -297,20 +298,23 @@ int	ft_stack_length(t_obj_list *stack)
 	return (i);
 }
 
+//!usar o set coords aqui
+//!iniciallizar o resto das variaveis
+//!mudar o c para color
 void ft_initobj(t_obj *obj)
 {
     obj->c.b = 0;
     obj->c.r = 0;
     obj->c.g = 0;
     obj->r = 0;
+    obj->r_sq = 0;
     obj->h = 0;
     obj->type = 0;
-    obj->vector.x = 0;
-    obj->vector.y = 0;
-    obj->vector.z = 0;
-    obj->point.x = 0;
-    obj->point.y = 0;
-    obj->point.z = 0;
+    set_coord(&obj->point, 0, 0, 0);
+    set_coord(&obj->vector, 0, 0, 0);
+    set_coord(&obj->vec_inver, 0, 0, 0);
+    set_coord(&obj->base1_c, 0, 0, 0);
+    set_coord(&obj->base2_c, 0, 0, 0);
 }
 
 int validate_obj(char *line, t_obj *obj)
@@ -506,6 +510,11 @@ void ft_print_cam(t_cam *cam)
     printf("normalized\n");
     ft_print_vec(&cam->normal);
     printf("FOV X:      %f\n", cam->fov_x);
+    printf("\nCAMARA AXIS:\n");
+    print_vec("ORIGEM: ", cam->axis.o);
+    print_vec("X:      ", cam->axis.x);
+    print_vec("Y:      ", cam->axis.y);
+    print_vec("Z:      ", cam->axis.z);
     printf("\n\n");
 }
 

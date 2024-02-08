@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:18:36 by rita              #+#    #+#             */
-/*   Updated: 2024/02/08 12:27:19 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/08 20:31:14 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,16 @@ static inline int	pixel_color(int i, int j, t_scene sc)
 	}
 }
 
-void render(t_img img, t_scene sc)
+void render(t_img img, t_scene scene)
 {
 	int i;
 	int j;
 	
-	//ft_print_scene(&sc);
+	ft_print_scene(&scene);
+	//scene.cam->axis = rot_axis(scene.cam->axis, img.rot.x_pos); //cima
+	//scene.cam->axis = rot_axis(scene.cam->axis, img.rot.x_neg); //baixo
+	//scene.cam->axis = rot_axis(scene.cam->axis, img.rot.y_neg); //esquerda
+	//scene.cam->axis = rot_axis(scene.cam->axis, img.rot.y_pos); //direita
 	i = 0;
 	j = 0; 
 	while (i < WIN_W)
@@ -67,7 +71,7 @@ void render(t_img img, t_scene sc)
 		j=0;
 		while (j < WIN_H)
 		{
-			put_pixel_img(img, i, j, pixel_color(i, j, sc));
+			put_pixel_img(img, i, j, pixel_color(i, j, scene));
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 20:32:56 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/08 12:43:02 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/08 20:48:41 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,29 @@ t_win	new_program(char *title)
 	return (win);
 }
 
-t_img	new_img(t_win *win, t_scene *scene, t_rotation rot)
+void	copy_scene(t_scene *dst, t_scene *src)
 {
-	t_img img;
+	int		i;
+	
+	i = 0;
+	dst->amb = malloc(sizeof(t_amb));
+	dst->amb = src->amb;
+	dst->cam = ft_calloc(1, sizeof(t_cam));
+	dst->cam = src->cam;
+	dst->light = ft_calloc(1, sizeof(t_light));
+	dst->light = src->light;
+	dst->n_obj = src->n_obj;
+	dst->obj = (t_obj *)malloc(sizeof(t_obj) * dst->n_obj);
+	while(i < dst->n_obj)
+	{
+		dst->obj[i] = src->obj[i];
+		i++;
+	}
+}
+
+t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene, t_rotation rot)
+{
+	t_img	img;
 
 	img.ptr = mlx_new_image(win->mlx_ptr, WIN_W,
 			WIN_H);
@@ -34,6 +54,7 @@ t_img	new_img(t_win *win, t_scene *scene, t_rotation rot)
 			&img.line_length, &img.endian);
 	img.win = win;
 	img.scene = scene;
+	img.original_scene = original_scene;
 	img.rot = rot;
 	return(img);
 }
@@ -51,11 +72,11 @@ t_rotation init_rot_matrix()
 	return(rot);
 }
 
-void	init_program(t_img *img, t_scene *scene, char *title, t_win *win)
+void	init_program(t_img *img, t_scene *scene, t_scene *original_scene, t_win *win)
 {
 	t_rotation	rot;
 	
-	*win = new_program(title);
+	*win = new_program("MINIRITA");
 	rot = init_rot_matrix();
-    *img = new_img(win, scene, rot);
+    *img = new_img(win, scene, original_scene, rot);
 }

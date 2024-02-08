@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 20:38:45 by rita              #+#    #+#             */
-/*   Updated: 2024/02/08 13:00:30 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/08 16:46:47 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,19 @@ t_vec3  vec3_mltmatrix(t_matrix mt, t_vec3 vec)
     result.x = vec.x * mt.x.x + vec.y * mt.y.x + vec.z * mt.z.x + mt.o.x;
     result.y = vec.x * mt.x.y + vec.y * mt.y.y + vec.z * mt.z.y + mt.o.y;
     result.z = vec.x * mt.x.z + vec.y * mt.y.z + vec.z * mt.z.z + mt.o.z;
-    // result = vec3_add(vec3_add(vec3_add(mt.o,vec3_scale(mt.x, vec.x)), 
-    //vec3_scale(mt.y, vec.y)), vec3_scale(mt.z, vec.z));
+    result = vec3_add(vec3_add(vec3_add(mt.o,vec3_scale(mt.x, vec.x)), 
+    vec3_scale(mt.y, vec.y)), vec3_scale(mt.z, vec.z));
     return(result);
 }
 
-t_matrix  mltmatrix(t_matrix mt1, t_matrix mt2)
+t_matrix  rot_axis(t_matrix mt1, t_matrix mt2)
 {
     t_matrix result;
     
-    result.x = vec3_mltmatrix(mt1, mt2.x);
-    result.y = vec3_mltmatrix(mt1, mt2.y);
-    result.z = vec3_mltmatrix(mt1, mt2.z);
     result.o = mt1.o;
+    result.x = vec3_mltmatrix(mt2, mt1.x);
+    result.y = vec3_mltmatrix(mt2, mt1.y);
+    result.z = vec3_mltmatrix(mt2, mt1.z);
     return(result);
 }
 

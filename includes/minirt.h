@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/08 12:42:48 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/08 20:45:02 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 #  define O 111
 #  define INCREASE 65451
 #  define DECREASE 65453
+#  define RESET 114
 # elif OS == 2
 #  define ESC 53
 #  define LEFT 123
@@ -47,11 +48,12 @@
 #  define O 31
 #  define INCREASE 24
 #  define DECREASE 27
+#  define RESET R
 # endif
 
 # define PI 3.1415
-# define ANG_ROT_POS PI/8
-# define ANG_ROT_NEG -PI/8
+# define ANG_ROT_POS PI/64
+# define ANG_ROT_NEG -ANG_ROT_POS
 # define WIN_W 1280
 # define WIN_H 700
 # define PL 0
@@ -110,13 +112,14 @@ typedef struct s_img
 	t_win	*win;
 	t_scene *scene;
 	t_rotation	rot;
+	t_scene *original_scene;
 }t_img;
 
 //*INITS
 t_win	new_program(char *title);
-t_img	new_img(t_win *win, t_scene *scene, t_rotation rot);
-void	init_program(t_img *img, t_scene *scene, char *title, t_win *win);
-
+t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene, t_rotation rot);
+void	init_program(t_img *img, t_scene *scene, t_scene *original_scene, t_win *win);
+void	copy_scene(t_scene *dst, t_scene *src);
 //*EXIT
 int		close_window(t_img *img);
 
@@ -125,10 +128,6 @@ int		handle_key_event(int button, t_img *view);
 
 //*RENDER
 void	render(t_img img, t_scene sc);
-
-//*SET
-void    set_pixel(t_vec2 *pixel);
-void    set_ray(t_ray *ray);
 
 //*CAM
 t_matrix    cam_axis(t_vec3 view, t_vec3 o);

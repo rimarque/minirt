@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:47:42 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/08 13:00:58 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/08 20:43:19 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,37 @@ int	handle_key_event(int button, t_img *img)
 	if(button == D)
 	{
 		//ft_print_scene(img->scene);
-		img->scene->cam->axis = mltmatrix(img->scene->cam->axis, img->rot.x_neg);
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rot.x_neg);
 		render(*img, *img->scene);
+	}
+	if(button == UP)
+	{
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rot.x_pos);
+		render(*img, *img->scene);
+		mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
+	}
+	if(button == DOWN)
+	{
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rot.x_neg); //baixo
+		render(*img, *img->scene);
+		mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
+	}
+	if(button == RIGHT)
+	{
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rot.y_neg); //direita
+		render(*img, *img->scene);
+		mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
+	}
+	if(button == LEFT)
+	{
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rot.y_pos); //esquerda
+		render(*img, *img->scene);
+		mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
+	}
+	if(button == RESET)
+	{
+		render(*img, *img->original_scene);
+		mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
 	}
 	return (0);
 }

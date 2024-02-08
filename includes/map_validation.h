@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/08 11:40:05 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/08 19:59:58 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_obj
 	float	h;
 	float	r;
 	float	r_sq;
-	t_matrix	axis;
 }t_obj;
 
 typedef struct s_obj_list
