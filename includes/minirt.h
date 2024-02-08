@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/08 20:45:02 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/08 21:40:22 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,22 +104,22 @@ typedef struct s_win
 
 typedef struct s_img
 {
-	void	*ptr;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	t_win	*win;
-	t_scene *scene;
+	void		*ptr;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	t_win		*win;
+	t_scene		*scene;
 	t_rotation	rot;
-	t_scene *original_scene;
+	t_scene		*original_scene;
 }t_img;
 
 //*INITS
 t_win	new_program(char *title);
 t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene, t_rotation rot);
 void	init_program(t_img *img, t_scene *scene, t_scene *original_scene, t_win *win);
-void	copy_scene(t_scene *dst, t_scene *src);
+
 //*EXIT
 int		close_window(t_img *img);
 
