@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 20:38:45 by rita              #+#    #+#             */
-/*   Updated: 2024/02/07 17:25:13 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/08 13:00:30 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void    set_coord(t_vec3 *vec, float a, float b, float c)
     vec->z = c;
 }
 
-t_mt    get_rotmatrix_x(float teta)
+t_matrix    get_rotmatrix_x(float teta)
 {
-    t_mt matrix;
+    t_matrix matrix;
 
     set_coord(&matrix.o, 0, 0, 0);
     set_coord(&matrix.x, 1, 0, 0);
@@ -30,9 +30,9 @@ t_mt    get_rotmatrix_x(float teta)
     return(matrix);
 }
 
-t_mt    get_rotmatrix_y(float teta)
+t_matrix    get_rotmatrix_y(float teta)
 {
-    t_mt matrix;
+    t_matrix matrix;
 
     set_coord(&matrix.o, 0, 0, 0);
     set_coord(&matrix.x, cosf(teta), 0, -1 * sinf(teta));
@@ -41,9 +41,9 @@ t_mt    get_rotmatrix_y(float teta)
     return(matrix);
 }
 
-t_mt    get_rotmatrix_z(float teta)
+t_matrix    get_rotmatrix_z(float teta)
 {
-    t_mt matrix;
+    t_matrix matrix;
 
     set_coord(&matrix.o, 0, 0, 0);
     set_coord(&matrix.x, cosf(teta), sinf(teta), 0);
@@ -53,7 +53,7 @@ t_mt    get_rotmatrix_z(float teta)
 }
 //multiplicar matriz por um vetor
 //neste caso a matriz e formada por quatro vetores, cada coluna da matriz e um vetor (x, y e z do axis e o (a origem do axis))
-t_vec3  vec3_mltmatrix(t_mt mt, t_vec3 vec)
+t_vec3  vec3_mltmatrix(t_matrix mt, t_vec3 vec)
 {
     t_vec3 result;
 
@@ -65,19 +65,20 @@ t_vec3  vec3_mltmatrix(t_mt mt, t_vec3 vec)
     return(result);
 }
 
-t_mt  mltmatrix(t_mt mt1, t_mt mt2)
+t_matrix  mltmatrix(t_matrix mt1, t_matrix mt2)
 {
-    t_mt result;
+    t_matrix result;
     
     result.x = vec3_mltmatrix(mt1, mt2.x);
     result.y = vec3_mltmatrix(mt1, mt2.y);
     result.z = vec3_mltmatrix(mt1, mt2.z);
+    result.o = mt1.o;
     return(result);
 }
 
 t_vec3 vec3_rotate(t_vec3 vec, float teta, char c)
 {
-    t_mt rot_matrix;
+    t_matrix rot_matrix;
     t_vec3 result;
 
     if(c == 'x')

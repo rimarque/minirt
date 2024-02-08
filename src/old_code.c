@@ -43,9 +43,9 @@
 		else
 			it1 = closer_inter(it1, it2); */
 
-/* t_mt    get_cyaxis(t_vec3 normal, t_vec3 o)
+/* t_matrix    get_cyaxis(t_vec3 normal, t_vec3 o)
 {
-    t_mt  axis;
+    t_matrix  axis;
     t_vec3  up;
 
     set_coord(&up, 0, 1, 0);

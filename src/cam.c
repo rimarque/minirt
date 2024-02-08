@@ -6,15 +6,15 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:16:21 by rita              #+#    #+#             */
-/*   Updated: 2024/02/06 15:20:54 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/08 11:40:05 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_mt    cam_axis(t_vec3 view, t_vec3 o)
+t_matrix    cam_axis(t_vec3 view, t_vec3 o)
 {
-    t_mt  axis;
+    t_matrix  axis;
     t_vec3  up;
 
     set_coord(&up, 0, 1, 0);

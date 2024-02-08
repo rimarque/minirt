@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/07 19:18:44 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/08 12:42:48 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,23 @@
 # endif
 
 # define PI 3.1415
-# define ANG_ROT PI/16
+# define ANG_ROT_POS PI/8
+# define ANG_ROT_NEG -PI/8
 # define WIN_W 1280
 # define WIN_H 700
 # define PL 0
 # define SP 1
 # define CY 2
+
+typedef	struct s_rotation
+{
+	t_matrix	x_pos;
+	t_matrix	x_neg;
+	t_matrix	y_pos;
+	t_matrix	y_neg;
+	t_matrix	z_pos;
+	t_matrix	z_neg;
+}t_rotation;
 
 typedef struct s_auxeq
 {
@@ -97,12 +108,14 @@ typedef struct s_img
 	int		line_length;
 	int		endian;
 	t_win	*win;
-	t_scene scene;
+	t_scene *scene;
+	t_rotation	rot;
 }t_img;
 
 //*INITS
 t_win	new_program(char *title);
-t_img	new_img(t_win *win, t_scene scene);
+t_img	new_img(t_win *win, t_scene *scene, t_rotation rot);
+void	init_program(t_img *img, t_scene *scene, char *title, t_win *win);
 
 //*EXIT
 int		close_window(t_img *img);
@@ -118,7 +131,7 @@ void    set_pixel(t_vec2 *pixel);
 void    set_ray(t_ray *ray);
 
 //*CAM
-t_mt    cam_axis(t_vec3 view, t_vec3 o);
+t_matrix    cam_axis(t_vec3 view, t_vec3 o);
 t_ray	get_ray(int i, int j, t_scene sc);
 
 //*INTERSECT

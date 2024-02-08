@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:18:36 by rita              #+#    #+#             */
-/*   Updated: 2024/02/07 18:19:16 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/08 12:27:19 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,8 @@ void render(t_img img, t_scene sc)
 {
 	int i;
 	int j;
-	int counter;
 	
-	counter = 0;
 	//ft_print_scene(&sc);
-	while(counter < 30)
-	{
-		sc.obj[0].point = vec3_rotate(sc.obj[0].point, ANG_ROT, 'y');
-		counter++;
-	}
 	i = 0;
 	j = 0; 
 	while (i < WIN_W)
