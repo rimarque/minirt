@@ -17,10 +17,14 @@ double	ft_atof(const char *str)
 	double	inteiro;
 	double	restante;
 	int		len;
+	char	sign;
 
 	inteiro = 0;
 	restante = 0;
 	len = 0;
+	while (*str == ' ' || ((*str >= '\t') && (*str <= '\r')))
+		str++;
+	sign = *str;
 	inteiro = (double)ft_atoll(str);
 	while (*str && *str != '.')
 		str++;
@@ -30,8 +34,8 @@ double	ft_atof(const char *str)
 	len = ft_strlen(str);
 	while (len--)
 		restante /= 10;
-	if (inteiro >= 0)
-		return (inteiro + restante);
-	else
+	if ((inteiro < 0) || ((inteiro == 0) && (sign == '-')))
 		return (inteiro + -restante);
+	else
+		return (inteiro + restante);
 }
