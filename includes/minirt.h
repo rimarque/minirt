@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/09 11:39:04 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/09 17:40:22 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,36 @@
 #define RIGHT 65363
 #define UP 65362
 #define DOWN 65364
+#define SHIFT_RIGHT 65506
+#define CTRL_RIGHT 65508
 #define W 119
 #define A 97
 #define S 115
 #define D 100
-#define O 111
+#define SHIFT_LEFT 65505
+#define CTRL_LEFT 65507
+#define TAB 65289
 #define INCREASE 65451
 #define DECREASE 65453
-#define RESET 114
+#define R 114
 #elif OS == 2
 #define ESC 53
 #define LEFT 123
 #define RIGHT 124
 #define UP 126
 #define DOWN 125
+#define SHIFT_RIGHT
+#define CTRL_RIGHT
 #define W 13
 #define A 0
 #define S 1
 #define D 2
-#define O 31
+#define SHIFT_LEFT
+#define CTRL_RIGHT
+#define TAB
 #define INCREASE 24
 #define DECREASE 27
-#define RESET 15
+#define R 15
 #endif
 
 #define PI 3.1415
@@ -58,6 +66,15 @@
 #define PL 0
 #define SP 1
 #define CY 2
+
+typedef struct s_translation {
+  t_vec3  x_pos;
+  t_vec3  x_neg;
+  t_vec3  y_pos;
+  t_vec3  y_neg;
+  t_vec3  z_pos;
+  t_vec3  z_neg;
+} t_translation;
 
 typedef struct s_rotation {
   t_matrix x_pos;
@@ -98,20 +115,21 @@ typedef struct s_win {
 
 typedef struct s_img
 {
-	void		*ptr;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-	t_win		*win;
-	t_scene		*scene;
-	t_rotation	rot;
-	t_scene		*original_scene;
+	void          *ptr;
+	char          *addr;
+	int           bits_per_pixel;
+	int			      line_length;
+	int			      endian;
+	t_win         *win;
+	t_scene		    *scene;
+	t_rotation	  rotation;
+  t_translation translation;
+	t_scene		    *original_scene;
 }t_img;
 
 //*INITS
 t_win	new_program(char *title);
-t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene, t_rotation rot);
+t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene);
 void	init_program(t_img *img, t_scene *scene, t_scene *original_scene, t_win *win);
 void	copy_scene(t_scene *dst, t_scene src);
 

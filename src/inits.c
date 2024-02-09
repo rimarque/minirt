@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 20:32:56 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/09 12:18:36 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/09 17:40:49 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,33 @@ void	copy_scene(t_scene *dst, t_scene src)
 		i++;
 	}
 }
+t_rotation init_rot_matrix()
+{
+	t_rotation	rotation;
 
-t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene, t_rotation rot)
+	rotation.x_pos = get_rotmatrix_x(ANG_ROT_POS);
+	rotation.x_neg = get_rotmatrix_x(ANG_ROT_NEG);
+	rotation.y_pos = get_rotmatrix_y(ANG_ROT_POS);
+	rotation.y_neg = get_rotmatrix_y(ANG_ROT_NEG);
+	rotation.z_pos = get_rotmatrix_z(ANG_ROT_POS);
+	rotation.z_neg = get_rotmatrix_z(ANG_ROT_NEG);
+	return(rotation);
+}
+
+t_translation	init_trans_vec()
+{
+	t_translation	translation;
+
+	set_coord(&translation.x_pos, 1, 0, 0); 
+	set_coord(&translation.x_neg, -1, 0, 0);
+	set_coord(&translation.y_pos, 0, 1, 0);
+	set_coord(&translation.y_neg, 0, -1, 0);
+	set_coord(&translation.z_pos, 0, 0, 1);
+	set_coord(&translation.z_neg, 0, 0, -1);
+	return(translation);
+}
+
+t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene)
 {
 	t_img	img;
 	
@@ -56,29 +81,14 @@ t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene, t_rotation ro
 	img.scene = scene;
 	copy_scene(original_scene, *scene);
 	img.original_scene = original_scene;
-	img.rot = rot;
+	img.rotation = init_rot_matrix();
+	img.translation = init_trans_vec();
 	return(img);
 }
 
-t_rotation init_rot_matrix()
-{
-	t_rotation	rot;
-
-	rot.x_pos = get_rotmatrix_x(ANG_ROT_POS);
-	rot.x_neg = get_rotmatrix_x(ANG_ROT_NEG);
-	rot.y_pos = get_rotmatrix_y(ANG_ROT_POS);
-	rot.y_neg = get_rotmatrix_y(ANG_ROT_NEG);
-	rot.z_pos = get_rotmatrix_z(ANG_ROT_POS);
-	rot.z_neg = get_rotmatrix_z(ANG_ROT_NEG);
-	return(rot);
-}
 
 void	init_program(t_img *img, t_scene *scene, t_scene *original_scene, t_win *win)
 {
-	t_rotation	rot;
-	
-	printf("passa aqui\n");
 	*win = new_program("MINIRITA");
-	rot = init_rot_matrix();
-    *img = new_img(win, scene, original_scene, rot);
+    *img = new_img(win, scene, original_scene);
 }
