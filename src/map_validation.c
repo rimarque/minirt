@@ -6,13 +6,12 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:07:10 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/08 20:47:40 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/09 12:10:27 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-//!já há uma funcao que faz isto na libft
 int	ft_freedoublepointer(char **dptr)
 {
 	int	i;
@@ -464,6 +463,12 @@ void ft_free_objarray(t_obj *obj, int len)
     while (i < len)
         free(&obj[i]);
     free(obj);
+}
+
+void    ft_free_ptr(void    **ptr)
+{
+    free(ptr);
+    *ptr = NULL;
 }
 
 void ft_free_scene(t_scene *scene)
