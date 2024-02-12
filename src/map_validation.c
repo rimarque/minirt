@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:07:10 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/12 10:54:43 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/12 21:52:54 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,8 +231,10 @@ int validate_cy(char **line, t_obj *obj)
         obj->r /= 2;
         obj->r_sq = obj->r*obj->r;
         obj->vec_inver = vec3_scale(obj->vector, -1);
-        obj->base1_c = vec3_add(obj->point, vec3_scale(obj->vector, obj->h/2));
-        obj->base2_c = vec3_add(obj->point, vec3_scale(obj->vec_inver, obj->h/2));
+        obj->base1_c = vec3_add(obj->point, 
+        vec3_scale(obj->vector, obj->h/2));
+        obj->base2_c = vec3_add(obj->point, 
+        vec3_scale(obj->vec_inver, obj->h/2));
         return(1);
     }
     return(0);
@@ -373,7 +375,7 @@ int list_to_obj(t_scene *scene)
         erro = validate_obj(head->obj, &scene->obj[++i]);
         if (erro == 0)
         {
-            ft_putstr_fd("Invalid Map Lista\n",2);
+            ft_putstr_fd("minirt: Invalid Map Lista\n",2);
             return(0);
         }
         head = head->next;
@@ -393,7 +395,7 @@ void init_scene(t_scene *scene)
 
 int ft_put_err(char *str)
 {
-    ft_putstr_fd("Invalid Map \n",2);
+    ft_putstr_fd("minirt: Invalid Map\n",2);
     printf("%s\n", str);
     return(0);
 }

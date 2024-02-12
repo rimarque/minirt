@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/12 11:46:19 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/12 15:01:18 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,13 @@ typedef struct s_img
 	t_win         *win;
 	t_scene		    *scene;
 	t_scene		    *original_scene;
+  bool          object_mode;
+  int           id_obj;
 }t_img;
 
 //*INITS
 t_win	new_program(char *title);
 t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene);
-void	init_program(t_img *img, t_scene *scene, t_scene *original_scene, t_win *win);
 void	copy_scene(t_scene *dst, t_scene src);
 
 //*EXIT
@@ -119,6 +120,18 @@ int close_window(t_img *img);
 
 //*KEYS
 int handle_key_event(int button, t_img *view);
+
+//*ROTATE_CAM
+void	rotate_cam(t_img *img, int button);
+
+//*ROTATE_OBJ
+void    rotate_obj(t_obj *obj, int  i, int button);
+
+//*TRANSLATE_CAM
+void	translate_cam(t_img *img, int button);
+
+//*TRANSLATE_OBJ
+void	translate_obj(t_obj *obj, int  i, int button);
 
 //*RENDER
 void render(t_img img, t_scene sc);

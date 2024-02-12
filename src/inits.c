@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 20:32:56 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/12 10:47:26 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/12 14:40:21 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,7 @@ t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene)
 	img.scene = scene;
 	copy_scene(original_scene, *scene);
 	img.original_scene = original_scene;
+	img.id_obj = 0;
+	img.object_mode = false;
 	return(img);
-}
-
-
-void	init_program(t_img *img, t_scene *scene, t_scene *original_scene, t_win *win)
-{
-	*win = new_program("MINIRITA");
-    *img = new_img(win, scene, original_scene);
 }
