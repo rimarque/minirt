@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:47:42 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/12 11:47:54 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/12 13:31:10 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@ bool	is_rotation_button(int button)
 
 void	rotate_cam_x(t_cam	*cam, float	ang)
 {
-	cam->axis = rot_axis(cam->axis, get_rotmatrix_x(ang));
+	cam->axis = matrix_mltmatrix(cam->axis, get_rotmatrix_x(ang));
 }
 
 void	rotate_cam_y(t_cam	*cam, float	ang)
 {
-	cam->axis = rot_axis(cam->axis, get_rotmatrix_y(ang));
+	cam->axis = matrix_mltmatrix(cam->axis, get_rotmatrix_y(ang));
 }
 
 void	rotate_cam_z(t_cam	*cam, float	ang)
 {
-	cam->axis = rot_axis(cam->axis, get_rotmatrix_z(ang));
+	cam->axis = matrix_mltmatrix(cam->axis, get_rotmatrix_z(ang));
 }
 
 void	rotate_cam(t_img *img, int button)
@@ -70,17 +70,20 @@ void	rotate(t_img *img, int button)
 
 void	translate_cam_y(t_cam *cam, float amount)
 {
-	cam->view_point = vec3_add(cam->view_point, vec3_scale(cam->axis.y, amount));
+	cam->view_point = vec3_add(cam->view_point, 
+	vec3_scale(cam->axis.y, amount));
 }
 
 void	translate_cam_x(t_cam *cam, float amount)
 {
-	cam->view_point = vec3_add(cam->view_point, vec3_scale(cam->axis.x, amount));
+	cam->view_point = vec3_add(cam->view_point, 
+	vec3_scale(cam->axis.x, amount));
 }
 
 void	translate_cam_z(t_cam *cam, float amount)
 {
-	cam->view_point = vec3_add(cam->view_point, vec3_scale(cam->axis.z, amount));
+	cam->view_point = vec3_add(cam->view_point, 
+	vec3_scale(cam->axis.z, amount));
 }
 
 

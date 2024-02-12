@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
+#    By: rita <rita@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 14:39:30 by rimarque          #+#    #+#              #
-#    Updated: 2024/01/16 11:37:03 by rimarque         ###   ########.fr        #
+#    Updated: 2024/02/12 13:23:26 by rita             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = len_vec2.c len_vec3.c math_vec2.c math_vec3.c prod_vec2.c prod_vec3.c rotate_vec3.c print_vec3.c
+SRC = len_vec2.c len_vec3.c math_vec2.c math_vec3.c prod_vec2.c prod_vec3.c matrix_vec3.c aux_vec3.c
 
 NAME = mathvec.a
 

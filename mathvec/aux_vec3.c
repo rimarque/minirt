@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_vec3.c                                       :+:      :+:    :+:   */
+/*   aux_vec3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 11:34:48 by rimarque          #+#    #+#             */
-/*   Updated: 2024/01/16 12:53:04 by rimarque         ###   ########.fr       */
+/*   Created: 2024/02/12 13:16:41 by rita              #+#    #+#             */
+/*   Updated: 2024/02/12 13:22:33 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/mathvec.h"
+
+void    set_coord(t_vec3 *vec, float a, float b, float c)
+{
+    vec->x = a;
+    vec->y = b;
+    vec->z = c;
+}
 
 void print_vec(char *id, t_vec3 vec)
 {

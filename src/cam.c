@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:16:21 by rita              #+#    #+#             */
-/*   Updated: 2024/02/12 11:24:00 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/12 13:14:05 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ t_vec3  ray_dir(float x, float y, t_cam cam)
     result.x = x * x_max;
     result.y = y * y_max;
     result.z = -1;
-    result = vec3_mltmatrix_cam(cam.axis, cam.view_point, result);
-    result = vec3_sub(result, cam.view_point);
     result = vec3_normalized(result);
+    result = vec3_mltmatrix(cam.axis, result);
     return(result);
 }
 
