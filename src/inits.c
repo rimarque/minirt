@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 20:32:56 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/09 17:40:49 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/12 10:47:26 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,6 @@ void	copy_scene(t_scene *dst, t_scene src)
 		i++;
 	}
 }
-t_rotation init_rot_matrix()
-{
-	t_rotation	rotation;
-
-	rotation.x_pos = get_rotmatrix_x(ANG_ROT_POS);
-	rotation.x_neg = get_rotmatrix_x(ANG_ROT_NEG);
-	rotation.y_pos = get_rotmatrix_y(ANG_ROT_POS);
-	rotation.y_neg = get_rotmatrix_y(ANG_ROT_NEG);
-	rotation.z_pos = get_rotmatrix_z(ANG_ROT_POS);
-	rotation.z_neg = get_rotmatrix_z(ANG_ROT_NEG);
-	return(rotation);
-}
-
-t_translation	init_trans_vec()
-{
-	t_translation	translation;
-
-	set_coord(&translation.x_pos, 1, 0, 0); 
-	set_coord(&translation.x_neg, -1, 0, 0);
-	set_coord(&translation.y_pos, 0, 1, 0);
-	set_coord(&translation.y_neg, 0, -1, 0);
-	set_coord(&translation.z_pos, 0, 0, 1);
-	set_coord(&translation.z_neg, 0, 0, -1);
-	return(translation);
-}
 
 t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene)
 {
@@ -81,8 +56,6 @@ t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene)
 	img.scene = scene;
 	copy_scene(original_scene, *scene);
 	img.original_scene = original_scene;
-	img.rotation = init_rot_matrix();
-	img.translation = init_trans_vec();
 	return(img);
 }
 

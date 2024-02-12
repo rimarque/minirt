@@ -6,11 +6,19 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:07:10 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/09 12:10:27 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/12 10:54:43 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
+
+int valid_vector(t_vec3 *vec)
+{
+    if(vec->x == 0 && vec->y == 0 && vec->z == 0)
+        return(0);
+    *vec = vec3_normalized(*vec);  
+    return(1);  
+}
 
 int	ft_freedoublepointer(char **dptr)
 {
@@ -144,6 +152,8 @@ int validate_A(char **line, t_scene *scene)
 
 int validate_C(char **line, t_scene *scene)
 {
+    t_vec3  view;
+
     if (ft_arrlen(line) == 4 && scene->cam == NULL)
     {
         scene->cam = ft_calloc(1,sizeof(t_cam));
@@ -151,15 +161,17 @@ int validate_C(char **line, t_scene *scene)
             return(0);
         if (!parse_vec3(line[1], &scene->cam->view_point, 0))
             return(0);
-        if (!parse_vec3(line[2], &scene->cam->normal, 1))
+        if (!parse_vec3(line[2], &view, 1))
             return(0);
         if (!ft_isfloat(line[3],&scene->cam->fov_x, 0))
             return(0);
         if (!(float_in_range(scene->cam->fov_x, 0, 180)) || !ft_isdigit(line[3][0]))
             return(0);
-        scene->cam->fov_x = scene->cam->fov_x * (M_PI / 180);
+        if(!valid_vector(&view))
+            return(0);
+        scene->cam->fov_x = scene->cam->fov_x * (PI / 180);
         scene->cam->aspect = (float)WIN_H/WIN_W;
-        scene->cam->axis = cam_axis(scene->cam->normal, scene->cam->view_point);
+        scene->cam->axis = cam_axis(view);
         return(1);
     }
     return(0);
@@ -214,9 +226,11 @@ int validate_cy(char **line, t_obj *obj)
         if (!parse_color(line[5], &obj->c))
             return(0);
         obj->type = CY;
+        if(!valid_vector(&obj->vector))
+            return(0);
         obj->r /= 2;
         obj->r_sq = obj->r*obj->r;
-        obj->vec_inver = vec3_scale(obj->vector, -1); //!duvida
+        obj->vec_inver = vec3_scale(obj->vector, -1);
         obj->base1_c = vec3_add(obj->point, vec3_scale(obj->vector, obj->h/2));
         obj->base2_c = vec3_add(obj->point, vec3_scale(obj->vec_inver, obj->h/2));
         return(1);
@@ -235,6 +249,9 @@ int validate_pl(char **line, t_obj *obj)
         if (!parse_color(line[3], &obj->c))
             return(0);
         obj->type = PL;
+        if(!valid_vector(&obj->vector))
+            return(0);
+        obj->vector = vec3_normalized(obj->vector);
         return(1);
     }
     return(0);
@@ -512,11 +529,8 @@ void ft_print_cam(t_cam *cam)
     printf("---CAMARA---\n\n");
     printf("view_point\n");
     ft_print_vec(&cam->view_point);
-    printf("normalized\n");
-    ft_print_vec(&cam->normal);
     printf("FOV X:      %f\n", cam->fov_x);
     printf("\nCAMARA AXIS:\n");
-    print_vec("ORIGEM: ", cam->axis.o);
     print_vec("X:      ", cam->axis.x);
     print_vec("Y:      ", cam->axis.y);
     print_vec("Z:      ", cam->axis.z);

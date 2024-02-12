@@ -6,13 +6,13 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:16:21 by rita              #+#    #+#             */
-/*   Updated: 2024/02/08 11:40:05 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/12 11:24:00 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_matrix    cam_axis(t_vec3 view, t_vec3 o)
+t_matrix    cam_axis(t_vec3 view)
 {
     t_matrix  axis;
     t_vec3  up;
@@ -20,13 +20,9 @@ t_matrix    cam_axis(t_vec3 view, t_vec3 o)
     set_coord(&up, 0, 1, 0);
     if(vec3_dot(up, view) == 1 || vec3_dot(up, view) == -1)
         set_coord(&up, 1, 0, 0);
-    axis.o = o;
     axis.z = vec3_scale(view, -1);
     axis.x = vec3_normalized(vec3_cross(up, axis.z));
     axis.y = vec3_normalized(vec3_cross(axis.z, axis.x));
-    /* print_vec("X: ", axis.x);
-    print_vec("Y: ", axis.y);
-    print_vec("Z: ", axis.z); */
     return(axis);
 }
 
@@ -41,11 +37,9 @@ t_vec3  ray_dir(float x, float y, t_cam cam)
     result.x = x * x_max;
     result.y = y * y_max;
     result.z = -1;
-    result = vec3_mltmatrix(cam.axis, result);
-    result = vec3_sub(result, cam.axis.o);
+    result = vec3_mltmatrix_cam(cam.axis, cam.view_point, result);
+    result = vec3_sub(result, cam.view_point);
     result = vec3_normalized(result);
-    //print_vec("dir:",result);
-    //printf("point.x: %f\npoint.y: %f\npoint.z: %f\n", result.x, result.y, result.z);
     return(result);
 }
 
@@ -59,6 +53,6 @@ t_ray    get_ray(int i, int j, t_scene sc)
 	x = ((float)i / (WIN_W - 1)) * 2 - 1;
 	y = ((float)j / (WIN_H - 1)) * 2 - 1;
     ray.d = ray_dir(x, y, *sc.cam);
-	ray.o = sc.cam->axis.o;
+	ray.o = sc.cam->view_point;
     return(ray);
 }

@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:47:42 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/09 18:06:44 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/12 11:47:54 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,116 +28,35 @@ bool	is_rotation_button(int button)
 	return(false);
 }
 
-void	rotate_cam_up(t_img *img, t_cam cam)
+void	rotate_cam_x(t_cam	*cam, float	ang)
 {
-	if(cam.normal.x == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_pos);
-	if(cam.normal.x == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_neg);
-	if(cam.normal.y == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_neg);
-	if(cam.normal.y == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_pos);
-	if(cam.normal.z == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_neg);
-	if(cam.normal.z == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_pos);
+	cam->axis = rot_axis(cam->axis, get_rotmatrix_x(ang));
 }
 
-void	rotate_cam_down(t_img *img, t_cam cam)
+void	rotate_cam_y(t_cam	*cam, float	ang)
 {
-	if(cam.normal.x == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_neg);
-	if(cam.normal.x == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_pos);
-	if(cam.normal.y == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_pos);
-	if(cam.normal.y == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_neg);
-	if(cam.normal.z == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_pos);
-	if(cam.normal.z == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_neg);
+	cam->axis = rot_axis(cam->axis, get_rotmatrix_y(ang));
 }
 
-void	rotate_cam_right(t_img *img, t_cam cam)
+void	rotate_cam_z(t_cam	*cam, float	ang)
 {
-	if(cam.normal.x == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_neg);
-	if(cam.normal.x == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_neg);
-	if(cam.normal.y == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_neg);
-	if(cam.normal.y == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_neg);
-	if(cam.normal.z == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_neg);
-	if(cam.normal.z == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_neg);
-}
-
-void	rotate_cam_left(t_img *img, t_cam cam)
-{
-	if(cam.normal.x == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_pos);
-	if(cam.normal.x == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_pos);
-	if(cam.normal.y == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_pos);
-	if(cam.normal.y == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_pos);
-	if(cam.normal.z == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_pos);
-	if(cam.normal.z == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_pos);
-}
-
-void	rot_cam_clockwise(t_img *img, t_cam cam)
-{
-	if(cam.normal.x == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_pos);
-	if(cam.normal.x == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_neg);
-	if(cam.normal.y == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_pos);
-	if(cam.normal.y == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_neg);
-	if(cam.normal.z == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_pos);
-	if(cam.normal.z == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_neg);
-}
-
-void	rot_cam_counterclock(t_img *img, t_cam cam)
-{
-	if(cam.normal.x == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_neg);
-	if(cam.normal.x == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_pos);
-	if(cam.normal.y == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_neg);
-	if(cam.normal.y == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_pos);
-	if(cam.normal.z == 1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_neg);
-	if(cam.normal.z == -1)
-		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_pos);
+	cam->axis = rot_axis(cam->axis, get_rotmatrix_z(ang));
 }
 
 void	rotate_cam(t_img *img, int button)
 {
 	if(button == UP)
-		rotate_cam_up(img, *img->scene->cam);
+		rotate_cam_x(img->scene->cam, ANG_ROT);
 	if(button == DOWN)
-		rotate_cam_down(img, *img->scene->cam);
+		rotate_cam_x(img->scene->cam, -ANG_ROT);
 	if(button == RIGHT)
-		rotate_cam_right(img, *img->scene->cam);
+		rotate_cam_y(img->scene->cam, -ANG_ROT);
 	if(button == LEFT)
-		rotate_cam_left(img, *img->scene->cam);
+		rotate_cam_y(img->scene->cam, ANG_ROT);
 	if(button == SHIFT_RIGHT)
-		rot_cam_clockwise(img, *img->scene->cam);
+		rotate_cam_z(img->scene->cam, -ANG_ROT);
 	if(button == CTRL_RIGHT)
-		rot_cam_counterclock(img, *img->scene->cam);
+		rotate_cam_z(img->scene->cam, ANG_ROT);
 }
 
 
@@ -149,116 +68,36 @@ void	rotate(t_img *img, int button)
 		rotate_cam(img, button);
 }
 
-void	translate_cam_up(t_img *img, t_cam cam)
+void	translate_cam_y(t_cam *cam, float amount)
 {
-	if(cam.normal.x == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.y_pos);
-	if(cam.normal.x == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.y_pos);
-	if(cam.normal.y == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.x_pos);
-	if(cam.normal.y == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.x_pos);
-	if(cam.normal.z == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.y_pos);
-	if(cam.normal.z == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.y_pos);
+	cam->view_point = vec3_add(cam->view_point, vec3_scale(cam->axis.y, amount));
 }
 
-void	translate_cam_down(t_img *img, t_cam cam)
+void	translate_cam_x(t_cam *cam, float amount)
 {
-	if(cam.normal.x == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.y_neg);
-	if(cam.normal.x == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.y_neg);
-	if(cam.normal.y == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.x_neg);
-	if(cam.normal.y == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.x_neg);
-	if(cam.normal.z == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.y_neg);
-	if(cam.normal.z == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.y_neg);
+	cam->view_point = vec3_add(cam->view_point, vec3_scale(cam->axis.x, amount));
 }
 
-void	translate_cam_right(t_img *img, t_cam cam)
+void	translate_cam_z(t_cam *cam, float amount)
 {
-	if(cam.normal.x == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.z_pos);
-	if(cam.normal.x == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.z_neg);
-	if(cam.normal.y == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.z_neg);
-	if(cam.normal.y == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.z_pos);
-	if(cam.normal.z == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.x_neg);
-	if(cam.normal.z == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.x_pos);
+	cam->view_point = vec3_add(cam->view_point, vec3_scale(cam->axis.z, amount));
 }
 
-void	translate_cam_left(t_img *img, t_cam cam)
-{
-	if(cam.normal.x == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.z_neg);
-	if(cam.normal.x == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.z_pos);
-	if(cam.normal.y == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.z_pos);
-	if(cam.normal.y == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.z_neg);
-	if(cam.normal.z == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.x_pos);
-	if(cam.normal.z == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.x_neg);
-}
-
-void	translate_cam_front(t_img *img, t_cam cam)
-{
-	if(cam.normal.x == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.x_pos);
-	if(cam.normal.x == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.x_neg);
-	if(cam.normal.y == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.y_pos);
-	if(cam.normal.y == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.y_neg);
-	if(cam.normal.z == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.z_pos);
-	if(cam.normal.z == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.z_neg);
-}
-
-void	translate_cam_back(t_img *img, t_cam cam)
-{
-	if(cam.normal.x == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.x_neg);
-	if(cam.normal.x == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.x_pos);
-	if(cam.normal.y == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.y_neg);
-	if(cam.normal.y == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.y_pos);
-	if(cam.normal.z == 1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.z_neg);
-	if(cam.normal.z == -1)
-		img->scene->cam->axis.o = vec3_add(img->scene->cam->axis.o, img->translation.z_pos);
-}
 
 void	translate_cam(t_img *img, int button)
 {
 	if(button == SHIFT_LEFT)
-		translate_cam_up(img, *img->scene->cam);
+		translate_cam_y(img->scene->cam, SCALE_TRANS);
 	if(button == CTRL_LEFT)
-		translate_cam_down(img, *img->scene->cam);
+		translate_cam_y(img->scene->cam, -SCALE_TRANS);
 	if(button == D)
-		translate_cam_right(img, *img->scene->cam);
+		translate_cam_x(img->scene->cam, SCALE_TRANS);
 	if(button == A)
-		translate_cam_left(img, *img->scene->cam);
+		translate_cam_x(img->scene->cam, -SCALE_TRANS);
 	if(button == W)
-		translate_cam_front(img, *img->scene->cam);
+		translate_cam_z(img->scene->cam, -SCALE_TRANS);
 	if(button == S)
-		translate_cam_back(img, *img->scene->cam);
+		translate_cam_z(img->scene->cam, SCALE_TRANS);
 }
 
 void	translate(t_img *img, int button)

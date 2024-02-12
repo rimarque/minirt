@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:10:40 by rita              #+#    #+#             */
-/*   Updated: 2024/02/08 16:47:40 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/12 11:22:30 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_mt
 	t_vec3 x;
 	t_vec3 y;
 	t_vec3 z;
-	t_vec3 o;
 }t_matrix;
 
 //*MATH_VEC3
@@ -56,6 +55,7 @@ void print_vec(char *id, t_vec3 vec);
 
 //*ROTATE_VEC3
 void    set_coord(t_vec3 *vec, float a, float b, float c);
+t_vec3  vec3_mltmatrix_cam(t_matrix mt, t_vec3 t, t_vec3 vec);
 t_vec3  vec3_mltmatrix(t_matrix mt, t_vec3 vec);
 t_matrix  rot_axis(t_matrix mt1, t_matrix mt2);
 t_matrix    get_rotmatrix_x(float teta);

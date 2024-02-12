@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/09 17:40:22 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/12 11:46:19 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,31 +59,14 @@
 #endif
 
 #define PI 3.1415
-#define ANG_ROT_POS PI / 64
-#define ANG_ROT_NEG -ANG_ROT_POS
+#define ANG_ROT PI / 32
+#define SCALE_TRANS 4
+#define SCALE_RESIZE 2
 #define WIN_W 1280
 #define WIN_H 700
 #define PL 0
 #define SP 1
 #define CY 2
-
-typedef struct s_translation {
-  t_vec3  x_pos;
-  t_vec3  x_neg;
-  t_vec3  y_pos;
-  t_vec3  y_neg;
-  t_vec3  z_pos;
-  t_vec3  z_neg;
-} t_translation;
-
-typedef struct s_rotation {
-  t_matrix x_pos;
-  t_matrix x_neg;
-  t_matrix y_pos;
-  t_matrix y_neg;
-  t_matrix z_pos;
-  t_matrix z_neg;
-} t_rotation;
 
 typedef struct s_auxeq {
   float in_sqrt;
@@ -122,8 +105,6 @@ typedef struct s_img
 	int			      endian;
 	t_win         *win;
 	t_scene		    *scene;
-	t_rotation	  rotation;
-  t_translation translation;
 	t_scene		    *original_scene;
 }t_img;
 
@@ -143,7 +124,7 @@ int handle_key_event(int button, t_img *view);
 void render(t_img img, t_scene sc);
 
 //*CAM
-t_matrix cam_axis(t_vec3 view, t_vec3 o);
+t_matrix    cam_axis(t_vec3 view);
 t_ray get_ray(int i, int j, t_scene sc);
 
 //*INTERSECT

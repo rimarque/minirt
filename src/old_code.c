@@ -68,3 +68,96 @@
     color->g = g;
     color->b = b;
 } */
+
+/* void	rotate_cam_down(t_img *img, t_cam cam)
+{
+	if(cam.normal.x == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_neg);
+	if(cam.normal.x == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_pos);
+	if(cam.normal.y == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_pos);
+	if(cam.normal.y == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_neg);
+	if(cam.normal.z == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_pos);
+	if(cam.normal.z == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_neg);
+}
+
+void	rotate_cam_right(t_img *img, t_cam cam)
+{
+	if(cam.normal.x == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_neg);
+	if(cam.normal.x == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_neg);
+	if(cam.normal.y == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_neg);
+	if(cam.normal.y == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_neg);
+	if(cam.normal.z == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_neg);
+	if(cam.normal.z == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_neg);
+}
+
+void	rotate_cam_left(t_img *img, t_cam cam)
+{
+	if(cam.normal.x == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_pos);
+	if(cam.normal.x == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_pos);
+	if(cam.normal.y == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_pos);
+	if(cam.normal.y == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_pos);
+	if(cam.normal.z == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_pos);
+	if(cam.normal.z == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_pos);
+}
+
+void	rot_cam_clockwise(t_img *img, t_cam cam)
+{
+	if(cam.normal.x == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_pos);
+	if(cam.normal.x == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_neg);
+	if(cam.normal.y == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_pos);
+	if(cam.normal.y == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_neg);
+	if(cam.normal.z == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_pos);
+	if(cam.normal.z == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_neg);
+}
+
+void	rot_cam_counterclock(t_img *img, t_cam cam)
+{
+	if(cam.normal.x == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_neg);
+	if(cam.normal.x == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.x_pos);
+	if(cam.normal.y == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_neg);
+	if(cam.normal.y == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.y_pos);
+	if(cam.normal.z == 1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_neg);
+	if(cam.normal.z == -1)
+		img->scene->cam->axis = rot_axis(img->scene->cam->axis, img->rotation.z_pos);
+} */
+
+/* t_rotation init_rot_matrix()
+{
+	t_rotation	rotation;
+
+	rotation.x_pos = get_rotmatrix_x(ANG_ROT_POS);
+	rotation.x_neg = get_rotmatrix_x(ANG_ROT_NEG);
+	rotation.y_pos = get_rotmatrix_y(ANG_ROT_POS);
+	rotation.y_neg = get_rotmatrix_y(ANG_ROT_NEG);
+	rotation.z_pos = get_rotmatrix_z(ANG_ROT_POS);
+	rotation.z_neg = get_rotmatrix_z(ANG_ROT_NEG);
+	return(rotation);
+} */

@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 20:38:45 by rita              #+#    #+#             */
-/*   Updated: 2024/02/08 16:46:47 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/12 11:21:31 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_matrix    get_rotmatrix_x(float teta)
 {
     t_matrix matrix;
 
-    set_coord(&matrix.o, 0, 0, 0);
     set_coord(&matrix.x, 1, 0, 0);
     set_coord(&matrix.y, 0, cosf(teta), sinf(teta));
     set_coord(&matrix.z, 0, -1 * sinf(teta), cosf(teta));
@@ -34,7 +33,6 @@ t_matrix    get_rotmatrix_y(float teta)
 {
     t_matrix matrix;
 
-    set_coord(&matrix.o, 0, 0, 0);
     set_coord(&matrix.x, cosf(teta), 0, -1 * sinf(teta));
     set_coord(&matrix.y, 0, 1, 0);
     set_coord(&matrix.z, sinf(teta), 0, cosf(teta));
@@ -45,23 +43,35 @@ t_matrix    get_rotmatrix_z(float teta)
 {
     t_matrix matrix;
 
-    set_coord(&matrix.o, 0, 0, 0);
     set_coord(&matrix.x, cosf(teta), sinf(teta), 0);
     set_coord(&matrix.y, -1 * sinf(teta), cosf(teta), 0);
     set_coord(&matrix.z, 0, 0, 1);
     return(matrix);
 }
+
+t_vec3  vec3_mltmatrix_cam(t_matrix mt, t_vec3 t, t_vec3 vec)
+{
+    t_vec3 result;
+
+    result.x = vec.x * mt.x.x + vec.y * mt.y.x + vec.z * mt.z.x + t.x;
+    result.y = vec.x * mt.x.y + vec.y * mt.y.y + vec.z * mt.z.y + t.y;
+    result.z = vec.x * mt.x.z + vec.y * mt.y.z + vec.z * mt.z.z + t.z;
+    //result = vec3_add(vec3_add(vec3_add(mt.o,vec3_scale(mt.x, vec.x)), 
+    //vec3_scale(mt.y, vec.y)), vec3_scale(mt.z, vec.z));
+    return(result);
+}
+
 //multiplicar matriz por um vetor
 //neste caso a matriz e formada por quatro vetores, cada coluna da matriz e um vetor (x, y e z do axis e o (a origem do axis))
 t_vec3  vec3_mltmatrix(t_matrix mt, t_vec3 vec)
 {
     t_vec3 result;
 
-    result.x = vec.x * mt.x.x + vec.y * mt.y.x + vec.z * mt.z.x + mt.o.x;
-    result.y = vec.x * mt.x.y + vec.y * mt.y.y + vec.z * mt.z.y + mt.o.y;
-    result.z = vec.x * mt.x.z + vec.y * mt.y.z + vec.z * mt.z.z + mt.o.z;
-    result = vec3_add(vec3_add(vec3_add(mt.o,vec3_scale(mt.x, vec.x)), 
-    vec3_scale(mt.y, vec.y)), vec3_scale(mt.z, vec.z));
+    result.x = vec.x * mt.x.x + vec.y * mt.y.x + vec.z * mt.z.x;
+    result.y = vec.x * mt.x.y + vec.y * mt.y.y + vec.z * mt.z.y;
+    result.z = vec.x * mt.x.z + vec.y * mt.y.z + vec.z * mt.z.z;
+    //result = vec3_add(vec3_add(vec3_add(mt.o,vec3_scale(mt.x, vec.x)), 
+    //vec3_scale(mt.y, vec.y)), vec3_scale(mt.z, vec.z));
     return(result);
 }
 
@@ -69,14 +79,13 @@ t_matrix  rot_axis(t_matrix mt1, t_matrix mt2)
 {
     t_matrix result;
     
-    result.o = mt1.o;
-    result.x = vec3_mltmatrix(mt2, mt1.x);
-    result.y = vec3_mltmatrix(mt2, mt1.y);
-    result.z = vec3_mltmatrix(mt2, mt1.z);
+    result.x = vec3_mltmatrix(mt1, mt2.x);
+    result.y = vec3_mltmatrix(mt1, mt2.y);
+    result.z = vec3_mltmatrix(mt1, mt2.z);
     return(result);
 }
 
-t_vec3 vec3_rotate(t_vec3 vec, float teta, char c)
+/* t_vec3 vec3_rotate(t_vec3 vec, float teta, char c)
 {
     t_matrix rot_matrix;
     t_vec3 result;
@@ -89,7 +98,7 @@ t_vec3 vec3_rotate(t_vec3 vec, float teta, char c)
         rot_matrix = get_rotmatrix_z(teta);
     result = vec3_mltmatrix(rot_matrix, vec);
     return(result);
-}
+} */
 
 //multiplica um vetor por uma matriz (da forma que o sratch a pixel ensina)
 //neste caso a matriz e formada por 3 vetores:
