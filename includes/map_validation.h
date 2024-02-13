@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/12 10:15:20 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 12:23:38 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,14 @@ typedef struct s_light
 typedef struct s_obj
 {
 	int		type;
+	t_rgb	color;
 	t_vec3	point;
 	t_vec3	vector;
 	t_vec3	vec_inver;
 	t_vec3	base1_c;
 	t_vec3	base2_c;
-	t_rgb	c;
 	float	h;
-	float	r;
-	float	r_sq;
+	float	r_sqr;
 }t_obj;
 
 typedef struct s_obj_list

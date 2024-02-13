@@ -6,15 +6,15 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:41:53 by rita              #+#    #+#             */
-/*   Updated: 2024/02/08 12:36:10 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 12:02:36 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-bool in_circle(t_vec3 p, t_vec3 c, float r_sqr)
+bool in_circle(t_vec3 p, t_vec3 c, float r_sqrr)
 {
-	if (vec3_lensqr(vec3_sub(p, c)) <= r_sqr)
+	if (vec3_lensqr(vec3_sub(p, c)) <= r_sqrr)
 		return(true);
 	return(false);
 }
@@ -32,7 +32,7 @@ t_inter inter_onebase(t_ray ray, t_obj cy, t_vec3 c, t_vec3 v)
 	if(it.t < 0 && it.t < 0)
 		return(it);
 	it.point = vec3_add(ray.o, vec3_scale(ray.d, it.t));
-	if(!in_circle(it.point, c, cy.r_sq))
+	if(!in_circle(it.point, c, cy.r_sqr))
 		return(it);
 	it.normal = v;
 	it.inter = true;

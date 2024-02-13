@@ -34,10 +34,10 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minirt
 
-_FILES 			=  map_validation inits \
+_FILES 			=  map_validation inits aux_obj exit \
 					render cam intersect light \
 					inter_pl inter_sp inter_cy inter_cysurface inter_cybase inter_closer \
-					keys translate_cam translate_obj rotate_cam rotate_obj exit 
+					keys translate_cam translate_obj rotate_cam rotate_obj translate_light
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))

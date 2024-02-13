@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:07:10 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/12 21:52:54 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 12:27:41 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,7 @@ int parse_color(char *str, t_rgb *rgb)
     }
     if(ft_arrlen(raw) != 3)
         return(0 & ft_freedoublepointer(raw));
-    rgb->r=irgb[0];
-    rgb->g=irgb[1];
-    rgb->b=irgb[2];
+    *rgb = get_color(irgb[0], irgb[1], irgb[2]);
     ft_freedoublepointer(raw);
     return(1);
 }
@@ -199,13 +197,13 @@ int validate_sp(char **line, t_obj *obj)
     {
         if (!parse_vec3(line[1], &obj->point, 0))
             return(0);
-        if (!ft_isfloat(line[2], &obj->r, 2))
+        if (!ft_isfloat(line[2], &obj->r_sqr, 2))
             return(0);
-        if (!parse_color(line[3], &obj->c))
+        if (!parse_color(line[3], &obj->color))
             return(0);
         obj->type = SP;
-        obj->r /= 2;
-        obj->r_sq = obj->r*obj->r;
+        obj->r_sqr /= 2;
+        obj->r_sqr = obj->r_sqr * obj->r_sqr;
         return(1);
     }
     return(0);
@@ -219,22 +217,18 @@ int validate_cy(char **line, t_obj *obj)
             return(0);
         if (!parse_vec3(line[2], &obj->vector, 1))
             return(0);
-        if (!ft_isfloat(line[3], &obj->r, 2))
+        if (!ft_isfloat(line[3], &obj->r_sqr, 2))
             return(0);
         if (!ft_isfloat(line[4], &obj->h, 2))
             return(0);
-        if (!parse_color(line[5], &obj->c))
+        if (!parse_color(line[5], &obj->color))
             return(0);
-        obj->type = CY;
         if(!valid_vector(&obj->vector))
             return(0);
-        obj->r /= 2;
-        obj->r_sq = obj->r*obj->r;
-        obj->vec_inver = vec3_scale(obj->vector, -1);
-        obj->base1_c = vec3_add(obj->point, 
-        vec3_scale(obj->vector, obj->h/2));
-        obj->base2_c = vec3_add(obj->point, 
-        vec3_scale(obj->vec_inver, obj->h/2));
+        obj->type = CY;
+        obj->r_sqr /= 2;
+        obj->r_sqr = obj->r_sqr * obj->r_sqr;
+        compute_auxvariables(obj);
         return(1);
     }
     return(0);
@@ -248,12 +242,11 @@ int validate_pl(char **line, t_obj *obj)
             return(0);
         if (!parse_vec3(line[2], &obj->vector, 1))
             return(0);
-        if (!parse_color(line[3], &obj->c))
+        if (!parse_color(line[3], &obj->color))
             return(0);
-        obj->type = PL;
         if(!valid_vector(&obj->vector))
             return(0);
-        obj->vector = vec3_normalized(obj->vector);
+        obj->type = PL;
         return(1);
     }
     return(0);
@@ -321,11 +314,8 @@ int	ft_stack_length(t_obj_list *stack)
 //!mudar o c para color
 void ft_initobj(t_obj *obj)
 {
-    obj->c.b = 0;
-    obj->c.r = 0;
-    obj->c.g = 0;
-    obj->r = 0;
-    obj->r_sq = 0;
+    obj->color = get_color(0, 0, 0);
+    obj->r_sqr = 0;
     obj->h = 0;
     obj->type = 0;
     set_coord(&obj->point, 0, 0, 0);
@@ -558,13 +548,12 @@ void ft_print_obj(t_obj *obj, int num)
     while (i++ < num -1)
     {
         printf("Obj %d %s\n", i, tipos[obj[i].type]);
-        ft_print_color(&obj[i].c);
+        ft_print_color(&obj[i].color);
         printf("point\n");
         ft_print_vec(&obj[i].point);
         printf("normalized\n");
         ft_print_vec(&obj[i].vector);
-        printf("R:          %f\n", obj[i].r);
-        printf("R SQ:          %f\n", obj[i].r_sq);
+        printf("R SQ:       %f\n", obj[i].r_sqr);
         printf("H:          %f\n", obj[i].h);
         printf("\n");
     }

@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:43:23 by rita              #+#    #+#             */
-/*   Updated: 2024/02/07 11:13:06 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 12:02:36 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	in_cy_surface(t_ray ray, t_obj cy, t_auxeq *aux)
 	aux->dot_cov = vec3_dot(co, cy.vec_inver);
 	a = vec3_dot(ray.d, ray.d) - aux->dot_dv * aux->dot_dv;
 	b = 2 * (vec3_dot(ray.d, co) - aux->dot_dv * aux->dot_cov);
-	c = vec3_dot(co, co) - aux->dot_cov * aux->dot_cov - cy.r_sq;
+	c = vec3_dot(co, co) - aux->dot_cov * aux->dot_cov - cy.r_sqr;
 	aux->in_sqrt = b * b - 4 * a * c;
 	if (aux->in_sqrt < 0)
 		return(false);

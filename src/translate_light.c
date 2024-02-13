@@ -1,62 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   translate_obj.c                                    :+:      :+:    :+:   */
+/*   translate_light.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:31 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 12:31:46 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 11:53:22 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void	translate_obj_y(t_obj *obj, int i, float scale)
+void	translate_light_y(t_light *light, float scale)
 {
 	t_vec3	dir;
 
 	set_coord(&dir, 0, 1, 0);
-	obj[i].point = vec3_add(obj[i].point, 
-	vec3_scale(dir, scale));
-	if(obj[i].type == CY)
-		compute_auxvariables(&obj[i]);
+	light->point = vec3_add(light->point, 
+	vec3_scale(dir, scale));	
 }
 
-void	translate_obj_x(t_obj *obj, int i, float scale)
+void	translate_light_x(t_light *light, float scale)
 {
 	t_vec3	dir;
 
 	set_coord(&dir, 1, 0, 0);
-	obj[i].point = vec3_add(obj[i].point, 
+	light->point = vec3_add(light->point, 
 	vec3_scale(dir, scale));
-	if(obj[i].type == CY)
-		compute_auxvariables(&obj[i]);
 }
 
-void	translate_obj_z(t_obj *obj, int i, float scale)
+void	translate_light_z(t_light *light, float scale)
 {
 	t_vec3	dir;
 
 	set_coord(&dir, 0, 0, 1);
-	obj[i].point = vec3_add(obj[i].point, 
+	light->point = vec3_add(light->point, 
 	vec3_scale(dir, scale));
-	if(obj[i].type == CY)
-		compute_auxvariables(&obj[i]);
 }
 
-void	translate_obj(t_obj *obj, int  i, int button)
+void	translate_light(t_light *light, int button)
 {
 	if(button == SHIFT_LEFT)
-		translate_obj_y(obj, i, SCALE_TRANS);
+		translate_light_y(light, SCALE_TRANS);
 	if(button == CTRL_LEFT)
-		translate_obj_y(obj, i, -SCALE_TRANS);
+		translate_light_y(light, -SCALE_TRANS);
 	if(button == D)
-		translate_obj_x(obj, i, SCALE_TRANS);
+		translate_light_x(light, SCALE_TRANS);
 	if(button == A)
-		translate_obj_x(obj, i, -SCALE_TRANS);
+		translate_light_x(light, -SCALE_TRANS);
 	if(button == W)
-		translate_obj_z(obj, i, -SCALE_TRANS);
+		translate_light_z(light, -SCALE_TRANS);
 	if(button == S)
-		translate_obj_z(obj, i, SCALE_TRANS);
+		translate_light_z(light, SCALE_TRANS);
 }

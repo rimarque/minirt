@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 16:34:17 by rita              #+#    #+#             */
-/*   Updated: 2024/02/07 11:20:57 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 12:02:36 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	in_sp_surface(t_ray ray, t_obj sp, t_auxeq *aux)
 	co = vec3_sub(ray.o, sp.point);
 	a = vec3_dot(ray.d, ray.d);
 	b = 2 * vec3_dot(ray.d, co);
-	c = vec3_dot(co, co) - sp.r_sq;
+	c = vec3_dot(co, co) - sp.r_sqr;
 	aux->in_sqrt = b * b - 4 * a * c;
 	if (aux->in_sqrt < 0)
 		return(false);

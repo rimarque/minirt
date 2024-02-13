@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/12 15:01:18 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 12:21:52 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 #define INCREASE 65451
 #define DECREASE 65453
 #define R 114
+#define L 108
 #elif OS == 2
 #define ESC 53
 #define LEFT 123
@@ -56,6 +57,7 @@
 #define INCREASE 24
 #define DECREASE 27
 #define R 15
+#define L 
 #endif
 
 #define PI 3.1415
@@ -106,8 +108,8 @@ typedef struct s_img
 	t_win         *win;
 	t_scene		    *scene;
 	t_scene		    *original_scene;
-  bool          object_mode;
-  int           id_obj;
+  bool          light_mode;
+  int           obj_id;
 }t_img;
 
 //*INITS
@@ -132,6 +134,13 @@ void	translate_cam(t_img *img, int button);
 
 //*TRANSLATE_OBJ
 void	translate_obj(t_obj *obj, int  i, int button);
+
+//*TRANSLATE_LIGHT
+void	translate_light(t_light *light, int button);
+
+//*AUX_OBJ
+void    compute_auxvariables(t_obj *obj);
+t_rgb   get_color(uint8_t r, uint8_t g, uint8_t b);
 
 //*RENDER
 void render(t_img img, t_scene sc);

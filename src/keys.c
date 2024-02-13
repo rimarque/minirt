@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:47:42 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/12 21:38:35 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 12:41:23 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,31 @@ bool	is_rotation_button(int button)
 }
 
 void	translate(t_img *img, int button)
-{
-	if (img->id_obj == 0)
+{	
+	if(img->light_mode == true)
+		translate_light(img->scene->light, button);
+	else if (img->obj_id == 0)
 		translate_cam(img, button);
 	else
-		translate_obj(img->scene->obj, img->id_obj - 1, button);
+		translate_obj(img->scene->obj, img->obj_id - 1, button);
+	render(*img, *img->scene);
+	mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
 }
 
 void	rotate(t_img *img, int button)
 {
-	if (img->id_obj == 0)
+	if(img->light_mode == true)
+		return ;
+	if (img->obj_id == 0)
 		rotate_cam(img, button);
 	else
 	{
-		if(img->scene->obj[img->id_obj - 1].type == SP)
+		if(img->scene->obj[img->obj_id - 1].type == SP)
 			return ;
-		rotate_obj(img->scene->obj, img->id_obj - 1, button);
+		rotate_obj(img->scene->obj, img->obj_id - 1, button);
 	}
-		
+	render(*img, *img->scene);
+	mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);	
 }
 
 void	reset_img(t_img *img)
@@ -58,49 +65,45 @@ void	reset_img(t_img *img)
 	mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
 }
 
-/* void	set_obj_id_mode(bool *object_mode, int *id, int n_obj)
+void	set_obj_id(t_img *img, t_obj *obj, t_obj *original_obj, int n_obj)
 {
-	*id = (*id + 1) % (n_obj + 1);
-	if(*id == 0)
-		*object_mode = false;
-	else
-		*object_mode = true;
-}*/
-
-t_rgb   get_color(uint8_t r, uint8_t g, uint8_t b)
-{
-	t_rgb	color;
-
-    color.r = r;
-    color.g = g;
-    color.b = b;
-	return (color);
+		if(img->obj_id > 0)
+		{
+			obj[img->obj_id - 1].color = 
+			original_obj[img->obj_id - 1].color;
+		}
+		img->obj_id = (img->obj_id + 1) % (n_obj + 1);
+		if(img->obj_id > 0)
+			obj[img->obj_id - 1].color = get_color(255, 0, 0);
+		render(*img, *img->scene);
+		mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
 }
 
-//todo: translate light
+void	set_light_mode(bool *light_mode)
+{
+	if(*light_mode == true)
+		*light_mode = false;
+	else if(*light_mode == false)
+		*light_mode = true;
+}
+
+//todo: resize obj
+//todo: adicional calcul
 int	handle_key_event(int button, t_img *img)
 {
-    //printf("Button: %d\n", button);
+    printf("Button: %d\n", button);
 	if (button == ESC)
 		close_window(img);
 	if(button == TAB)
-	{
-		if(img->id_obj > 0)
-		{
-			img->scene->obj[img->id_obj - 1].c = 
-			img->original_scene->obj[img->id_obj - 1].c;
-		}
-		img->id_obj = (img->id_obj + 1) % (img->scene->n_obj + 1);
-		if(img->id_obj > 0)
-			img->scene->obj[img->id_obj - 1].c = get_color(255, 0, 0);
-	}
+		set_obj_id(img, img->scene->obj, img->original_scene->obj, 
+			img->scene->n_obj);
+	if(button == L)
+		set_light_mode(&img->light_mode);		
 	if(is_rotation_button(button))
 		rotate(img, button);
 	if(is_translation_button(button))
 		translate(img, button);
 	if(button == R)
 		reset_img(img);
-	render(*img, *img->scene);
-	mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
 	return (0);
 }
