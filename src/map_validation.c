@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:07:10 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/13 12:27:41 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 18:46:05 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,13 +197,13 @@ int validate_sp(char **line, t_obj *obj)
     {
         if (!parse_vec3(line[1], &obj->point, 0))
             return(0);
-        if (!ft_isfloat(line[2], &obj->r_sqr, 2))
+        if (!ft_isfloat(line[2], &obj->r, 2))
             return(0);
         if (!parse_color(line[3], &obj->color))
             return(0);
         obj->type = SP;
-        obj->r_sqr /= 2;
-        obj->r_sqr = obj->r_sqr * obj->r_sqr;
+        obj->r = obj->r / 2;
+        obj->r_sqr = obj->r * obj->r;
         return(1);
     }
     return(0);
@@ -217,7 +217,7 @@ int validate_cy(char **line, t_obj *obj)
             return(0);
         if (!parse_vec3(line[2], &obj->vector, 1))
             return(0);
-        if (!ft_isfloat(line[3], &obj->r_sqr, 2))
+        if (!ft_isfloat(line[3], &obj->r, 2))
             return(0);
         if (!ft_isfloat(line[4], &obj->h, 2))
             return(0);
@@ -226,8 +226,8 @@ int validate_cy(char **line, t_obj *obj)
         if(!valid_vector(&obj->vector))
             return(0);
         obj->type = CY;
-        obj->r_sqr /= 2;
-        obj->r_sqr = obj->r_sqr * obj->r_sqr;
+        obj->r = obj->r / 2;
+        obj->r_sqr = obj->r * obj->r;
         compute_auxvariables(obj);
         return(1);
     }
@@ -309,12 +309,10 @@ int	ft_stack_length(t_obj_list *stack)
 	return (i);
 }
 
-//!usar o set coords aqui
-//!iniciallizar o resto das variaveis
-//!mudar o c para color
 void ft_initobj(t_obj *obj)
 {
     obj->color = get_color(0, 0, 0);
+    obj->r = 0;
     obj->r_sqr = 0;
     obj->h = 0;
     obj->type = 0;

@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 20:32:56 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/13 11:45:07 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 18:02:10 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene)
 	img.original_scene = original_scene;
 	img.obj_id = 0;
 	img.light_mode = false;
+	img.height_mode = false;
 	return(img);
 }

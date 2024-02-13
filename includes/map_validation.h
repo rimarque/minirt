@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 12:23:38 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 15:17:40 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_obj
 	t_vec3	base1_c;
 	t_vec3	base2_c;
 	float	h;
+	float	r;
 	float	r_sqr;
 }t_obj;
 

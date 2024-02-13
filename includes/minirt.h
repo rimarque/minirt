@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 12:21:52 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 18:27:04 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@
 #define SHIFT_LEFT 65505
 #define CTRL_LEFT 65507
 #define TAB 65289
-#define INCREASE 65451
-#define DECREASE 65453
+#define INCREASE 43
+#define DECREASE 45
 #define R 114
 #define L 108
+#define H 104
 #elif OS == 2
 #define ESC 53
 #define LEFT 123
@@ -58,12 +59,14 @@
 #define DECREASE 27
 #define R 15
 #define L 
+#define H
 #endif
 
 #define PI 3.1415
 #define ANG_ROT PI / 32
 #define SCALE_TRANS 4
-#define SCALE_RESIZE 2
+#define RESIZE_R 0.1
+#define RESIZE_H 0.2
 #define WIN_W 1280
 #define WIN_H 700
 #define PL 0
@@ -109,6 +112,7 @@ typedef struct s_img
 	t_scene		    *scene;
 	t_scene		    *original_scene;
   bool          light_mode;
+  bool          height_mode;
   int           obj_id;
 }t_img;
 
@@ -127,16 +131,17 @@ int handle_key_event(int button, t_img *view);
 void	rotate_cam(t_img *img, int button);
 
 //*ROTATE_OBJ
-void    rotate_obj(t_obj *obj, int  i, int button);
+void    rotate_obj(t_obj *obj, int button);
 
 //*TRANSLATE_CAM
 void	translate_cam(t_img *img, int button);
 
-//*TRANSLATE_OBJ
-void	translate_obj(t_obj *obj, int  i, int button);
+//*TRANSLATE_POINT
+void	translate_point(t_vec3 *point, int button);
+void	translate_obj(t_obj *obj, int button);
 
-//*TRANSLATE_LIGHT
-void	translate_light(t_light *light, int button);
+//*RESIZE_OBJ
+void	resize_obj(t_img *img, int button, t_obj *obj);
 
 //*AUX_OBJ
 void    compute_auxvariables(t_obj *obj);

@@ -6,15 +6,15 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:41:53 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 12:02:36 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 12:49:01 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-bool in_circle(t_vec3 p, t_vec3 c, float r_sqrr)
+bool in_circle(t_vec3 p, t_vec3 c, float r_sqr)
 {
-	if (vec3_lensqr(vec3_sub(p, c)) <= r_sqrr)
+	if (vec3_lensqr(vec3_sub(p, c)) <= r_sqr)
 		return(true);
 	return(false);
 }

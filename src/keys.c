@@ -6,24 +6,41 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:47:42 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/13 12:41:23 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 18:33:36 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-bool	is_translation_button(int button)
+bool	is_translation(int button)
 {
 	if(button == W || button == S || button == A 
-	|| button == D || button == SHIFT_LEFT || button == CTRL_LEFT)
+		|| button == D || button == SHIFT_LEFT 
+			|| button == CTRL_LEFT)
 		return(true);
 	return(false);
 }
 
-bool	is_rotation_button(int button)
+bool	is_rotation(int button)
 {
 	if(button == UP || button == DOWN || button == RIGHT 
-	|| button == LEFT || button == SHIFT_RIGHT || button == CTRL_RIGHT)
+		|| button == LEFT || button == SHIFT_RIGHT 
+			|| button == CTRL_RIGHT)
+		return(true);
+	return(false);
+}
+
+bool	is_resize(int button, int obj_id, t_obj *obj)
+{
+	if (obj_id > 0 && obj[obj_id - 1].type != PL
+		&& (button == INCREASE || button == DECREASE))
+		return(true);
+	return(false);
+}
+
+bool	change_mode(int button)
+{
+	if (button == TAB || button == L || button == H)
 		return(true);
 	return(false);
 }
@@ -31,11 +48,11 @@ bool	is_rotation_button(int button)
 void	translate(t_img *img, int button)
 {	
 	if(img->light_mode == true)
-		translate_light(img->scene->light, button);
+		translate_point(&img->scene->light->point, button);
 	else if (img->obj_id == 0)
 		translate_cam(img, button);
 	else
-		translate_obj(img->scene->obj, img->obj_id - 1, button);
+		translate_obj(&img->scene->obj[img->obj_id -1], button);
 	render(*img, *img->scene);
 	mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
 }
@@ -50,10 +67,17 @@ void	rotate(t_img *img, int button)
 	{
 		if(img->scene->obj[img->obj_id - 1].type == SP)
 			return ;
-		rotate_obj(img->scene->obj, img->obj_id - 1, button);
+		rotate_obj(&img->scene->obj[img->obj_id - 1], button);
 	}
 	render(*img, *img->scene);
 	mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);	
+}
+
+void	reset_mode(t_img *img)
+{
+	img->obj_id = 0;
+	img->light_mode = 0;
+	img->height_mode = 0;
 }
 
 void	reset_img(t_img *img)
@@ -61,11 +85,13 @@ void	reset_img(t_img *img)
 	ft_free_scene(img->scene);
 	init_scene(img->scene);
 	copy_scene(img->scene, *img->original_scene);
+	reset_mode(img);
 	render(*img, *img->scene);
 	mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
 }
 
-void	set_obj_id(t_img *img, t_obj *obj, t_obj *original_obj, int n_obj)
+
+void	select_obj(t_img *img, t_obj *obj, t_obj *original_obj, int n_obj)
 {
 		if(img->obj_id > 0)
 		{
@@ -79,29 +105,51 @@ void	set_obj_id(t_img *img, t_obj *obj, t_obj *original_obj, int n_obj)
 		mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
 }
 
-void	set_light_mode(bool *light_mode)
+void	reset_obj_selection(t_img *img)
 {
-	if(*light_mode == true)
-		*light_mode = false;
-	else if(*light_mode == false)
-		*light_mode = true;
+	img->scene->obj[img->obj_id - 1].color = 
+			img->original_scene->obj[img->obj_id - 1].color;
+	img->obj_id = 0;
+	img->height_mode = 0;
+	render(*img, *img->scene);
+	mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
+}
+
+void	set_mode(bool *mode)
+{
+	if(*mode == true)
+		*mode = false;
+	else if(*mode == false)
+		*mode = true;
+}
+void	select_mode(int button, t_img *img)
+{
+	if(button == TAB && img->light_mode == false)
+		select_obj(img, img->scene->obj, img->original_scene->obj, 
+			img->scene->n_obj);
+	if(button == L)
+	{
+		if(img->light_mode == false && img->obj_id > 0)
+			reset_obj_selection(img);
+		set_mode(&img->light_mode);
+	}
+	if(button == H && img->obj_id > 0)
+		set_mode(&img->height_mode);
 }
 
 //todo: resize obj
-//todo: adicional calcul
 int	handle_key_event(int button, t_img *img)
 {
-    printf("Button: %d\n", button);
+    //printf("Button: %d\n", button);
 	if (button == ESC)
 		close_window(img);
-	if(button == TAB)
-		set_obj_id(img, img->scene->obj, img->original_scene->obj, 
-			img->scene->n_obj);
-	if(button == L)
-		set_light_mode(&img->light_mode);		
-	if(is_rotation_button(button))
+	if(change_mode(button))
+		select_mode(button, img);
+	if(is_resize(button, img->obj_id, img->scene->obj))
+		resize_obj(img, button, &img->scene->obj[img->obj_id - 1]);
+	if(is_rotation(button))
 		rotate(img, button);
-	if(is_translation_button(button))
+	if(is_translation(button))
 		translate(img, button);
 	if(button == R)
 		reset_img(img);

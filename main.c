@@ -6,14 +6,12 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:58:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 12:02:36 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 12:49:19 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minirt.h"
 
-//todo: guardar coisas que se repetem nos calculos:
-//c = vec3_dot(co, co) - sp.r_sqr;
 int main(int argc, char **argv)
 {
     t_win   win;
