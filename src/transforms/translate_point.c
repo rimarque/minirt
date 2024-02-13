@@ -6,11 +6,11 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:31 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 17:30:31 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 21:02:28 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 void	translate_point_y(t_vec3 *point, float scale)
 {
@@ -51,11 +51,4 @@ void	translate_point(t_vec3 *point, int button)
 		translate_point_z(point, -SCALE_TRANS);
 	if(button == S)
 		translate_point_z(point, SCALE_TRANS);
-}
-
-void	translate_obj(t_obj *obj, int button)
-{
-	translate_point(&obj->point, button);
-	if(obj->type == CY)
-		compute_auxvariables(obj);
 }

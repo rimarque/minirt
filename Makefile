@@ -14,7 +14,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra #-Werror
+CFLAGS			= -Wall -Wextra -Werror
 NPD				= --no-print-directory
 CMLX			= -lmlx -Ilmlx -lXext -lX11
 CMATH			= -lm
@@ -28,20 +28,23 @@ MLX 			= ./mlx/libmlx.a
 MLX_PATH		= ./mlx
 INCLUDE			= includes
 SRCS			= src
-VPATH			= $(SRCS)
+_SUBFOLDERS		= parser render transforms
+VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minirt
 
-_FILES 			=  map_validation inits aux_obj exit \
+_FILES 			=  init aux_obj keys exit \
+					map_validation \
 					render cam intersect light \
-					inter_pl inter_sp inter_cy inter_cysurface inter_cybase inter_closer \
-					keys translate_cam translate_point rotate_cam rotate_obj resize_obj
+					inter_pl inter_sp inter_cy inter_cysurface inter_cybase inter_aux \
+					check_button select_mode reset transforms \
+					translate_cam translate_point rotate_cam rotate_obj resize_obj 
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
-_HEADERS		= minirt.h map_validation.h
+_HEADERS		= minirt.h parser.h
 HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------

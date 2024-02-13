@@ -6,11 +6,11 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:12:17 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/03 16:18:15 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 19:48:42 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 // l    --> Light Direction
 // n    --> Object Norm

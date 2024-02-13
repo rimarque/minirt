@@ -6,11 +6,11 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:41:53 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 12:49:01 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 19:48:19 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 bool in_circle(t_vec3 p, t_vec3 c, float r_sqr)
 {

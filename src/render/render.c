@@ -6,11 +6,11 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:18:36 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 12:25:49 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 20:45:22 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 void	put_pixel_img(t_img img, int x, int y, int color)
 {
@@ -48,7 +48,6 @@ static inline int	pixel_color(int i, int j, t_scene sc)
 	else
 	{
 		f = compute_light(&sc, &it);
-		//f = 1;
 		return (encode_rgb(sc.obj[it.i].color.r * f, 
 				sc.obj[it.i].color.g * f, sc.obj[it.i].color.b * f));
 	}
@@ -60,10 +59,6 @@ void render(t_img img, t_scene scene)
 	int j;
 	
 	ft_print_scene(&scene);
-	//scene.cam->axis = rot_axis(scene.cam->axis, img.rot.x_pos); //cima
-	//scene.cam->axis = rot_axis(scene.cam->axis, img.rot.x_neg); //baixo
-	//scene.cam->axis = rot_axis(scene.cam->axis, img.rot.y_neg); //esquerda
-	//scene.cam->axis = rot_axis(scene.cam->axis, img.rot.y_pos); //direita
 	i = 0;
 	j = 0; 
 	while (i < WIN_W)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validation.h                                   :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 15:17:40 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 20:52:30 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int	ft_stack_length(t_obj_list *stack);
 void ft_initobj(t_obj *obj);
 int validate_obj(char *line, t_obj *obj);
 int list_to_obj(t_scene *scene);
-void init_scene(t_scene *scene);
 int ft_put_err();
 int final_check(t_scene *scene);
 int open_map(char *str);

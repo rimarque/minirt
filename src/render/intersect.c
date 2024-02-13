@@ -6,11 +6,11 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:49:36 by rita              #+#    #+#             */
-/*   Updated: 2024/02/12 21:50:14 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 19:48:36 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 t_inter	inter_obj(t_ray ray, t_obj obj, int i, t_inter prev_it)
 {

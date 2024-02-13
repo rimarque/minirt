@@ -6,11 +6,11 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:57:52 by rita              #+#    #+#             */
-/*   Updated: 2024/02/12 14:11:07 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 19:49:22 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 void	rotate_cam_x(t_cam	*cam, float	ang)
 {

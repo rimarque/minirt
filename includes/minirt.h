@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 18:27:04 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 21:47:56 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define MINIRT_H
 
 #include "../mlx/mlx.h"
-#include "./map_validation.h"
+#include "./parser.h"
 
 #ifndef OS
 #define OS 1
@@ -119,6 +119,7 @@ typedef struct s_img
 //*INITS
 t_win	new_program(char *title);
 t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene);
+void init_scene(t_scene *scene);
 void	copy_scene(t_scene *dst, t_scene src);
 
 //*EXIT
@@ -127,25 +128,15 @@ int close_window(t_img *img);
 //*KEYS
 int handle_key_event(int button, t_img *view);
 
-//*ROTATE_CAM
-void	rotate_cam(t_img *img, int button);
-
-//*ROTATE_OBJ
-void    rotate_obj(t_obj *obj, int button);
-
-//*TRANSLATE_CAM
-void	translate_cam(t_img *img, int button);
-
-//*TRANSLATE_POINT
-void	translate_point(t_vec3 *point, int button);
-void	translate_obj(t_obj *obj, int button);
-
-//*RESIZE_OBJ
-void	resize_obj(t_img *img, int button, t_obj *obj);
-
 //*AUX_OBJ
 void    compute_auxvariables(t_obj *obj);
 t_rgb   get_color(uint8_t r, uint8_t g, uint8_t b);
+
+/****************/
+/*              */
+/*    RENDER    */
+/*              */
+/****************/
 
 //*RENDER
 void render(t_img img, t_scene sc);
@@ -172,11 +163,50 @@ t_inter inter_surface(t_ray ray, t_obj cy);
 //*INTER_CYBASE
 t_inter inter_base(t_ray ray, t_obj cy);
 
-//*INTER_CLOSER
+//*INTER_AUX
 t_inter closer_inter(t_inter it1, t_inter it2);
-float closer_t(float in_sqrt, float t1, float t2);
+float   closer_t(float in_sqrt, float t1, float t2);
+bool    aply_quadratic_form(float a, float b, float c, t_auxeq *aux);
 
 //*LIGHT
 float compute_light(t_scene *scene, t_inter *it);
+
+/******************/
+/*                */
+/*   TRANSFORMS   */
+/*                */
+/******************/
+
+//*CHECK_BUTTON
+bool	is_change_mode(int button);
+bool	is_resize(int button, int obj_id, t_obj *obj);
+bool	is_rotation(int button);
+bool	is_translation(int button);
+
+//*SELECT_MODE
+void	select_mode(int button, t_img *img);
+
+//*TRANSFORMS
+void	translate(t_img *img, int button);
+void	translate_obj(t_obj *obj, int button);
+void	rotate(t_img *img, int button);
+
+//*RESET
+void	reset_img(t_img *img);
+
+//*ROTATE_CAM
+void	rotate_cam(t_img *img, int button);
+
+//*ROTATE_OBJ
+void  rotate_obj(t_obj *obj, int button);
+
+//*TRANSLATE_CAM
+void	translate_cam(t_img *img, int button);
+
+//*TRANSLATE_POINT
+void	translate_point(t_vec3 *point, int button);
+
+//*RESIZE_OBJ
+void	resize_obj(t_img *img, int button, t_obj *obj);
 
 #endif

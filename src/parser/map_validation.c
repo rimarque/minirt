@@ -6,11 +6,11 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:07:10 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/13 18:46:05 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 20:51:01 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 int valid_vector(t_vec3 *vec)
 {
@@ -370,15 +370,6 @@ int list_to_obj(t_scene *scene)
     }
     
     return(1);
-}
-
-void init_scene(t_scene *scene)
-{
-    scene->amb = NULL;
-    scene->cam = NULL;
-    scene->light = NULL;
-    scene->obj = NULL;
-    scene->temp = NULL;
 }
 
 int ft_put_err(char *str)

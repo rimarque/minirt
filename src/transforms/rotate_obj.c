@@ -6,11 +6,11 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:06:32 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 17:49:49 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 19:49:26 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 void	rotate_obj_x(t_obj *obj, float ang)
 {

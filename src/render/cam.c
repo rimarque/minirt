@@ -6,11 +6,11 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:16:21 by rita              #+#    #+#             */
-/*   Updated: 2024/02/12 13:14:05 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 20:03:06 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 t_matrix    cam_axis(t_vec3 view)
 {

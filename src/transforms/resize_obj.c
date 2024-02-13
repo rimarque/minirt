@@ -6,11 +6,11 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:37:17 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 18:28:46 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 21:25:16 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 void   resize_radius(t_obj *obj, int button)
 { 
@@ -40,5 +40,6 @@ void	resize_obj(t_img *img, int button, t_obj *obj)
 	else
 		resize_radius(obj, button);
 	render(*img, *img->scene);
-	mlx_put_image_to_window(img->win->mlx_ptr, img->win->win_ptr, img->ptr, 0, 0);
+	mlx_put_image_to_window(img->win->mlx_ptr, 
+		img->win->win_ptr, img->ptr, 0, 0);
 }

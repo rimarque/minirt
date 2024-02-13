@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 20:32:56 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/13 18:02:10 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 20:51:18 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ t_win	new_program(char *title)
 	win.mlx_ptr = mlx_ptr;
 	win.win_ptr = mlx_new_window(mlx_ptr, WIN_W, WIN_H, title);
 	return (win);
+}
+
+void init_scene(t_scene *scene)
+{
+    scene->amb = NULL;
+    scene->cam = NULL;
+    scene->light = NULL;
+    scene->obj = NULL;
+    scene->temp = NULL;
 }
 
 void	copy_scene(t_scene *dst, t_scene src)

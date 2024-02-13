@@ -6,11 +6,11 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:43:23 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 12:02:36 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/13 20:25:45 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
 bool	in_cy_surface(t_ray ray, t_obj cy, t_auxeq *aux)
 {
@@ -25,12 +25,9 @@ bool	in_cy_surface(t_ray ray, t_obj cy, t_auxeq *aux)
 	a = vec3_dot(ray.d, ray.d) - aux->dot_dv * aux->dot_dv;
 	b = 2 * (vec3_dot(ray.d, co) - aux->dot_dv * aux->dot_cov);
 	c = vec3_dot(co, co) - aux->dot_cov * aux->dot_cov - cy.r_sqr;
-	aux->in_sqrt = b * b - 4 * a * c;
-	if (aux->in_sqrt < 0)
-		return(false);
-	aux->t1 = (-b + sqrtf(aux->in_sqrt)) / (2 * a);
-	aux->t2 = (-b - sqrtf(aux->in_sqrt)) / (2 * a);
-	return(true);
+	if(!aply_quadratic_form(a, b, c, aux))
+		return (false);
+	return (true);
 }
 
 t_inter	get_inter_tm(t_vec3 d, t_obj cy, float dot_cov, float t)
@@ -60,10 +57,7 @@ t_inter	get_inter(t_vec3 d, t_obj cy, t_auxeq aux)
 		it1 = it2;
 	return(it1);
 }
-		
-//!normal
-//p - c - v*m;
-//vec_3_normalized(vec3_sub(vec3_sub(it.point, cy.cap_c), vec3_scale(cy.vec_inver, aux.m)));
+
 t_inter	inter_surface(t_ray ray, t_obj cy)
 {
 	t_inter it;
