@@ -6,72 +6,72 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 21:47:56 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/14 16:59:18 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
-#define MINIRT_H
+# define MINIRT_H
 
-#include "../mlx/mlx.h"
-#include "./parser.h"
+# include "../mlx/mlx.h"
+# include "./parser.h"
 
-#ifndef OS
-#define OS 1
-#endif
+# ifndef OS
+#  define OS 1
+# endif
 
-#if OS == 1
-#define ESC 65307
-#define LEFT 65361
-#define RIGHT 65363
-#define UP 65362
-#define DOWN 65364
-#define SHIFT_RIGHT 65506
-#define CTRL_RIGHT 65508
-#define W 119
-#define A 97
-#define S 115
-#define D 100
-#define SHIFT_LEFT 65505
-#define CTRL_LEFT 65507
-#define TAB 65289
-#define INCREASE 43
-#define DECREASE 45
-#define R 114
-#define L 108
-#define H 104
-#elif OS == 2
-#define ESC 53
-#define LEFT 123
-#define RIGHT 124
-#define UP 126
-#define DOWN 125
-#define SHIFT_RIGHT
-#define CTRL_RIGHT
-#define W 13
-#define A 0
-#define S 1
-#define D 2
-#define SHIFT_LEFT
-#define CTRL_RIGHT
-#define TAB
-#define INCREASE 24
-#define DECREASE 27
-#define R 15
-#define L 
-#define H
-#endif
+# if OS == 1
+#  define ESC 65307
+#  define LEFT 65361
+#  define RIGHT 65363
+#  define UP 65362
+#  define DOWN 65364
+#  define SHIFT_RIGHT 65506
+#  define CTRL_RIGHT 65508
+#  define W 119
+#  define A 97
+#  define S 115
+#  define D 100
+#  define SHIFT_LEFT 65505
+#  define CTRL_LEFT 65507
+#  define TAB 65289
+#  define INCREASE 43
+#  define DECREASE 45
+#  define R 114
+#  define L 108
+#  define H 104
+# elif OS == 2
+#  define ESC 53
+#  define LEFT 123
+#  define RIGHT 124
+#  define UP 126
+#  define DOWN 125
+#  define SHIFT_RIGHT
+#  define CTRL_RIGHT
+#  define W 13
+#  define A 0
+#  define S 1
+#  define D 2
+#  define SHIFT_LEFT
+#  define CTRL_RIGHT
+#  define TAB
+#  define INCREASE 24
+#  define DECREASE 27
+#  define R 15
+#  define L 
+#  define H
+# endif
 
-#define PI 3.1415
-#define ANG_ROT PI / 32
-#define SCALE_TRANS 4
-#define RESIZE_R 0.1
-#define RESIZE_H 0.2
-#define WIN_W 1280
-#define WIN_H 700
-#define PL 0
-#define SP 1
-#define CY 2
+# define PI 3.1415
+# define ANG_ROT PI / 32
+# define SCALE_TRANS 4
+# define RESIZE_R 0.1
+# define RESIZE_H 0.2
+# define WIN_W 1280
+# define WIN_H 700
+# define PL 0
+# define SP 1
+# define CY 2
 
 typedef struct s_auxeq {
   float in_sqrt;
