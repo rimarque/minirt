@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 20:52:30 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/24 16:00:51 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_amb
 	t_rgb	c;
 }t_amb;
 
-//!invalid map, if normal = (0, 0, 0) && normalizar
 typedef struct s_cam
 {
 	t_vec3	view_point;
@@ -57,6 +56,9 @@ typedef struct s_obj
 	t_vec3	vec_inver;
 	t_vec3	base1_c;
 	t_vec3	base2_c;
+/* 	t_vec3	co;
+	float	dot_cov;
+	float	qf_c; */
 	float	h;
 	float	r;
 	float	r_sqr;

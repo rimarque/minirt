@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/14 16:59:18 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/24 16:00:02 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ typedef struct s_auxeq {
 } t_auxeq;
 
 typedef struct s_inter {
-  bool inter;
-  int i;
-  float t;
-  float m;
-  t_vec3 point;
-  t_vec3 normal;
+  bool    inter;
+  int     i;
+  float   t;
+  float   m;
+  t_vec3  point;
+  t_vec3  normal;
 } t_inter;
 
 typedef struct s_ray {
@@ -129,8 +129,9 @@ int close_window(t_img *img);
 int handle_key_event(int button, t_img *view);
 
 //*AUX_OBJ
-void    compute_auxvariables(t_obj *obj);
 t_rgb   get_color(uint8_t r, uint8_t g, uint8_t b);
+void    compute_auxvar_cy(t_obj *obj);
+void    compute_auxvar_qf(t_obj *obj);
 
 /****************/
 /*              */

@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:37:17 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 21:25:16 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/24 14:44:05 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void   resize_height(t_obj *obj, int button)
 		obj->h *= (1 + RESIZE_H);
 	if(button == DECREASE)
 		obj->h *= (1 - RESIZE_H);
-	compute_auxvariables(obj); 
+	compute_auxvar_cy(obj); 
 }
 
 void	resize_obj(t_img *img, int button, t_obj *obj)

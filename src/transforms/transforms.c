@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:00:13 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 21:25:42 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/24 14:44:05 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	translate_obj(t_obj *obj, int button)
 {
 	translate_point(&obj->point, button);
 	if(obj->type == CY)
-		compute_auxvariables(obj);
+		compute_auxvar_cy(obj);
 }
 
 void	translate(t_img *img, int button)
