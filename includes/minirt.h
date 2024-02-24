@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/24 16:00:02 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/24 16:34:33 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ t_ray get_ray(int i, int j, t_scene sc);
 
 //*INTERSECT
 t_inter intersect(t_ray ray, t_obj *obj, int n);
+bool intersect_shadow(t_ray ray, t_obj *obj, int n, int avoid);
 
 //*INTER_PL
 t_inter inter_pl(t_ray ray, t_obj pl, t_inter prev_it);

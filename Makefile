@@ -14,7 +14,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -O3
 NPD				= --no-print-directory
 CMLX			= -lmlx -Ilmlx -lXext -lX11
 CMATH			= -lm

@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:07:10 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/24 14:43:08 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/24 16:32:24 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -417,7 +417,7 @@ int map_validate(char *file, t_scene *scene)
     line = ft_strtrimall(get_next_line(fd, 0));
     while (line)
     {
-        if(!validate_line(line, scene))
+        if(line[0] != '#' && !validate_line(line, scene))
         {
             free(line);
             ft_putstr_fd("Invalid Map line\n",2);

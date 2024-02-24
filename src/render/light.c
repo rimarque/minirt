@@ -6,16 +6,28 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:12:17 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/13 19:48:42 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/24 17:15:18 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
+
+bool shadow_intersection(t_scene *scene, t_inter *it, t_vec3 l)
+{
+    t_ray  shadow_dir;
+    
+    shadow_dir.o = it->point;
+    shadow_dir.d = l;
+    if (intersect_shadow(shadow_dir,scene->obj,scene->n_obj, it->i)) 
+            return true; 
+    return false; 
+}
+
+
 // l    --> Light Direction
 // n    --> Object Norm
 // i    --> intensidade luz
-
 float   compute_light(t_scene *scene, t_inter *it)
 {
     float i;
@@ -24,13 +36,10 @@ float   compute_light(t_scene *scene, t_inter *it)
 
     i = scene->amb->ratio;
     l = vec3_sub(scene->light->point,it->point);
-    //set_coord(&it->normal, 0, 1, 0);
     dot = vec3_dot(it->normal, l);
-    //print_vec("normal:", it->normal);
-    if (dot > 0)
+    if (dot > 0 && !shadow_intersection(scene, it, l))
         i += scene->light->ratio * dot / (vec3_lenght(it->normal) * vec3_lenght(l));
-    // else
-    //     i = 1;
-       // i += compute_shadow(scene, it);
+    if (i > 1)
+        return(1);
     return(i);
 }
