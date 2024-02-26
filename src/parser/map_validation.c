@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:07:10 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/24 16:32:24 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/26 17:46:50 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ int validate_cy(char **line, t_obj *obj)
         obj->type = CY;
         obj->r = obj->r / 2;
         obj->r_sqr = obj->r * obj->r;
-        compute_auxvar_cy(obj);
+        compute_cy_aux_var(obj);
         return(1);
     }
     return(0);
@@ -316,11 +316,14 @@ void ft_initobj(t_obj *obj)
     obj->r_sqr = 0;
     obj->h = 0;
     obj->type = 0;
+    obj->dot_cov = 0;
+    obj->qf_c = 0;
     set_coord(&obj->point, 0, 0, 0);
     set_coord(&obj->vector, 0, 0, 0);
     set_coord(&obj->vec_inver, 0, 0, 0);
     set_coord(&obj->base1_c, 0, 0, 0);
     set_coord(&obj->base2_c, 0, 0, 0);
+    set_coord(&obj->co, 0, 0, 0);
 }
 
 int validate_obj(char *line, t_obj *obj)

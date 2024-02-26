@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/24 16:34:33 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/26 18:27:28 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef struct s_auxeq {
   float t1;
   float t2;
   float dot_dv;
-  float dot_cov;
 } t_auxeq;
 
 typedef struct s_inter {
@@ -130,8 +129,8 @@ int handle_key_event(int button, t_img *view);
 
 //*AUX_OBJ
 t_rgb   get_color(uint8_t r, uint8_t g, uint8_t b);
-void    compute_auxvar_cy(t_obj *obj);
-void    compute_auxvar_qf(t_obj *obj);
+void    compute_cy_aux_var(t_obj *cy);
+void    compute_ray_origin_dependet_var(t_obj *obj, t_vec3 ray_o, int n_obj);
 
 /****************/
 /*              */
@@ -190,7 +189,6 @@ void	select_mode(int button, t_img *img);
 
 //*TRANSFORMS
 void	translate(t_img *img, int button);
-void	translate_obj(t_obj *obj, int button);
 void	rotate(t_img *img, int button);
 
 //*RESET
@@ -200,7 +198,7 @@ void	reset_img(t_img *img);
 void	rotate_cam(t_img *img, int button);
 
 //*ROTATE_OBJ
-void  rotate_obj(t_obj *obj, int button);
+void    rotate_obj(t_obj *obj, int button);
 
 //*TRANSLATE_CAM
 void	translate_cam(t_img *img, int button);

@@ -6,12 +6,11 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:12:17 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/24 17:15:18 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/26 18:58:07 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-
 
 bool shadow_intersection(t_scene *scene, t_inter *it, t_vec3 l)
 {

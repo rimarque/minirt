@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/24 16:00:51 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/26 16:51:12 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ typedef struct s_obj
 	t_vec3	vec_inver;
 	t_vec3	base1_c;
 	t_vec3	base2_c;
-/* 	t_vec3	co;
+	t_vec3	co;
 	float	dot_cov;
-	float	qf_c; */
+	float	qf_c;
 	float	h;
 	float	r;
 	float	r_sqr;
