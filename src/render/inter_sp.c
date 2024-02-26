@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 16:34:17 by rita              #+#    #+#             */
-/*   Updated: 2024/02/26 17:14:36 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/26 22:06:00 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 bool	in_sp_surface(t_ray ray, t_obj sp, t_auxeq *aux)
 {
-	//t_vec3	co;
+	t_vec3	co;
 	float	a;
 	float	b;
-	//float	c;
+	float	c;
 
-	sp.co = vec3_sub(ray.o, sp.point);
+	co = vec3_sub(ray.o, sp.point);
 	a = vec3_dot(ray.d, ray.d);
-	b = 2 * vec3_dot(ray.d, sp.co);
-	sp.qf_c = vec3_dot(sp.co, sp.co) - sp.r_sqr;
-	if(!aply_quadratic_form(a, b, sp.qf_c, aux))
+	b = 2 * vec3_dot(ray.d, co);
+	c = vec3_dot(co, co) - sp.r_sqr;
+	if(!aply_quadratic_form(a, b, c, aux))
 		return (false);
 	return (true);
 }

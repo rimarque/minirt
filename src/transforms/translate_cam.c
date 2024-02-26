@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:00:31 by rita              #+#    #+#             */
-/*   Updated: 2024/02/26 17:43:11 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/26 22:01:54 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,4 @@ void	translate_cam(t_img *img, int button)
 		translate_cam_z(img->scene->cam, -SCALE_TRANS);
 	if(button == S)
 		translate_cam_z(img->scene->cam, SCALE_TRANS);
-	compute_ray_origin_dependet_var(img->scene->obj, 
-		img->scene->cam->view_point, img->scene->n_obj);
 }

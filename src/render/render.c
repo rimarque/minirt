@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:18:36 by rita              #+#    #+#             */
-/*   Updated: 2024/02/26 18:30:14 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/26 22:02:10 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void render(t_img img, t_scene scene)
 	int j;
 	
 	ft_print_scene(&scene);
-	compute_ray_origin_dependet_var(scene.obj, 
-		scene.cam->view_point, scene.n_obj);
 	i = 0;
 	j = 0; 
 	while (i < WIN_W)
