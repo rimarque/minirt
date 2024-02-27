@@ -14,7 +14,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -O3
 NPD				= --no-print-directory
 CMLX			= -lmlx -Ilmlx -lXext -lX11
 CMATH			= -lm
@@ -28,21 +28,37 @@ MLX 			= ./mlx/libmlx.a
 MLX_PATH		= ./mlx
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= test
+_SUBFOLDERS		= parser render transforms
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minirt
 
-_FILES 			= test inits exit keys render get map_validation
+_FILES 			=  init aux_obj keys exit \
+					map_validation \
+					render cam intersect light \
+					inter_pl inter_sp inter_cy inter_cysurface inter_cybase inter_aux \
+					check_button select_mode reset transforms \
+					translate_cam translate_point rotate_cam rotate_obj resize_obj 
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
-_HEADERS		= minirt.h map_validation.h
+_HEADERS		= minirt.h parser.h
 HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------
+
+ifeq ($(shell uname), Linux)
+	MLX_PATH	= ./mlx
+	CMLX		= -lmlx -Ilmlx -lXext -lX11
+	OS          = 1
+else ifeq ($(shell uname), Darwin)
+	MLX_PATH	= ./mlx_osx
+	CMLX 		= -lmlx -Ilmlx
+	CP_CMD 		= cp ${MLX_PATH}/libmlx.dylib ./
+	OS          = 2
+endif
 
 all: $(NAME)
 
@@ -52,7 +68,7 @@ $(NAME): $(OBJDIR) $(TARGET) $(LIBFT) $(MATHVEC) $(MLX) main.c
 
 $(OBJDIR)/%.o : %.c $(HDR)
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $<$(RESET)"
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
+	$(CC) $(CFLAGS) -D OS=$(OS) -c $< -o $@ -I $(INCLUDE)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
