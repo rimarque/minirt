@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:54:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/26 22:06:41 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/26 23:55:08 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ t_ray get_ray(int i, int j, t_scene sc);
 
 //*INTERSECT
 t_inter intersect(t_ray ray, t_obj *obj, int n);
-bool intersect_shadow(t_ray ray, t_obj *obj, int n, int avoid);
+bool intersect_shadow(t_ray ray, t_scene scene, int avoid, float len_l);
 
 //*INTER_PL
 t_inter inter_pl(t_ray ray, t_obj pl, t_inter prev_it);
@@ -170,7 +170,7 @@ float   closer_t(float in_sqrt, float t1, float t2);
 bool    aply_quadratic_form(float a, float b, float c, t_auxeq *aux);
 
 //*LIGHT
-float compute_light(t_scene *scene, t_inter *it);
+float   compute_light(t_scene scene, t_inter it);
 
 /******************/
 /*                */

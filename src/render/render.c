@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:18:36 by rita              #+#    #+#             */
-/*   Updated: 2024/02/26 22:02:10 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/26 23:55:22 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ static inline int	pixel_color(int i, int j, t_scene sc)
 		return (encode_rgb(0, 0, 0));
 	else
 	{
-		f = compute_light(&sc, &it);
-		//f = 1;
+		f = compute_light(sc, it);
 		return (encode_rgb(sc.obj[it.i].color.r * f, 
 				sc.obj[it.i].color.g * f, sc.obj[it.i].color.b * f));
 	}

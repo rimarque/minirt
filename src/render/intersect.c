@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:49:36 by rita              #+#    #+#             */
-/*   Updated: 2024/02/24 17:14:48 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/27 00:02:45 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_inter intersect(t_ray ray, t_obj *obj, int n)
 	return(prev_it);
 }
 
-bool intersect_shadow(t_ray ray, t_obj *obj, int n, int avoid)
+bool intersect_shadow(t_ray ray, t_scene scene, int avoid, float len_l)
 {
 	int i;
 	t_inter prev_it;
@@ -60,16 +60,15 @@ bool intersect_shadow(t_ray ray, t_obj *obj, int n, int avoid)
 
 	prev_it.inter = false;
 	i = 0;
-	if (i == avoid)
-			i++;
-	while(i < n)
+	while(i < scene.n_obj)
 	{
-		it = inter_obj(ray, obj[i], i, prev_it);
-		if (it.inter && it.t < vec3_lenght(ray.d))
-			return(true);
+		if (i != avoid)
+		{
+			it = inter_obj(ray, scene.obj[i], i, prev_it);
+			if (it.inter && it.t < len_l)
+				return(true);
+		}
 		i++;
-		if (i == avoid)
-			i++;
 	}
 	return(false);
 }

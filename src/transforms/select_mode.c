@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:05:05 by rita              #+#    #+#             */
-/*   Updated: 2024/02/14 12:26:04 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/26 22:20:24 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	is_red(t_rgb color)
 {
-	if(color.r > 225 && color.g < 80 
+	if(color.r > 200 && color.g < 80 
 		&& color.b < 80)
 			return (true);
 	return (false);
