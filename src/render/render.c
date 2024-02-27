@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:18:36 by rita              #+#    #+#             */
-/*   Updated: 2024/02/26 23:55:22 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/27 11:32:37 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static inline int	pixel_color(int i, int j, t_scene sc)
 	t_inter	it;
 
 	ray = get_ray(i, j, sc);
-	it = intersect(ray, sc.obj, sc.n_obj);
+	it = cam_ray_intersect_obj(ray, sc.obj, sc.n_obj);
 	if (!it.inter)
 		return (encode_rgb(0, 0, 0));
 	else

@@ -6,13 +6,13 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 16:34:17 by rita              #+#    #+#             */
-/*   Updated: 2024/02/26 22:06:00 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/27 11:04:14 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-bool	in_sp_surface(t_ray ray, t_obj sp, t_auxeq *aux)
+bool	in_sp_surface(t_ray ray, t_obj sp, t_auxqf *aux)
 {
 	t_vec3	co;
 	float	a;
@@ -31,7 +31,7 @@ bool	in_sp_surface(t_ray ray, t_obj sp, t_auxeq *aux)
 t_inter	inter_sp(t_ray ray, t_obj sp, t_inter prev_it)
 {
 	t_inter	it;
-	t_auxeq aux;
+	t_auxqf aux;
 	
 	if(!in_sp_surface(ray, sp, &aux) || (aux.t1 < 0 && aux.t2 < 0))
 		return(it.inter = false, it);

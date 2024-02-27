@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:49:36 by rita              #+#    #+#             */
-/*   Updated: 2024/02/27 00:02:45 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/27 10:48:45 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_inter	inter_obj(t_ray ray, t_obj obj, int i, t_inter prev_it)
     return(it);
 }
 
-t_inter intersect(t_ray ray, t_obj *obj, int n)
+t_inter cam_ray_intersect_obj(t_ray ray, t_obj *obj, int n)
 {
 	int i;
 	t_inter prev_it;
@@ -52,7 +52,7 @@ t_inter intersect(t_ray ray, t_obj *obj, int n)
 	return(prev_it);
 }
 
-bool intersect_shadow(t_ray ray, t_scene scene, int avoid, float len_l)
+bool light_ray_intersect_obj(t_ray ray, t_scene scene, int avoid, float len_l)
 {
 	int i;
 	t_inter prev_it;

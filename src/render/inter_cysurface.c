@@ -6,13 +6,17 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:43:23 by rita              #+#    #+#             */
-/*   Updated: 2024/02/26 22:05:10 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/27 11:25:18 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-bool	in_cy_surface(t_ray ray, t_obj cy, t_auxeq *aux)
+//*Formula de interseção com o cilindro:
+//https://hugi.scene.org/online/hugi24/coding
+//%20graphics%20chris%20dragan%20raytracing%20shapes.htm
+
+bool	in_cy_surface(t_ray ray, t_obj cy, t_auxqf *aux)
 {
 	t_vec3	co;
 	float	a;
@@ -44,7 +48,7 @@ t_inter	get_inter_tm(t_vec3 d, t_obj cy, float dot_cov, float t)
 	it.inter = true;
 	return(it);
 }
-t_inter	get_inter(t_vec3 d, t_obj cy, t_auxeq	aux)
+t_inter	get_inter(t_vec3 d, t_obj cy, t_auxqf	aux)
 {
 	t_inter	it1;
 	t_inter it2;
@@ -61,7 +65,7 @@ t_inter	get_inter(t_vec3 d, t_obj cy, t_auxeq	aux)
 t_inter	inter_surface(t_ray ray, t_obj cy)
 {
 	t_inter it;
-	t_auxeq	aux;
+	t_auxqf	aux;
 	
 	it.inter = false;
 	if(!in_cy_surface(ray, cy, &aux) || (aux.t1 < 0 && aux.t2 < 0))

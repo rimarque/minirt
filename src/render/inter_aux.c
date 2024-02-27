@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:54:00 by rita              #+#    #+#             */
-/*   Updated: 2024/02/13 20:24:56 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/27 11:04:14 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ float	closer_t(float in_sqrt, float t1, float t2)
 	return(t2);
 }
 
-bool	aply_quadratic_form(float a, float b, float c, t_auxeq *aux)
+bool	aply_quadratic_form(float a, float b, float c, t_auxqf *aux)
 {
 	aux->in_sqrt = b * b - 4 * a * c;
 	if (aux->in_sqrt < 0)

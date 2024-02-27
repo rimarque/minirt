@@ -6,7 +6,7 @@
 /*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:12:17 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/02/26 23:54:55 by rita             ###   ########.fr       */
+/*   Updated: 2024/02/27 10:49:58 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 bool shadow(t_scene scene, t_inter it, t_vec3 l, float len_l)
 {
-    t_ray  shadow_dir;
+    t_ray  light_ray;
     
-    shadow_dir.o = it.point;
-    shadow_dir.d = vec3_normalized(l);
-    if (intersect_shadow(shadow_dir,scene, it.i, len_l)) 
+    light_ray.o = it.point;
+    light_ray.d = vec3_normalized(l);
+    if (light_ray_intersect_obj(light_ray,scene, it.i, len_l)) 
             return true; 
     return false; 
 }

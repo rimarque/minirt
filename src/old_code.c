@@ -16,7 +16,7 @@
 
 /* t_inter	inter_surface_old(t_ray ray, t_obj cy, )
 {
-	t_auxeq aux;
+	t_auxqf aux;
 	
 	if(!in_cy(ray, cy, &aux) || (aux.t1 < 0 && aux.t2 < 0)) //se nao interseta o cilindro infinito
 		return(it.inter = false, it);
