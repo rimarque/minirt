@@ -12,33 +12,33 @@
 
 #include "../../includes/minirt.h"
 
-void	rotate_cam_x(t_cam	*cam, float	ang)
+void	rotate_cam_x(t_cam *cam, float ang)
 {
 	cam->axis = matrix_mltmatrix(cam->axis, get_rotmatrix_x(ang));
 }
 
-void	rotate_cam_y(t_cam	*cam, float	ang)
+void	rotate_cam_y(t_cam *cam, float ang)
 {
 	cam->axis = matrix_mltmatrix(cam->axis, get_rotmatrix_y(ang));
 }
 
-void	rotate_cam_z(t_cam	*cam, float	ang)
+void	rotate_cam_z(t_cam *cam, float ang)
 {
 	cam->axis = matrix_mltmatrix(cam->axis, get_rotmatrix_z(ang));
 }
 
 void	rotate_cam(t_img *img, int button)
 {
-	if(button == UP)
+	if (button == UP)
 		rotate_cam_x(img->scene->cam, ANG_ROT);
-	if(button == DOWN)
+	if (button == DOWN)
 		rotate_cam_x(img->scene->cam, -ANG_ROT);
-	if(button == RIGHT)
+	if (button == RIGHT)
 		rotate_cam_y(img->scene->cam, -ANG_ROT);
-	if(button == LEFT)
+	if (button == LEFT)
 		rotate_cam_y(img->scene->cam, ANG_ROT);
-	if(button == SHIFT_RIGHT)
+	if (button == SHIFT_RIGHT)
 		rotate_cam_z(img->scene->cam, -ANG_ROT);
-	if(button == CTRL_RIGHT)
+	if (button == CTRL_RIGHT)
 		rotate_cam_z(img->scene->cam, ANG_ROT);
 }

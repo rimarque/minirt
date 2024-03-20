@@ -12,16 +12,16 @@
 
 #include "includes/mathvec.h"
 
-float vec2_dot(t_vec2 a, t_vec2 b)
+float	vec2_dot(t_vec2 a, t_vec2 b)
 {
-    return(a.x * b.x + a.y * b.y);
+	return (a.x * b.x + a.y * b.y);
 }
 
-t_vec2 vec2_scale(t_vec2 a, float b)
+t_vec2	vec2_scale(t_vec2 a, float b)
 {
-    t_vec2 result;
+	t_vec2	result;
 
-    result.x = a.x * b;
-    result.y = a.y * b;
-    return(result);
+	result.x = a.x * b;
+	result.y = a.y * b;
+	return (result);
 }

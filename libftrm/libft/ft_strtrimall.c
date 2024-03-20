@@ -19,9 +19,10 @@ int	ft_isspace(int c)
 
 char	*ft_strtrimall(char *str)
 {
-	int	i;
-	int	j;
-	char *temp;
+	int		i;
+	int		j;
+	char	*temp;
+
 	i = 0;
 	j = 0;
 	if (!str)
@@ -30,10 +31,10 @@ char	*ft_strtrimall(char *str)
 		i++;
 	j = ft_strlen(str);
 	if (i >= j--)
-		return(str);
+		return (str);
 	while (str[j] && ft_isspace(str[j]))
 		j -= 1;
 	temp = ft_substr(str, i, j + 1);
 	free(str);
-	return(temp);
+	return (temp);
 }

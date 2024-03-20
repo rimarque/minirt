@@ -12,12 +12,12 @@
 
 #include "includes/mathvec.h"
 
-float vec2_lensqr(t_vec2 a)
+float	vec2_lensqr(t_vec2 a)
 {
-    return(vec2_dot(a, a));
+	return (vec2_dot(a, a));
 }
 
-float vec2_lenght(t_vec2 a)
+float	vec2_lenght(t_vec2 a)
 {
-    return(sqrt(vec2_lensqr(a)));
+	return (sqrt(vec2_lensqr(a)));
 }

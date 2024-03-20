@@ -12,31 +12,31 @@
 
 #include "includes/mathvec.h"
 
-t_vec2 vec2_add(t_vec2 a, t_vec2 b)
+t_vec2	vec2_add(t_vec2 a, t_vec2 b)
 {
-    t_vec2 result;
+	t_vec2	result;
 
-    result.x = a.x + b.x;
-    result.y = a.y + b.y;
-    return(result);
+	result.x = a.x + b.x;
+	result.y = a.y + b.y;
+	return (result);
 }
 
-t_vec2 vec2_sub(t_vec2 a, t_vec2 b)
+t_vec2	vec2_sub(t_vec2 a, t_vec2 b)
 {
-    t_vec2 result;
+	t_vec2	result;
 
-    result.x = a.x - b.x;
-    result.y = a.y - b.y;
-    return(result);
+	result.x = a.x - b.x;
+	result.y = a.y - b.y;
+	return (result);
 }
 
-t_vec2 vec2_normalized(t_vec2 a)
+t_vec2	vec2_normalized(t_vec2 a)
 {
-    t_vec2  result;
-    float   len;
-    
-    len = vec2_lenght(a);
-    result.x = a.x / len;
-    result.y = a.y / len;
-    return(result);
+	t_vec2	result;
+	float	len;
+
+	len = vec2_lenght(a);
+	result.x = a.x / len;
+	result.y = a.y / len;
+	return (result);
 }

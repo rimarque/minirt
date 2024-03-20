@@ -34,21 +34,20 @@ void	translate_point_z(t_vec3 *point, float scale)
 
 	set_coord(&dir, 0, 0, 1);
 	*point = vec3_add(*point, vec3_scale(dir, scale));
-	
 }
 
 void	translate_point(t_vec3 *point, int button)
 {
-	if(button == SHIFT_LEFT)
+	if (button == SHIFT_LEFT)
 		translate_point_y(point, SCALE_TRANS);
-	if(button == CTRL_LEFT)
+	if (button == CTRL_LEFT)
 		translate_point_y(point, -SCALE_TRANS);
-	if(button == D)
+	if (button == D)
 		translate_point_x(point, SCALE_TRANS);
-	if(button == A)
+	if (button == A)
 		translate_point_x(point, -SCALE_TRANS);
-	if(button == W)
+	if (button == W)
 		translate_point_z(point, -SCALE_TRANS);
-	if(button == S)
+	if (button == S)
 		translate_point_z(point, SCALE_TRANS);
 }

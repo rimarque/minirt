@@ -36,8 +36,8 @@ OBJDIR			= obj
 NAME 			= minirt
 
 _FILES 			=  init aux_obj keys exit \
-					map_validation \
-					render cam intersect light \
+					map_validation free parse print_obj print_scene utils validate_obj\
+					validate_scene render cam intersect light \
 					inter_pl inter_sp inter_cy inter_cysurface inter_cybase inter_aux \
 					check_button select_mode reset transforms \
 					translate_cam translate_point rotate_cam rotate_obj resize_obj 
@@ -55,7 +55,7 @@ ifeq ($(shell uname), Linux)
 	OS          = 1
 else ifeq ($(shell uname), Darwin)
 	MLX_PATH	= ./mlx_osx
-	CMLX 		= -lmlx -Ilmlx
+	CMLX 		= -lmlx -Ilmlx#include "../../includes/minirt.h"
 	CP_CMD 		= cp ${MLX_PATH}/libmlx.dylib ./
 	OS          = 2
 endif

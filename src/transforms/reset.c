@@ -26,6 +26,6 @@ void	reset_img(t_img *img)
 	init_scene(img->scene);
 	copy_scene(img->scene, *img->original_scene);
 	render(*img, *img->scene);
-	mlx_put_image_to_window(img->win->mlx_ptr, 
-        img->win->win_ptr, img->ptr, 0, 0);
+	mlx_put_image_to_window(img->win->mlx_ptr, \
+		img->win->win_ptr, img->ptr, 0, 0);
 }

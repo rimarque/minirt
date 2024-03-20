@@ -12,14 +12,14 @@
 
 #include "includes/mathvec.h"
 
-void    set_coord(t_vec3 *vec, float a, float b, float c)
+void	set_coord(t_vec3 *vec, float a, float b, float c)
 {
-    vec->x = a;
-    vec->y = b;
-    vec->z = c;
+	vec->x = a;
+	vec->y = b;
+	vec->z = c;
 }
 
-void print_vec(char *id, t_vec3 vec)
+void	print_vec(char *id, t_vec3 vec)
 {
 	printf("%s x: %f; y: %f; z: %f;\n", id, vec.x, vec.y, vec.z);
 }

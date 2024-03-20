@@ -22,13 +22,12 @@ void	put_pixel_img(t_img img, int x, int y, int color)
 
 int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
 {
-    return (red << 16 | green << 8 | blue);
+	return (red << 16 | green << 8 | blue);
 }
 
-
 int	color_blend(int obj_color, int amb_color, float ratio)
-{	
-	return((int)((1.0f - ratio) * obj_color + ratio * amb_color));
+{
+	return ((int)((1.0f - ratio) * obj_color + ratio * amb_color));
 }
 
 /* The static inline keywords suggest that this function is defined within 
@@ -54,28 +53,24 @@ static inline int	pixel_color(int i, int j, t_scene sc)
 	else
 	{
 		f = compute_light(sc, it);
-		//return (encode_rgb(sc.obj[it.i].color.r * f, 
-		//		sc.obj[it.i].color.g * f, sc.obj[it.i].color.b * f));
-		return(encode_rgb(
-			color_blend(sc.obj[it.i].color.r, sc.amb->c.r, sc.amb->ratio) * f,
-			color_blend(sc.obj[it.i].color.g, sc.amb->c.g, sc.amb->ratio) * f,
-			color_blend(sc.obj[it.i].color.b, sc.amb->c.b, sc.amb->ratio) * f
+		return (encode_rgb(\
+			color_blend(sc.obj[it.i].color.r, sc.amb->c.r, sc.amb->ratio) * f, \
+			color_blend(sc.obj[it.i].color.g, sc.amb->c.g, sc.amb->ratio) * f, \
+			color_blend(sc.obj[it.i].color.b, sc.amb->c.b, sc.amb->ratio) * f \
 		));
 	}
 }
 
-
-void render(t_img img, t_scene scene)
+void	render(t_img img, t_scene scene)
 {
-	int i;
-	int j;
-	
-	ft_print_scene(&scene);
+	int	i;
+	int	j;
+
 	i = 0;
-	j = 0; 
+	j = 0;
 	while (i < WIN_W)
 	{
-		j=0;
+		j = 0;
 		while (j < WIN_H)
 		{
 			put_pixel_img(img, i, j, pixel_color(i, j, scene));
