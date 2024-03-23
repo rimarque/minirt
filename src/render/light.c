@@ -12,34 +12,41 @@
 
 #include "../../includes/minirt.h"
 
+float	get_min(float a, float b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
 bool	shadow(t_scene scene, t_inter it, t_vec3 l, float len_l)
 {
 	t_ray	light_ray;
 
 	light_ray.o = it.point;
-	light_ray.d = vec3_normalized(l);
+	light_ray.d = l;
 	if (lig_ray_int_obj(light_ray, scene, it.i, len_l))
 		return (true);
 	return (false);
 }
 
-// l    --> Light Direction
-// n    --> Object Norm
-// i    --> intensidade luz
 float	compute_light(t_scene scene, t_inter it)
 {
 	float	i;
 	float	dot;
 	t_vec3	l;
 	float	len_l;
+	float	distance_factor;
 
 	i = scene.amb->ratio;
 	l = vec3_sub(scene.light->point, it.point);
 	len_l = vec3_lenght(l);
+	l = vec3_normalized(l);
 	dot = vec3_dot(it.normal, l);
 	if (dot > 0 && !shadow(scene, it, l, len_l))
-		i += (scene.light->ratio * dot) / (vec3_lenght(it.normal) * len_l);
-	if (i > 1)
-		return (1);
-	return (i);
+	{
+		distance_factor = get_min(1.0, LIGHT_RANGE / len_l);
+		i += (scene.light->ratio * dot) * distance_factor;
+	}
+	return (get_min(1.0, i));
 }

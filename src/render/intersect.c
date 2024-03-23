@@ -40,6 +40,7 @@ t_inter	cam_ray_intersect_obj(t_ray ray, t_obj *obj, int n)
 	t_inter	prev_it;
 	t_inter	it;
 
+	ft_memset(&prev_it, 0, sizeof(t_inter));
 	prev_it.inter = false;
 	i = 0;
 	while (i < n)
