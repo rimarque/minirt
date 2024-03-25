@@ -19,7 +19,7 @@ int	close_window(t_img *img)
 	mlx_destroy_image(img->win->mlx_ptr, img->ptr);
 	mlx_destroy_window(img->win->mlx_ptr, img->win->win_ptr);
 	if (OS == 1)
-	   mlx_destroy_display(img->win->mlx_ptr);
+		mlx_destroy_display(img->win->mlx_ptr);
 	free(img->win->mlx_ptr);
 	exit(0);
 }

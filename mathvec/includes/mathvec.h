@@ -21,20 +21,20 @@ typedef struct s_vec3
 	float	x;
 	float	y;
 	float	z;
-}t_vec3;
+}	t_vec3;
 
 typedef struct s_vec2
 {
 	float	x;
 	float	y;
-}t_vec2;
+}	t_vec2;
 
 typedef struct s_mt
 {
-	t_vec3 x;
-	t_vec3 y;
-	t_vec3 z;
-}t_matrix;
+	t_vec3	x;
+	t_vec3	y;
+	t_vec3	z;
+}	t_matrix;
 
 //*MATH_VEC3
 t_vec3		vec3_add(t_vec3 a, t_vec3 b);
@@ -51,11 +51,11 @@ float		vec3_dot(t_vec3 a, t_vec3 b);
 t_vec3		vec3_cross(t_vec3 a, t_vec3 b);
 
 //*ROTATE_VEC3
-t_matrix    get_rotmatrix_x(float teta);
-t_matrix    get_rotmatrix_y(float teta);
-t_matrix    get_rotmatrix_z(float teta);
-t_vec3  	vec3_mltmatrix(t_matrix mt, t_vec3 vec);
-t_matrix  	matrix_mltmatrix(t_matrix mt1, t_matrix mt2);
+t_matrix	get_rotmatrix_x(float teta);
+t_matrix	get_rotmatrix_y(float teta);
+t_matrix	get_rotmatrix_z(float teta);
+t_vec3		vec3_mltmatrix(t_matrix mt, t_vec3 vec);
+t_matrix	matrix_mltmatrix(t_matrix mt1, t_matrix mt2);
 
 //*AUX_VEC3
 void		set_coord(t_vec3 *vec, float a, float b, float c);

@@ -22,14 +22,14 @@ long long	ft_atoll(const char *str)
 	while (*str == ' ' || ((*str >= '\t') && (*str <= '\r')))
 		str++;
 	if (*str == '-')
-	{	
+	{
 		pos = -1;
 		str++;
 	}
 	else if (*str == '+')
 		str++;
 	while (*str >= '0' && *str <= '9')
-	{	
+	{
 		atoi = atoi * 10 + (str[0] - '0');
 		str++;
 	}

@@ -23,19 +23,19 @@ t_win	new_program(char *title)
 	return (win);
 }
 
-void init_scene(t_scene *scene)
+void	init_scene(t_scene *scene)
 {
-    scene->amb = NULL;
-    scene->cam = NULL;
-    scene->light = NULL;
-    scene->obj = NULL;
-    scene->temp = NULL;
+	scene->amb = NULL;
+	scene->cam = NULL;
+	scene->light = NULL;
+	scene->obj = NULL;
+	scene->temp = NULL;
 }
 
 void	copy_scene(t_scene *dst, t_scene src)
 {
 	int		i;
-	
+
 	i = 0;
 	dst->amb = malloc(sizeof(t_amb));
 	*dst->amb = *src.amb;
@@ -45,7 +45,7 @@ void	copy_scene(t_scene *dst, t_scene src)
 	*dst->light = *src.light;
 	dst->n_obj = src.n_obj;
 	dst->obj = (t_obj *)malloc(sizeof(t_obj) * dst->n_obj);
-	while(i < dst->n_obj)
+	while (i < dst->n_obj)
 	{
 		dst->obj[i] = src.obj[i];
 		i++;
@@ -55,7 +55,7 @@ void	copy_scene(t_scene *dst, t_scene src)
 t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene)
 {
 	t_img	img;
-	
+
 	img.ptr = mlx_new_image(win->mlx_ptr, WIN_W,
 			WIN_H);
 	img.addr = mlx_get_data_addr(img.ptr,
@@ -68,5 +68,5 @@ t_img	new_img(t_win *win, t_scene *scene, t_scene *original_scene)
 	img.obj_id = 0;
 	img.light_mode = false;
 	img.height_mode = false;
-	return(img);
+	return (img);
 }
