@@ -6,7 +6,7 @@
 /*   By: bde-sous <bde-sous@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024-03-18 19:33:06 by bde-sous          #+#    #+#             */
-/*   Updated: 2024-03-18 19:33:06 by bde-sous         ###   ########.fr       */
+/*   Updated: 2024/03/25 21:14:04 by bde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_free_objarray(t_obj *obj, int len)
 
 void	ft_free_ptr(void **ptr)
 {
-	free(ptr);
+	free(*ptr);
 	*ptr = NULL;
 }
 

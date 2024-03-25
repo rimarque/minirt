@@ -33,7 +33,7 @@ VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
 #--------------------------------- FILES  ---------------------------------------
-NAME 			= minirt
+NAME 			= miniRT
 
 _FILES 			=  init aux_obj keys exit \
 					map_validation free parse print_obj print_scene utils validate_obj\
