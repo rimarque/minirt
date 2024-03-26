@@ -53,7 +53,7 @@ $ ./minirt ./path_to_scene/scene_name.rt
 ### **Select mode**
 - You can press **TAB** to select an object or **L** to select light
 - Press **L** to activate light mode, use the keys to translate the light and press it again to deactivate
-- Every time you press **TAB** a new object will be selected and it will turn red, you can use the keyboard to translate, rotate or resize the selected object
+- Every time you press **TAB** a new object will be selected, you can use the keyboard to translate, rotate or resize the selected object
 - If there are no more objects to select pressing **TAB** will take you back to camera mode
 - The movement of light and objects is relative to the axes of the real world
 
@@ -74,8 +74,8 @@ $ ./minirt ./path_to_scene/scene_name.rt
 - **CTRL_RIGHT** - along the z axis counterclockwise
 
 ### **Resize**
-- **H** - activates height mode, if not pressed the diameter is the default mesure to be resized (pressed a secund time deactivates height mode)
+- **H** - activates height mode, if not pressed the diameter is the default mesure to be resized (press again to deactivate)
 - **+** - Increses object size
 - **-** - Decreses object size
 
-**Note**: Directions are relative to the camera's axes, with the disclaimer the objects and light movements may have different directions if the camera's view is not (0,0,-1).
+**Note**: Directions are relative to the camera's axes, with objects and light movements potentially differing if the camera's view is not (0,0,-1).
