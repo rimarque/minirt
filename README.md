@@ -58,8 +58,8 @@ $ ./miniRT ./path_to_scene/scene_name.rt
 - The movement of light and objects is relative to the axes of the real world
 
 ### **Translation**
-- **W** - foword
-- **S** - backwords
+- **W** - foward
+- **S** - backward
 - **A** - right
 - **D** - left
 - **SHIFT_LEFT** - up
