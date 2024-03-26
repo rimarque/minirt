@@ -48,7 +48,7 @@ $ ./minirt ./path_to_scene/scene_name.rt
 ### 🚦 **Select mode**
 - The program's default mode is camera mode, use the keyboard to translate or rotate the camera
 - The movement of the camera is relative to its axes
-- Press **L** for light mode, use the keys to translate the light (press **L** again to deactivate)
+- Press **L** for light mode, use the keys to translate the light (press again to deactivate)
 - Press **TAB** to cycle through objects, use the keyboard to translate, rotate or resize the selected object
 - If there are no more objects to select, pressing **TAB** will take you back to camera mode
 - The movement of light and objects is relative to real-world axes
