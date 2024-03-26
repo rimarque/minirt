@@ -43,8 +43,39 @@ or, if you have your own scenes you want to render
 $ ./miniRT ./path_to_scene/scene_name.rt
 ```
 
-## **Controls**
-- **W** - Translate foword
-- **S** - Translate backwords
-- **A** - Translate right
-- **D** - Translate left
+### **Use the keyboard to change the scene!**
+
+## **Move the camera**
+- The programs default mode is camera mode, so if no mode is selected the keys will move the camera
+- You can use the keyboard to translate ou rotate the camera
+- The movement of the camera is relative to the camera's axes
+
+## **Select mode**
+- You can press **TAB** to select an object or **L** to select light
+- Press **L** to activate light mode, use the keys to translate the light and press it again to deactivate
+- Every time you press **TAB** a new object will be selected and it will turn red, you can use the keyboard to translate, rotate or resize the selected object
+- If there are no more object to select pressing **TAB** will take you back to camera mode
+- The movement of light and objects is relative to the axes of the real world
+
+## **Translation**
+- **W** - foword
+- **S** - backwords
+- **A** - right
+- **D** - left
+- **SHIFT_LEFT** - up
+- **CTRL_LEFT** - down
+
+## **Rotation**
+- **ARROW_UP** - along the x axis up
+- **ARROW_DOWN** - along the x axis down
+- **ARROW_RIGTH** - along the y axis to the right
+- **ARROW_LEFT** - along the y axis to the left
+- **SHIFT_RIGHT** - along the z axis clockwise
+- **CTRL_RIGHT** - along the z axis counterclockwise
+
+**Note**: Directions are relative to the camera's axes, with the disclaimer the objects and light movements may have different directions if the camera's view is not (0,0,-1).
+
+## **Resize**
+- **H** - activates height mode, if not pressed the diameter is the default mesure to be resized (pressed a secund time deactivates height mode)
+- **+** - Increses object size
+- **-** - Decreses object size
