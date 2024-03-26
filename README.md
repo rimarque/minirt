@@ -43,21 +43,21 @@ Or, if you have your own scenes you want to render:
 $ ./minirt ./path_to_scene/scene_name.rt
 ```
 
-## **Use the keyboard to change the scene!**
+## ⌨️ **Use the keyboard to change the scene**
 
-### **Move the camera**
+### **Move the camera** 📷
 - The program's default mode is camera mode
 - You can use the keyboard to translate or rotate the camera
 - Movement of the camera is relative to its axes
 
-### **Select mode**
+### **Select mode** :pushpin:
 - Press **TAB** for object selection or **L** for light
 - In light mode, use the keys to translate the light (press **L** again to deactivate)
 - Press **TAB** to cycle through objects, use the keyboard to translate, rotate or resize the selected object
 - If there are no more objects to select, pressing **TAB** will take you back to camera mode
 - Movement of light and objects is relative to real-world axes
 
-### **Translation**
+### **Translation** 🚗
 - **W** - foward
 - **S** - backward
 - **A** - left
@@ -65,15 +65,15 @@ $ ./minirt ./path_to_scene/scene_name.rt
 - **SHIFT_LEFT** - up
 - **CTRL_LEFT** - down
 
-### **Rotation**
-- **ARROW_UP** - rotate along the x axis up
-- **ARROW_DOWN** - rotate along the x axis down
-- **ARROW_RIGTH** - rotate along the y axis to the right
-- ⬅ - rotate along the y axis to the left
+### **Rotation** :carousel_horse:
+- ⬆️ rotate along the x axis up
+- ⬇️ rotate along the x axis down
+- ➡️ rotate along the y axis to the right
+- ⬇️ rotate along the y axis to the left
 - **SHIFT_RIGHT** - rotate along the z axis clockwise
 - **CTRL_RIGHT** - rotate along the z axis counterclockwise
 
-### **Resize**
+### **Resize** :straight_ruler:
 - **H** - activates height mode, if not pressed the diameter is the default mesure to be resized (press again to deactivate)
 - **+** - Increses object size
 - **-** - Decreses object size
