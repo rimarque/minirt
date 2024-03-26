@@ -43,9 +43,9 @@ or, if you have your own scenes you want to render
 $ ./miniRT ./path_to_scene/scene_name.rt
 ```
 
-### **Use the keyboard to change the scene!**
+## **Use the keyboard to change the scene!**
 
-## **Move the camera**
+# **Move the camera**
 - The programs default mode is camera mode, so if no mode is selected the keys will move the camera
 - You can use the keyboard to translate ou rotate the camera
 - The movement of the camera is relative to the camera's axes
