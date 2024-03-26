@@ -1,8 +1,13 @@
 # **miniRT**
 
 ## **About**
+MiniRT is a collaborative project that serves as an introduction to the captivating world of Raytracing.
+It's about rendering simple Computer-Generated-Images using the ray-tracing technique. 
+It simulates light behavior by tracing rays from the camera's eye to the scene and from object intersection points to lights.
+This method enables lifelike images by accurately modeling how light interacts with surfaces and environments.
+The project is coded in C, utilizing the mlx library.
 
-## 📝 **Authorship**
+## **Authorship**
 
 - [Bruno Camarinha](https://github.com/bcamarinha92)
 - [Rita Marques](https://github.com/rimarque)
