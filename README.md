@@ -15,7 +15,7 @@ The project is coded in C, utilizing the mlx library.
 ## **Cloning the repository**
 
 ```shell
-git clone https://github.com/maricard18/42-miniRT.git 
+git clone git@github.com:rimarque/minirt.git 
 ```
 
 ## **Features**
