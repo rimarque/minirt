@@ -60,8 +60,8 @@ $ ./miniRT ./path_to_scene/scene_name.rt
 ### **Translation**
 - **W** - foward
 - **S** - backward
-- **A** - right
-- **D** - left
+- **A** - left
+- **D** - right
 - **SHIFT_LEFT** - up
 - **CTRL_LEFT** - down
 
