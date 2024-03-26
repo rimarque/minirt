@@ -35,12 +35,12 @@ To compile the program you should run `make`.
 This rule will generate an executable file named `minirt`. To launch the executable you should follow this syntax:
 
 ```sh
-$ ./miniRT ./scenes/mandatory/scene_name.rt
+$ ./minirt ./scenes/mandatory/scene_name.rt
 ```
 or, if you have your own scenes you want to render
 
 ```sh
-$ ./miniRT ./path_to_scene/scene_name.rt
+$ ./minirt ./path_to_scene/scene_name.rt
 ```
 
 ## **Use the keyboard to change the scene!**
