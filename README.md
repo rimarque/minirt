@@ -25,7 +25,7 @@ git clone git@github.com:rimarque/minirt.git
 - Ambient and diffuse lighting
 - Shadows
 - Camera rotation and translation
-- Objects rotation, translation and resize
+- Object rotation, translation and resize
 - Light translation
 ```
 
