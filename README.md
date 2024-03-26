@@ -73,9 +73,9 @@ $ ./miniRT ./path_to_scene/scene_name.rt
 - **SHIFT_RIGHT** - along the z axis clockwise
 - **CTRL_RIGHT** - along the z axis counterclockwise
 
-**Note**: Directions are relative to the camera's axes, with the disclaimer the objects and light movements may have different directions if the camera's view is not (0,0,-1).
-
 ## **Resize**
 - **H** - activates height mode, if not pressed the diameter is the default mesure to be resized (pressed a secund time deactivates height mode)
 - **+** - Increses object size
 - **-** - Decreses object size
+
+**Note**: Directions are relative to the camera's axes, with the disclaimer the objects and light movements may have different directions if the camera's view is not (0,0,-1).
