@@ -54,7 +54,7 @@ $ ./minirt ./path_to_scene/scene_name.rt
 - Press **TAB** for object selection or **L** for light
 - In light mode, use the keys to translate the light (press **L** again to deactivate)
 - Press **TAB** to cycle through objects, use the keyboard to translate, rotate or resize the selected object
-- If there are no more objects to select pressing **TAB** will take you back to camera mode
+- If there are no more objects to select, pressing **TAB** will take you back to camera mode
 - Movement of light and objects is relative to real-world axes
 
 ### **Translation**
