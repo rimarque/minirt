@@ -69,7 +69,7 @@ $ ./minirt ./path_to_scene/scene_name.rt
 - **ARROW_UP** - rotate along the x axis up
 - **ARROW_DOWN** - rotate along the x axis down
 - **ARROW_RIGTH** - rotate along the y axis to the right
-- **ARROW_LEFT** - rotate along the y axis to the left
+- ⬅ - rotate along the y axis to the left
 - **SHIFT_RIGHT** - rotate along the z axis clockwise
 - **CTRL_RIGHT** - rotate along the z axis counterclockwise
 
