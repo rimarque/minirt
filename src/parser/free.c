@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bde-sous <bde-sous@student.42.fr>          #+#  +:+       +#+        */
+/*   By: rita <rita@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-03-18 19:33:06 by bde-sous          #+#    #+#             */
-/*   Updated: 2024/03/25 21:14:04 by bde-sous         ###   ########.fr       */
+/*   Created: 2024/03/18 19:33:06 by bde-sous          #+#    #+#             */
+/*   Updated: 2024/03/26 12:41:50 by rita             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ void	ft_free_objarray(t_obj *obj, int len)
 	while (i < len)
 		free(&obj[i]);
 	free(obj);
-}
-
-void	ft_free_ptr(void **ptr)
-{
-	free(*ptr);
-	*ptr = NULL;
 }
 
 void	ft_free_scene(t_scene *scene)
