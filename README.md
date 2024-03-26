@@ -37,7 +37,7 @@ This rule will generate an executable file named `minirt`. To launch the executa
 ```sh
 $ ./minirt ./scenes/mandatory/scene_name.rt
 ```
-or, if you have your own scenes you want to render
+Or, if you have your own scenes you want to render:
 
 ```sh
 $ ./minirt ./path_to_scene/scene_name.rt
