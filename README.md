@@ -45,19 +45,19 @@ $ ./miniRT ./path_to_scene/scene_name.rt
 
 ## **Use the keyboard to change the scene!**
 
-# **Move the camera**
+### **Move the camera**
 - The programs default mode is camera mode, so if no mode is selected the keys will move the camera
 - You can use the keyboard to translate ou rotate the camera
 - The movement of the camera is relative to the camera's axes
 
-## **Select mode**
+### **Select mode**
 - You can press **TAB** to select an object or **L** to select light
 - Press **L** to activate light mode, use the keys to translate the light and press it again to deactivate
 - Every time you press **TAB** a new object will be selected and it will turn red, you can use the keyboard to translate, rotate or resize the selected object
 - If there are no more object to select pressing **TAB** will take you back to camera mode
 - The movement of light and objects is relative to the axes of the real world
 
-## **Translation**
+### **Translation**
 - **W** - foword
 - **S** - backwords
 - **A** - right
@@ -65,7 +65,7 @@ $ ./miniRT ./path_to_scene/scene_name.rt
 - **SHIFT_LEFT** - up
 - **CTRL_LEFT** - down
 
-## **Rotation**
+### **Rotation**
 - **ARROW_UP** - along the x axis up
 - **ARROW_DOWN** - along the x axis down
 - **ARROW_RIGTH** - along the y axis to the right
@@ -73,7 +73,7 @@ $ ./miniRT ./path_to_scene/scene_name.rt
 - **SHIFT_RIGHT** - along the z axis clockwise
 - **CTRL_RIGHT** - along the z axis counterclockwise
 
-## **Resize**
+### **Resize**
 - **H** - activates height mode, if not pressed the diameter is the default mesure to be resized (pressed a secund time deactivates height mode)
 - **+** - Increses object size
 - **-** - Decreses object size
