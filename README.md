@@ -30,7 +30,7 @@ git clone git@github.com:rimarque/minirt.git
 ```
 
 ## **Compilation**
-To compile the mandatory part of the ray tracer you should run `make`.
+To compile the program you should run `make`.
 
 This rule will generate an executable file named `minirt`. To launch the executable you should follow this syntax:
 
