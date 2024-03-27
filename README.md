@@ -33,7 +33,7 @@ git clone git@github.com:rimarque/minirt.git
 <table align=center>
 	<tbody>
 		<tr>
-			<td><image src="img/temple_translight.png"></td>
+			<td><image src="img/templeMoveCam.png"></td>
 			<td><image src="img/infiniteRoom.png"></td>
 		</tr>
 	</tbody>
