@@ -32,7 +32,7 @@ git clone git@github.com:rimarque/minirt.git
 ## :link: **Compilation**
 To compile the program you should run `make`.
 
-This rule will generate an executable file named `minirt`. To launch the executable you should follow this syntax:
+This rule will generate an executable file named `miniRT`. To launch the executable you should follow this syntax:
 
 ```sh
 $ ./minirt ./scenes/mandatory/scene_name.rt
