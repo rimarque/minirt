@@ -74,4 +74,4 @@ $ ./minirt ./path_to_scene/scene_name.rt
 - **+** - Increses object size
 - **-** - Decreses object size
 
-⚠️ **Note**: directions are relative to the camera's axes, with objects and light movements potentially differing if the camera's view is not (0,0,-1).
+⚠️ **Note**: directions are relative to the camera's axes, with object and light movements potentially differing if the camera's view is not (0,0,-1).
