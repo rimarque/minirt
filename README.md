@@ -30,7 +30,7 @@ git clone git@github.com:rimarque/minirt.git
 ```
 <tbody>
 		<tr>
-			<td><image src="img/temple_translatedlight.png"></td>
+			<td><image src="img/temple_translight.png"></td>
    	</tr>
   </tbody>
 
