@@ -28,6 +28,11 @@ git clone git@github.com:rimarque/minirt.git
 - Object rotation, translation and resize
 - Light translation
 ```
+<tbody>
+		<tr>
+			<td><image src="img/temple_translatedlight.png"></td>
+   	</tr>
+  </tbody>
 
 ## :link: **Compilation**
 To compile the program you should run `make`.
