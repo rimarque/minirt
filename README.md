@@ -39,7 +39,7 @@ git clone git@github.com:rimarque/minirt.git
 	<tbody>
 		<tr>
 			<td><image src="img/temple_translight.png"></td>
-			<td><image src="img/infiniteRoom"></td>
+			<td><image src="img/infiniteRoom.png"></td>
 		</tr>
 	</tbody>
 </table>
