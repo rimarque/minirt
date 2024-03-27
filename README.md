@@ -18,7 +18,7 @@ The project is coded in C, utilizing the mlx library.
 git clone git@github.com:rimarque/minirt.git 
 ```
 
-## :page_with_curl: **Features**
+## :pencil: **Features**
 ```
 - Scene file parser
 - Display of planes, spheres and cylinders
