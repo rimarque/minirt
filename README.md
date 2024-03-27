@@ -31,11 +31,6 @@ git clone git@github.com:rimarque/minirt.git
 
 
 <table align=center>
-	<thead>
-		<tr>
-			<th colspan=2>Images</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td><image src="img/temple_translight.png"></td>
