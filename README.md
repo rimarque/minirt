@@ -79,7 +79,7 @@ $ ./minirt ./path_to_scene/scene_name.rt
 - **SHIFT_RIGHT** - rotate along the z axis clockwise
 - **CTRL_RIGHT** - rotate along the z axis counterclockwise
 
-### :straight_ruler: **Resize**
+### 📐 **Resize**
 - **H** - activates height mode, if not pressed the diameter is the default mesure to be resized (press again to deactivate)
 - **+** - Increses object size
 - **-** - Decreses object size
