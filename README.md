@@ -21,6 +21,7 @@ git clone git@github.com:rimarque/minirt.git
 ## 💎 **Features**
 ```
 - Scene file parser
+- Sandard camara view (0,0,-1)
 - Display of planes, spheres and cylinders
 - Ambient and diffuse lighting
 - Shadows
@@ -61,15 +62,15 @@ $ ./minirt ./path_to_scene/scene_name.rt
 - Press **L** for light mode, use the keys to translate the light (press again to deactivate)
 - Press **TAB** to cycle through objects, use the keyboard to translate, rotate or resize the selected object
 - If there are no more objects to select, pressing **TAB** will take you back to camera mode
-- The movement of light and objects is relative to real-world axes
+- The movement of light and objects is relative to the real-world axes (the directions described below are based on the standard camera view (0,0-1)).
 
 ### 🚗 **Translation**
-- **W** - foward
-- **S** - backward
-- **A** - left
-- **D** - right
-- **SHIFT_LEFT** - up
-- **CTRL_LEFT** - down
+- **W** - foward (decrement z axis)
+- **S** - backward (increment z axis)
+- **A** - left (decrement x axis)
+- **D** - right (increment x axis)
+- **SHIFT_LEFT** - up (increment y axis)
+- **CTRL_LEFT** - down (decrement y axis)
 
 ### :carousel_horse: **Rotation**
 - ⬆️ rotate along the x axis up
@@ -83,5 +84,3 @@ $ ./minirt ./path_to_scene/scene_name.rt
 - **H** - activates height mode, if not pressed the diameter is the default mesure to be resized (press again to deactivate)
 - **+** - Increses object size
 - **-** - Decreses object size
-
-⚠️ **Note**: directions are relative to the camera's axes, with object and light movements potentially differing if the camera's view is not (0,0,-1).
