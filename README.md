@@ -62,7 +62,7 @@ $ ./minirt ./path_to_scene/scene_name.rt
 - Press **L** for light mode, use the keys to translate the light (press again to deactivate)
 - Press **TAB** to cycle through objects, use the keyboard to translate, rotate or resize the selected object
 - If there are no more objects to select, pressing **TAB** will take you back to camera mode
-- The movement of light and objects is relative to the real-world axes (the directions described below are based on the standard camera view (0,0-1)).
+- The movement of light and objects is relative to the real-world axes (the directions described below are based on the standard camera view).
 
 ### 🚗 **Translation**
 - **W** - foward (decrement z axis)
